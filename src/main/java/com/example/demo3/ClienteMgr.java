@@ -1,7 +1,9 @@
 package com.example.demo3;
 
+import com.example.demo3.entities.Cliente;
 import com.example.demo3.exceptions.InformacionInvalida;
 import com.example.demo3.exceptions.ClienteYaExiste;
+import com.example.demo3.persistence.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
