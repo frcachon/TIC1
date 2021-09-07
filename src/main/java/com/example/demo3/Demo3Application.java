@@ -1,5 +1,6 @@
 package com.example.demo3;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,26 +13,15 @@ public class Demo3Application {
 		SpringApplication.run(Demo3Application.class, args);
 	}
 
+	@Autowired
+	private ClienteMgr clienteMgr;
+
 	@Bean
 	public CommandLineRunner run(ClienteRepository repository) {
 		return (args) -> {
-			insertCliente(repository);
+			clienteMgr.addClient(52353543L,"Francisco", "emailfrancisco");
 			System.out.println(repository.findAll());
 		};
-	}
-
-	private void insertCliente(ClienteRepository repository) {
-		repository.save(new Cliente("Juan", 11111111L, "juan@gmail.com"));
 	}
 
 }
-
-/*	@Bean
-	public CommandLineRunner run(ClienteRepository repository) {
-		return (args) -> {
-			ClienteMgr clienteMgr = new ClienteMgr();
-			clienteMgr.addClient(11111111L,"Francisco", "emailfrancisco");
-			System.out.println(repository.findAll());
-			System.out.println(repository.findClienteByDocument(52359065L));
-		};
-	}*/
