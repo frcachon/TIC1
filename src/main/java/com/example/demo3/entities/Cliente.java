@@ -17,7 +17,7 @@ public class Cliente {
     @Column(name="email")
     private String email;
 
-    public Cliente(String name, Long document, String email) {
+    public Cliente(Long document, String name, String email) {
         this.name = name;
         this.document = document;
         this.email = email;

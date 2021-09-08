@@ -69,13 +69,13 @@ public class ClienteController {
         } else {
 
             try {
-                Long name = Long.valueOf(name_field.getText());   //obtiene los valores de los campos
+                Long document = Long.valueOf(document_field.getText());   //obtiene los valores de los campos
                 String mail = mail_field.getText();
-                String document = document_field.getText();
+                String name = name_field.getText();
 
                 try {
 
-                    clienteMgr.addClient(name, mail, document);
+                    clienteMgr.addClient(document, name, mail);
 
                     showAlert("Cliente agregado", "Se agrego con exitosamente al cliente");
 

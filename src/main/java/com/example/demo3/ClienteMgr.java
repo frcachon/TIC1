@@ -25,7 +25,7 @@ public class ClienteMgr {
             throw new ClienteYaExiste();
         }
 
-        Cliente cliente = new Cliente(name, document, email);
+        Cliente cliente = new Cliente(document, name, email);
         clienteRepository.save(cliente);
     }
 

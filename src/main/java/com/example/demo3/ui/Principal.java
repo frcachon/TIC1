@@ -27,7 +27,6 @@ public class Principal {
         stage.setTitle("Registrar un Cliente");
         stage.show();
 
-
     }
 
 }

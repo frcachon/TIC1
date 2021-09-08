@@ -18,7 +18,6 @@ public class Demo3Application {
 		public static void main(String[] args) {
 			Demo3Application.context = SpringApplication.run(Demo3Application.class);
 			Application.launch(ApplicationJFX.class, args);
-
 		}
 
 		public static ConfigurableApplicationContext getContext() {
