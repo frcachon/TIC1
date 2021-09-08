@@ -58,7 +58,7 @@ public class ClienteController {
 
     @FXML
     void addClient(ActionEvent event) {
-        if (name_field.getText() == null || name_field.getText().equals("") ||
+        if (name_field.getText() == null || name_field.getText().equals("") ||     //chequeamos que nada sea nulo
                 mail_field.getText() == null || mail_field.getText().equals("") ||
                 document_field.getText() == null || document_field.getText().equals("")) {
 
@@ -69,7 +69,7 @@ public class ClienteController {
         } else {
 
             try {
-                Long name = Long.valueOf(name_field.getText());
+                Long name = Long.valueOf(name_field.getText());   //obtiene los valores de los campos
                 String mail = mail_field.getText();
                 String document = document_field.getText();
 
