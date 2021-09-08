@@ -24,6 +24,7 @@ public class Principal {
         Parent root = fxmlLoader.load(ClienteController.class.getResourceAsStream("AddClient.fxml"));
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
+        stage.setTitle("Registrar un Cliente");
         stage.show();
 
 
