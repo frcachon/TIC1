@@ -53,9 +53,9 @@ import java.util.ResourceBundle;
 
             }
 
-            cedulaColumn.setCellValueFactory(new PropertyValueFactory<>("document"));
-            nameColumn.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-            emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
+            //cedulaColumn.setCellValueFactory(new PropertyValueFactory<>("document"));
+            //nameColumn.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+            //emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
 
             table.setItems(lista);
         }
