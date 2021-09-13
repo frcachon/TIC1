@@ -1,4 +1,4 @@
-package com.example.demo3;
+package com.example.demo3.managers;
 
 import com.example.demo3.entities.Cliente;
 import com.example.demo3.exceptions.InformacionInvalida;

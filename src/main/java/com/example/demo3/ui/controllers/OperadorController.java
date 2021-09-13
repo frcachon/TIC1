@@ -1,9 +1,8 @@
-package com.example.demo3.ui.Client;
+package com.example.demo3.ui.controllers;
 
-import com.example.demo3.ClienteMgr;
-import com.example.demo3.exceptions.ClienteYaExiste;
+import com.example.demo3.managers.OperadorMgr;
 import com.example.demo3.exceptions.InformacionInvalida;
-import javafx.application.Platform;
+import com.example.demo3.exceptions.OperadorYaExiste;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -15,10 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ClienteController {
+public class OperadorController {
 
     @Autowired
-    private ClienteMgr clienteMgr;
+    private OperadorMgr operadorMgr;
 
     @FXML
     private Button btn;
@@ -33,7 +32,7 @@ public class ClienteController {
     private TextField mail_field;
 
     @FXML
-    private TextField document_field;
+    private TextField id_field;
 
     @FXML
     void close(ActionEvent actionEvent) {
@@ -53,14 +52,14 @@ public class ClienteController {
     private void clean() {
         name_field.setText(null);
         mail_field.setText(null);
-        document_field.setText(null);
+        id_field.setText(null);
     }
 
     @FXML
-    void addClient(ActionEvent event) {
+    void addOperador(ActionEvent event) {
         if (name_field.getText() == null || name_field.getText().equals("") ||     //chequeamos que nada sea nulo
                 mail_field.getText() == null || mail_field.getText().equals("") ||
-                document_field.getText() == null || document_field.getText().equals("")) {
+                id_field.getText() == null || id_field.getText().equals("")) {
 
             showAlert(
                     "Faltan datos!",
@@ -69,24 +68,24 @@ public class ClienteController {
         } else {
 
             try {
-                Long document = Long.valueOf(document_field.getText());   //obtiene los valores de los campos
+                Long identificador = Long.valueOf(id_field.getText());   //obtiene los valores de los campos
                 String mail = mail_field.getText();
                 String name = name_field.getText();
 
                 try {
 
-                    clienteMgr.addClient(document, name, mail);
+                    operadorMgr.addOperador(identificador, name, mail);
 
-                    showAlert("Cliente agregado", "Se agrego con exitosamente al cliente");
+                    showAlert("Operador agregado", "Se agrego con exitosamente al operador");
 
                     close(event);
                 } catch (InformacionInvalida informacionInvalida) {
                     showAlert(
                             "Informacion invalida !",
                             "Los datos ingresados no son correctos.");
-                } catch (ClienteYaExiste clienteYaExiste) {
+                } catch (OperadorYaExiste operadorYaExiste) {
                     showAlert(
-                            "Los datos ingresados pertenecen a un cliente ya registrado!",
+                            "Los datos ingresados pertenecen a un operador ya registrado!",
                             " ");
                 }
 
@@ -94,7 +93,7 @@ public class ClienteController {
 
                 showAlert(
                         "Datos incorrectos!",
-                        "El documento no tiene el formato esperado (numerico).");
+                        "El ID no tiene el formato esperado (numerico).");
 
             }
         }
@@ -103,6 +102,3 @@ public class ClienteController {
 
 
 }
-
-
-
