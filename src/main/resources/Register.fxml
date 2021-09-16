@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo3.ui.controllers.RegisterController">
+   <children>
+      <Button fx:id="btn" layoutX="323.0" layoutY="187.0" mnemonicParsing="false" onAction="#agregarClientAction" prefHeight="47.0" prefWidth="148.0" text="Soy Cliente" />
+      <Button fx:id="btn1" layoutX="238.0" layoutY="322.0" mnemonicParsing="false" onAction="#verClientsAction" prefHeight="26.0" prefWidth="124.0" text="Ver clientes" />
+      <Button fx:id="btn11" layoutX="128.0" layoutY="187.0" mnemonicParsing="false" onAction="#agregarOperadorAction" prefHeight="47.0" prefWidth="148.0" text="Soy Operador" />
+   </children>
+   <effect>
+      <Glow />
+   </effect>
+</AnchorPane>

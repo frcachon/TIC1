@@ -5,34 +5,50 @@ import com.example.demo3.exceptions.InformacionInvalida;
 import com.example.demo3.exceptions.OperadorYaExiste;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 @Component
-public class OperadorController {
+public class OperadorController implements Initializable {
 
     @Autowired
     private OperadorMgr operadorMgr;
 
     @FXML
-    private Button btn;
-
-    @FXML
     private TextField name_field;
 
     @FXML
-    private Button register_button;
+    private TextField phone_field;
 
     @FXML
-    private TextField mail_field;
+    private Button siguiente_button;
 
     @FXML
-    private TextField id_field;
+    private TextField password_field;
+
+    @FXML
+    private ChoiceBox<String> depto_choice;
+
+    @FXML
+    private TextField email_field;
+
+    @FXML
+    private TextField direccion_field;
+
+    @FXML
+    void descripOffersWindow(ActionEvent event) {
+    }
+
 
     @FXML
     void close(ActionEvent actionEvent) {
@@ -51,15 +67,15 @@ public class OperadorController {
 
     private void clean() {
         name_field.setText(null);
-        mail_field.setText(null);
-        id_field.setText(null);
+        direccion_field.setText(null);
+        phone_field.setText(null);
     }
 
     @FXML
     void addOperador(ActionEvent event) {
         if (name_field.getText() == null || name_field.getText().equals("") ||     //chequeamos que nada sea nulo
-                mail_field.getText() == null || mail_field.getText().equals("") ||
-                id_field.getText() == null || id_field.getText().equals("")) {
+                phone_field.getText() == null || direccion_field.getText().equals("") ||
+                phone_field.getText() == null || direccion_field.getText().equals("")) {
 
             showAlert(
                     "Faltan datos!",
@@ -68,8 +84,8 @@ public class OperadorController {
         } else {
 
             try {
-                Long identificador = Long.valueOf(id_field.getText());   //obtiene los valores de los campos
-                String mail = mail_field.getText();
+                Long identificador = Long.valueOf(phone_field.getText());   //obtiene los valores de los campos
+                String mail = direccion_field.getText();
                 String name = name_field.getText();
 
                 try {
@@ -101,4 +117,10 @@ public class OperadorController {
     }
 
 
+    private String[] deptos = {"Artigas", "Canelones", "Cerro Largo", "Colonia", "Durazno", "Flores", "Florida", "Lavalleja", "Maldonado", "Montevideo", "Paysandú", "Río Negro", "Rivera", "Rocha", "Salto", "San José", "Soriano", "Tacuarembó", "Treinta y Tres",};
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        depto_choice.getItems().addAll(deptos);
+    }
 }

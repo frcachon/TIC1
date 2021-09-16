@@ -1,4 +1,4 @@
-package com.example.demo3.ui;
+package com.example.demo3.ui.controllers;
 
 import com.example.demo3.Demo3Application;
 import com.example.demo3.ui.controllers.ClienteController;
@@ -12,9 +12,7 @@ import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Principal {
-    @FXML
-    private MenuItem AgregarCliente;
+public class RegisterController {
 
     @FXML
     void agregarClientAction(ActionEvent event) throws Exception {
@@ -26,11 +24,7 @@ public class Principal {
         stage.setScene(new Scene(root));
         stage.setTitle("Registrar un Cliente");
         stage.show();
-
     }
-
-    @FXML
-    private MenuItem AgregarOperador;
 
     @FXML
     void agregarOperadorAction(ActionEvent event) throws Exception {
@@ -42,11 +36,7 @@ public class Principal {
         stage.setScene(new Scene(root));
         stage.setTitle("Registrar un Operador");
         stage.show();
-
     }
-
-    @FXML
-    private MenuItem VerClientes;
 
     @FXML
     void verClientsAction(ActionEvent event) throws Exception {
@@ -58,8 +48,5 @@ public class Principal {
         stage.setScene(new Scene(root));
         stage.setTitle("Ver clientes");
         stage.show();
-
     }
-
-
 }
