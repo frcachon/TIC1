@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo3.ui.controllers.ClienteViewController">
+   <children>
+      <TableView fx:id="table" layoutX="68.0" layoutY="47.0" prefHeight="307.0" prefWidth="464.0">
+        <columns>
+          <TableColumn fx:id="cedulaColumn" prefWidth="88.0" text="Cedula" />
+          <TableColumn fx:id="nameColumn" prefWidth="175.0" text="Nombre" />
+            <TableColumn fx:id="emailColumn" minWidth="6.0" prefWidth="147.0" text="Email" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
