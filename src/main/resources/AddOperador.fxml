@@ -7,49 +7,50 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="323.0" prefWidth="479.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo3.ui.controllers.OperadorController">
+<AnchorPane fx:id="pane_empresa" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="323.0" prefWidth="479.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo3.ui.controllers.OperadorController">
    <children>
-      <Label layoutX="37.0" layoutY="33.0" text="Nombre de la empresa:">
+      <Label layoutX="36.0" layoutY="23.0" text="Nombre de la empresa:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="101.0" layoutY="82.0" text="Contraseña:">
+      <Label layoutX="101.0" layoutY="91.0" text="Contraseña:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="117.0" layoutY="148.0" text="Teléfono:">
+      <Label layoutX="117.0" layoutY="157.0" text="Teléfono:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="name_field" layoutX="185.0" layoutY="29.0" prefHeight="26.0" prefWidth="220.0" />
-      <TextField fx:id="phone_field" layoutX="185.0" layoutY="144.0" prefHeight="26.0" prefWidth="220.0" />
+      <TextField fx:id="operador_name_field" layoutX="185.0" layoutY="20.0" prefHeight="26.0" prefWidth="220.0" />
+      <TextField fx:id="phone_field" layoutX="185.0" layoutY="153.0" prefHeight="26.0" prefWidth="220.0" />
       <Button fx:id="siguiente_button" layoutX="203.0" layoutY="259.0" mnemonicParsing="false" onAction="#descripOffersWindow" prefHeight="38.0" prefWidth="76.0" text="Siguiente" />
-      <TextField fx:id="password_field" layoutX="185.0" layoutY="78.0" prefHeight="26.0" prefWidth="220.0" />
-      <Label layoutX="185.0" layoutY="58.0" text="El nombre de la empresa se utilizará como nombre de usuario.">
-         <font>
-            <Font size="10.0" />
-         </font>
-      </Label>
-      <ChoiceBox fx:id="depto_choice" layoutX="185.0" layoutY="111.0" prefHeight="26.0" prefWidth="220.0" />
-      <Label layoutX="84.0" layoutY="115.0" text="Departamento:">
+      <TextField fx:id="password_field" layoutX="185.0" layoutY="87.0" prefHeight="26.0" prefWidth="220.0" />
+      <ChoiceBox fx:id="depto_choice" layoutX="185.0" layoutY="120.0" prefHeight="26.0" prefWidth="220.0" />
+      <Label layoutX="84.0" layoutY="125.0" text="Departamento:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="136.0" layoutY="182.0" text="Email:">
+      <Label layoutX="136.0" layoutY="191.0" text="Email:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="email_field" layoutX="185.0" layoutY="178.0" prefHeight="26.0" prefWidth="220.0" />
-      <Label layoutX="113.0" layoutY="216.0" text="Dirección:">
+      <TextField fx:id="email_field" layoutX="185.0" layoutY="187.0" prefHeight="26.0" prefWidth="220.0" />
+      <Label layoutX="113.0" layoutY="226.0" text="Dirección:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="direccion_field" layoutX="185.0" layoutY="212.0" prefHeight="26.0" prefWidth="220.0" />
+      <TextField fx:id="direccion_field" layoutX="185.0" layoutY="221.0" prefHeight="26.0" prefWidth="220.0" />
+      <TextField fx:id="employee_name_field" layoutX="185.0" layoutY="53.0" prefHeight="26.0" prefWidth="220.0" />
+      <Label layoutX="61.0" layoutY="56.0" text="Usuario empleado:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

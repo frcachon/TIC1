@@ -11,6 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,7 +26,10 @@ public class OperadorController implements Initializable {
     private OperadorMgr operadorMgr;
 
     @FXML
-    private TextField name_field;
+    private AnchorPane pane_empresa;
+
+    @FXML
+    private TextField operador_name_field;
 
     @FXML
     private TextField phone_field;
@@ -44,6 +48,9 @@ public class OperadorController implements Initializable {
 
     @FXML
     private TextField direccion_field;
+
+    @FXML
+    private TextField employee_name_field;
 
     @FXML
     void descripOffersWindow(ActionEvent event) {
@@ -66,14 +73,14 @@ public class OperadorController implements Initializable {
     }
 
     private void clean() {
-        name_field.setText(null);
+        employee_name_field.setText(null);
         direccion_field.setText(null);
         phone_field.setText(null);
     }
 
     @FXML
     void addOperador(ActionEvent event) {
-        if (name_field.getText() == null || name_field.getText().equals("") ||     //chequeamos que nada sea nulo
+        if (employee_name_field.getText() == null || employee_name_field.getText().equals("") ||     //chequeamos que nada sea nulo
                 phone_field.getText() == null || direccion_field.getText().equals("") ||
                 phone_field.getText() == null || direccion_field.getText().equals("")) {
 
@@ -86,7 +93,7 @@ public class OperadorController implements Initializable {
             try {
                 Long identificador = Long.valueOf(phone_field.getText());   //obtiene los valores de los campos
                 String mail = direccion_field.getText();
-                String name = name_field.getText();
+                String name = employee_name_field.getText();
 
                 try {
 
