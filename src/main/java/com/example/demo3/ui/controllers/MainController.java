@@ -26,7 +26,7 @@ public class MainController {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
 
-        AnchorPane pane = fxmlLoader.load(ClienteController.class.getResourceAsStream("Register.fxml"));
+        AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("Register.fxml"));
         pane_reg.getChildren().setAll(pane);
 
         //Parent root = fxmlLoader.load(ClienteController.class.getResourceAsStream("Register.fxml"));
@@ -50,7 +50,7 @@ public class MainController {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
 
-        AnchorPane pane = fxmlLoader.load(ClienteController.class.getResourceAsStream("Login.fxml"));
+        AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("Login.fxml"));
         pane_reg.getChildren().setAll(pane);
 
         //Parent root = fxmlLoader.load(ClienteController.class.getResourceAsStream("Login.fxml"));
