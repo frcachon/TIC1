@@ -2,11 +2,14 @@ package com.example.demo3.persistence;
 
 import com.example.demo3.entities.Cliente;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface ClienteRepository extends CrudRepository<Cliente,Integer> {
 
-    List<Cliente> findAllByDocument(Long document);
+    List<Cliente> findAllByUsername(String username);
+    List<Cliente> findAllByDocumentoAndAndPais(Long documento, String pais);
 
 }

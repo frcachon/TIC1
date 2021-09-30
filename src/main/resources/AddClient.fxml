@@ -29,7 +29,7 @@
       <TextField fx:id="username_field" layoutX="161.0" layoutY="43.0" prefHeight="26.0" prefWidth="207.0" />
       <TextField fx:id="mail_field" layoutX="161.0" layoutY="11.0" prefHeight="26.0" prefWidth="207.0" />
       <TextField fx:id="password_field" layoutX="161.0" layoutY="75.0" prefHeight="26.0" prefWidth="207.0" />
-      <Button fx:id="siguiente_button" layoutX="373.0" layoutY="261.0" mnemonicParsing="false" onAction="#hobbiesWindow" prefHeight="38.0" prefWidth="84.0" text="Siguiente" />
+      <Button fx:id="siguiente_button" layoutX="373.0" layoutY="261.0" mnemonicParsing="false" onAction="#addClient" prefHeight="38.0" prefWidth="84.0" text="Siguiente" />
       <Label layoutX="31.0" layoutY="144.0" text="Nro. de documento:">
          <font>
             <Font size="14.0" />
