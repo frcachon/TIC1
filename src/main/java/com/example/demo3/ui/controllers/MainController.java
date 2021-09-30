@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 
@@ -18,15 +19,21 @@ import org.springframework.stereotype.Component;
 public class MainController {
 
     @FXML
+    private AnchorPane pane_reg;
+
+    @FXML
     void registerWindow(ActionEvent event) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
 
-        Parent root = fxmlLoader.load(ClienteController.class.getResourceAsStream("Register.fxml"));
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Registrarse");
-        stage.show();
+        AnchorPane pane = fxmlLoader.load(ClienteController.class.getResourceAsStream("Register.fxml"));
+        pane_reg.getChildren().setAll(pane);
+
+        //Parent root = fxmlLoader.load(ClienteController.class.getResourceAsStream("Register.fxml"));
+        //Stage stage = new Stage();
+        //stage.setScene(new Scene(root));
+        //stage.setTitle("Registrarse");
+        //stage.show();
     }
 
     @FXML
@@ -43,11 +50,14 @@ public class MainController {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
 
-        Parent root = fxmlLoader.load(ClienteController.class.getResourceAsStream("Login.fxml"));
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Iniciar Sesión");
-        stage.show();
+        AnchorPane pane = fxmlLoader.load(ClienteController.class.getResourceAsStream("Login.fxml"));
+        pane_reg.getChildren().setAll(pane);
+
+        //Parent root = fxmlLoader.load(ClienteController.class.getResourceAsStream("Login.fxml"));
+        //Stage stage = new Stage();
+        //stage.setScene(new Scene(root));
+        //stage.setTitle("Iniciar Sesión");
+        //stage.show();
 
     }
 

@@ -71,14 +71,21 @@ public class ClienteController implements Initializable {
         alert.showAndWait();
     }
 
-    private void clean() {
-        document_field.setText(null);
-        mail_field.setText(null);
-        document_field.setText(null);
-    }
+    //private void clean() {
+    //    document_field.setText(null);
+    //    mail_field.setText(null);
+    //    document_field.setText(null);
+    //}
 
     @FXML
     void addClient(ActionEvent event) {
+
+        //Node source = (Node)  event.getSource();
+        //Stage parentStage  = (Stage) source.getScene().getWindow();
+        //Stage childStage = new Stage();
+        //childStage.initOwner(parentStage);
+
+
         if (document_field.getText() == null || document_field.getText().equals("") || //chequeamos que nada sea nulo
                 mail_field.getText() == null || mail_field.getText().equals("") ||
                 document_field.getText() == null || document_field.getText().equals("")) {
@@ -101,7 +108,9 @@ public class ClienteController implements Initializable {
 
                 try {
                     clienteMgr.addClient(username, mail, contrasena, documento, tipo_documento, fecha_nacimiento, vacuna_covid, pais);
+
                     showAlert("Cliente agregado", "Se registro con exitosamente al cliente");
+
                     // en vez de showAlert debo abrir la ventana de las etiquetas
 
                     close(event);
