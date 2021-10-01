@@ -26,7 +26,7 @@
       </Label>
       <TextField fx:id="operador_name_field" layoutX="185.0" layoutY="20.0" prefHeight="26.0" prefWidth="220.0" />
       <TextField fx:id="phone_field" layoutX="185.0" layoutY="153.0" prefHeight="26.0" prefWidth="220.0" />
-      <Button fx:id="siguiente_button" layoutX="203.0" layoutY="259.0" mnemonicParsing="false" onAction="#descripOffersWindow" prefHeight="38.0" prefWidth="76.0" text="Siguiente" />
+      <Button fx:id="siguiente_button" layoutX="203.0" layoutY="259.0" mnemonicParsing="false" onAction="#addOperador" prefHeight="38.0" prefWidth="76.0" text="Siguiente" />
       <TextField fx:id="password_field" layoutX="185.0" layoutY="87.0" prefHeight="26.0" prefWidth="220.0" />
       <ChoiceBox fx:id="depto_choice" layoutX="185.0" layoutY="120.0" prefHeight="26.0" prefWidth="220.0" />
       <Label layoutX="84.0" layoutY="125.0" text="Departamento:">

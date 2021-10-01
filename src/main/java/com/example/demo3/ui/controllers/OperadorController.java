@@ -72,17 +72,21 @@ public class OperadorController implements Initializable {
         alert.showAndWait();
     }
 
-    private void clean() {
+    /*private void clean() {
         employee_name_field.setText(null);
         direccion_field.setText(null);
         phone_field.setText(null);
-    }
+    }*/
 
     @FXML
     void addOperador(ActionEvent event) {
-        if (employee_name_field.getText() == null || employee_name_field.getText().equals("") ||     //chequeamos que nada sea nulo
-                phone_field.getText() == null || direccion_field.getText().equals("") ||
-                phone_field.getText() == null || direccion_field.getText().equals("")) {
+        if (operador_name_field.getText() == null || operador_name_field.getText().equals("")||
+                employee_name_field.getText() == null || employee_name_field.getText().equals("") ||  //chequeamos que nada sea nulo
+                password_field.getText() == null || password_field.getText().equals("") ||
+                depto_choice.getValue() == null || depto_choice.getValue().equals("") ||
+                phone_field.getText() == null || phone_field.getText().equals("") ||
+                email_field.getText() == null || email_field.getText().equals("") ||
+                direccion_field.getText() == null || direccion_field.getText().equals(""))  {
 
             showAlert(
                     "Faltan datos!",
@@ -91,13 +95,18 @@ public class OperadorController implements Initializable {
         } else {
 
             try {
-                Long identificador = Long.valueOf(phone_field.getText());   //obtiene los valores de los campos
-                String mail = direccion_field.getText();
-                String name = employee_name_field.getText();
+                String nombreEmpresa = operador_name_field.getText();
+                String nombreEmpleado = employee_name_field.getText();
+                String contrasena = password_field.getText();
+                String departamento = depto_choice.getValue();
+                Long telefono = Long.valueOf(phone_field.getText());
+                String emailContacto = email_field.getText();
+                String direccion = direccion_field.getText();
 
                 try {
 
-                    operadorMgr.addOperador(identificador, name, mail);
+                    operadorMgr.addOperador(nombreEmpresa,nombreEmpleado,contrasena,departamento,telefono,
+                            emailContacto,direccion);
 
                     showAlert("Operador agregado", "Se agrego con exitosamente al operador");
 
