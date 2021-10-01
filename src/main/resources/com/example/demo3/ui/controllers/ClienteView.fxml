@@ -8,9 +8,13 @@
    <children>
       <TableView fx:id="table" layoutX="68.0" layoutY="47.0" prefHeight="307.0" prefWidth="464.0">
         <columns>
-          <TableColumn fx:id="cedulaColumn" prefWidth="88.0" text="Cedula" />
-          <TableColumn fx:id="nameColumn" prefWidth="175.0" text="Nombre" />
-            <TableColumn fx:id="emailColumn" minWidth="6.0" prefWidth="147.0" text="Email" />
+          <TableColumn fx:id="usernameColumn" prefWidth="53.0" text="Usuario" />
+          <TableColumn fx:id="mailColumn" minWidth="0.0" prefWidth="40.0" text="Mail" />
+            <TableColumn fx:id="documentoColumn" minWidth="0.0" prefWidth="86.0" text="Documento" />
+            <TableColumn fx:id="tipoColumn" minWidth="0.0" prefWidth="42.0" text="Tipo" />
+            <TableColumn fx:id="nacimientoColumn" minWidth="0.0" text="Nacimiento" />
+            <TableColumn fx:id="vacunaColumn" minWidth="0.0" prefWidth="90.0" text="Vacuna Covid" />
+            <TableColumn fx:id="paisColumn" prefWidth="56.0" text="Pais" />
         </columns>
       </TableView>
    </children>
