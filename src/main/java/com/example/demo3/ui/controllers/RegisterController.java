@@ -37,7 +37,7 @@ public class RegisterController {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
 
-        AnchorPane pane = fxmlLoader.load(ClienteController.class.getResourceAsStream("AddOperador.fxml"));
+        AnchorPane pane = fxmlLoader.load(ClienteController.class.getResourceAsStream("OperadorChoice.fxml"));
         pane_reg.getChildren().setAll(pane);
 
         //Parent root = fxmlLoader.load(ClienteController.class.getResourceAsStream("AddOperador.fxml"));

@@ -12,7 +12,7 @@
    <Button fx:id="regis" layoutX="328.0" layoutY="256.0" mnemonicParsing="false" onAction="#registerWindow" prefHeight="26.0" prefWidth="124.0" text="Registarse" />
    <ImageView fx:id="caratula" fitHeight="150.0" fitWidth="150.0" layoutX="225.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
       <image>
-         <Image url="@logo.jpeg" />
+         <Image url="logo.jpeg" />
       </image>
    </ImageView>
    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
