@@ -21,7 +21,7 @@ public class RegisterController {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
 
-        AnchorPane pane = fxmlLoader.load(RegisterController.class.getResourceAsStream("AddClient.fxml"));
+        AnchorPane pane = fxmlLoader.load(ClienteController.class.getResourceAsStream("AddClient.fxml"));
         pane_reg.getChildren().setAll(pane);
 
         //Parent root = fxmlLoader.load(ClienteController.class.getResourceAsStream("AddClient.fxml"));
@@ -37,8 +37,14 @@ public class RegisterController {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
 
-        AnchorPane pane = fxmlLoader.load(RegisterController.class.getResourceAsStream("OperadorChoice.fxml"));
+        AnchorPane pane = fxmlLoader.load(ClienteController.class.getResourceAsStream("OperadorChoice.fxml"));
         pane_reg.getChildren().setAll(pane);
+
+        //Parent root = fxmlLoader.load(ClienteController.class.getResourceAsStream("AddOperador.fxml"));
+        //Stage stage = new Stage();
+        //stage.setScene(new Scene(root));
+        //stage.setTitle("Registrar un Operador");
+        //stage.show();
     }
 
     @FXML
@@ -46,7 +52,7 @@ public class RegisterController {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
 
-        AnchorPane pane = fxmlLoader.load(RegisterController.class.getResourceAsStream("ClienteView.fxml"));
+        AnchorPane pane = fxmlLoader.load(ClienteController.class.getResourceAsStream("ClienteView.fxml"));
         pane_reg.getChildren().setAll(pane);
 
         //Parent root = fxmlLoader.load(ClienteController.class.getResourceAsStream("ClienteView.fxml"));
