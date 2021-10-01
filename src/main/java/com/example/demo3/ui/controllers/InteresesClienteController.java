@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.net.URL;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -44,6 +46,9 @@ public class InteresesClienteController implements Initializable {
     private Button eliminarButton;
 
     @FXML
+    private ChoiceBox<String> interesChoiceBox;
+
+    @FXML
     void agregarPreferencia(ActionEvent event) {
 
     }
@@ -58,18 +63,27 @@ public class InteresesClienteController implements Initializable {
 
     }
 
-    ObservableList<Interes> lista;
 
     @Override
     public void initialize(URL location, ResourceBundle rb) {
 
         List<Interes> q = (List<Interes>) interesRepository.findAll();
-        lista = FXCollections.observableArrayList();
 
-        lista.addAll(q);
+        String[] inters = new String[q.size()];
+        for (int i = 0; i < q.size(); i++) {
+            if (q.get(i) != null) {
+                inters[i] = q.get(i).toString();
+            }
+        }
 
-        tablaIntereses.setItems(lista);
-        interesesColumn.setCellValueFactory(new PropertyValueFactory<>("interes"));
+        //ObservableList<Interes> lista = FXCollections.observableArrayList();
+        //lista.addAll(q);
+
+        interesChoiceBox.getItems().addAll(inters);
+
+
+        //tablaIntereses.setItems(lista);
+        //interesesColumn.setCellValueFactory(new PropertyValueFactory<>("interes"));
     }
 
 }

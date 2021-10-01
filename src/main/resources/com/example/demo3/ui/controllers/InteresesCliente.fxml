@@ -14,7 +14,7 @@
          <font>
             <Font size="20.0" />
          </font></Text>
-      <ChoiceBox layoutX="61.0" layoutY="118.0" prefHeight="26.0" prefWidth="193.0" />
+      <ChoiceBox fx:id="interesChoiceBox" layoutX="61.0" layoutY="118.0" prefHeight="26.0" prefWidth="193.0" />
       <Text layoutX="61.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Elija un interés y presione agregar. Puede agregar tantos como desee." textAlignment="CENTER" wrappingWidth="193.255859375" />
       <Button fx:id="agregarButton" layoutX="98.0" layoutY="160.0" mnemonicParsing="false" onAction="#agregarPreferencia" prefHeight="26.0" prefWidth="119.0" text="Agregar interés" />
       <TableView fx:id="tablaIntereses" layoutX="339.0" layoutY="78.0" prefHeight="248.0" prefWidth="193.0">

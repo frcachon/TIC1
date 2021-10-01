@@ -11,11 +11,11 @@ public class Interes {
     @Column(name="interes")
     private String interes;
 
-    public Interes(String interes) {
-        this.interes = interes;
+    public Interes() {
     }
 
-    public Interes() {
+    public Interes(String interes) {
+        this.interes = interes;
     }
 
     public Integer getId_interes() {
@@ -36,8 +36,6 @@ public class Interes {
 
     @Override
     public String toString() {
-        return "Interes{" +
-                "interes='" + interes + '\'' +
-                '}';
+        return interes;
     }
 }
