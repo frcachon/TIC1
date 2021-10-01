@@ -12,4 +12,5 @@ public interface ClienteRepository extends CrudRepository<Cliente,Integer> {
     List<Cliente> findAllByUsername(String username);
     List<Cliente> findAllByDocumentoAndAndPais(Long documento, String pais);
 
+
 }

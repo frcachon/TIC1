@@ -9,6 +9,7 @@
       <Button fx:id="btn" layoutX="323.0" layoutY="187.0" mnemonicParsing="false" onAction="#agregarClientAction" prefHeight="47.0" prefWidth="148.0" text="Soy Cliente" />
       <Button fx:id="btn1" layoutX="238.0" layoutY="322.0" mnemonicParsing="false" onAction="#verClientsAction" prefHeight="26.0" prefWidth="124.0" text="Ver clientes" />
       <Button fx:id="btn11" layoutX="128.0" layoutY="187.0" mnemonicParsing="false" onAction="#agregarOperadorAction" prefHeight="47.0" prefWidth="148.0" text="Soy Operador" />
+      <Button fx:id="atrasButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goBack" text="Atrás" />
    </children>
    <effect>
       <Glow />
