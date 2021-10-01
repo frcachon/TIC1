@@ -127,8 +127,8 @@ public class ClienteController implements Initializable {
                     clienteMgr.addClient(username, mail, contrasena, documento, tipo_documento, fecha_nacimiento, vacuna_covid, pais);
 
                     //showAlert("Cliente agregado", "Se registro con exitosamente al cliente");
+                    //close(event);
 
-                    close(event);
                 } catch (InformacionInvalida informacionInvalida) {
                     showAlert(
                             "Informacion invalida",
