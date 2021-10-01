@@ -23,6 +23,17 @@ public class OperadorChoiceController {
     private Button empresa;
 
     @FXML
+    private Button atrasButton;
+
+    @FXML
+    void goBack(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
+        AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("Register.fxml"));
+        pane_operador.getChildren().setAll(pane);
+    }
+
+    @FXML
     void registrarEmpleado(ActionEvent event) {
 
     }
