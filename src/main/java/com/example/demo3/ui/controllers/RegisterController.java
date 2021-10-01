@@ -6,15 +6,30 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
+
+import java.io.IOException;
 
 @Component
 public class RegisterController {
 
     @FXML
     private AnchorPane pane_reg;
+
+    @FXML
+    private Button atrasButton;
+
+    @FXML
+    void goBack(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
+
+        AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("Main.fxml"));
+        pane_reg.getChildren().setAll(pane);
+    }
 
     @FXML
     void agregarClientAction(ActionEvent event) throws Exception {
