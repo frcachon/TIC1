@@ -23,7 +23,7 @@ public class AddEmpleadoController {
     void goBack(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
-        AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("Register.fxml"));
+        AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("HomeAdmin.fxml"));
         emp_pane.getChildren().setAll(pane);
     }
 

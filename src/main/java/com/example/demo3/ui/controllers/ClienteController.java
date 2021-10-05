@@ -64,7 +64,7 @@ public class ClienteController implements Initializable {
     void goBack(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
-        AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("Register.fxml"));
+        AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("Main.fxml"));
         cliente_pane.getChildren().setAll(pane);
     }
 
