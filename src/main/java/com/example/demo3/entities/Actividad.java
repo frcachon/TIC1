@@ -3,7 +3,6 @@ package com.example.demo3.entities;
 import javax.persistence.*;
 import java.time.LocalTime;
 
-
 @Entity
 public class Actividad {
 
@@ -11,8 +10,8 @@ public class Actividad {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
 
-    @Column(name="actividad")
-    private String actividad;
+    @Column(name="titulo")
+    private String titulo;
 
     @Column(name="id_operador")
     private Integer id_operador;
@@ -20,8 +19,11 @@ public class Actividad {
     @Column(name="descripcion")
     private String descripcion;
 
-    @Column(name="horario")
-    private LocalTime horario;
+    @Column(name="horario_apertura")
+    private LocalTime apertura;
+
+    @Column(name="horario_cierre")
+    private LocalTime cierre;
 
     @Column(name="validada")
     private Boolean validada;
@@ -34,13 +36,14 @@ public class Actividad {
 
     public Actividad(){}
 
-    public Actividad(Integer id, String actividad, Integer id_operador, String descripcion, LocalTime horario,
-                     Boolean validada, Integer cupo, Boolean utiliza_reservas) {
+    public Actividad(Integer id, String titulo, Integer id_operador, String descripcion, LocalTime apertura,
+                     LocalTime cierre, Boolean validada, Integer cupo, Boolean utiliza_reservas) {
         this.id = id;
-        this.actividad = actividad;
+        this.titulo = titulo;
         this.id_operador = id_operador;
         this.descripcion = descripcion;
-        this.horario = horario;
+        this.apertura = apertura;
+        this.cierre = cierre;
         this.validada = validada;
         this.cupo = cupo;
         this.utiliza_reservas = utiliza_reservas;
@@ -53,11 +56,11 @@ public class Actividad {
         this.id = id;
     }
 
-    public String getActividad() {
-        return actividad;
+    public String getTitulo() {
+        return titulo;
     }
-    public void setActividad(String actividad) {
-        this.actividad = actividad;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
     public Integer getId_operador() {
@@ -95,24 +98,35 @@ public class Actividad {
         this.utiliza_reservas = utiliza_reservas;
     }
 
-    public LocalTime getHorario() {
-        return horario;
+    public LocalTime getApertura() {
+        return apertura;
     }
-    public void setHorario(LocalTime horario) {
-        this.horario = horario;
+
+    public void setApertura(LocalTime apertura) {
+        this.apertura = apertura;
+    }
+
+    public LocalTime getCierre() {
+        return cierre;
+    }
+
+    public void setCierre(LocalTime cierre) {
+        this.cierre = cierre;
     }
 
     @Override
     public String toString() {
         return "Actividad{" +
                 "id=" + id +
-                ", actividad='" + actividad + '\'' +
+                ", titulo='" + titulo + '\'' +
                 ", id_operador=" + id_operador +
                 ", descripcion='" + descripcion + '\'' +
-                ", horario=" + horario +
+                ", apertura=" + apertura +
+                ", cierre=" + cierre +
                 ", validada=" + validada +
                 ", cupo=" + cupo +
                 ", utiliza_reservas=" + utiliza_reservas +
                 '}';
     }
+
 }
