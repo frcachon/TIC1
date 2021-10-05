@@ -13,12 +13,6 @@ public class Operador {
     @Column(name="empresa")
     private String empresa;
 
-    @Column(name="empleado")
-    private String empleado;
-
-    @Column(name="contrasena")
-    private String contrasena;
-
     @Column(name = "departamento")
     private String departamento;
 
@@ -34,11 +28,9 @@ public class Operador {
     public Operador() {
     }
 
-    public Operador(String nombre_empresa, String nombre_empleado, String contrasena, String departamento, Long telefono,
+    public Operador(String nombre_empresa, String departamento, Long telefono,
                     String email_contacto, String direccion) {
         this.empresa = nombre_empresa;
-        this.empleado = nombre_empleado;
-        this.contrasena = contrasena;
         this.departamento = departamento;
         this.telefono = telefono;
         this.emailcontacto = email_contacto;
@@ -51,22 +43,6 @@ public class Operador {
 
     public void setNombre_empresa(String nombre_empresa) {
         this.empresa = nombre_empresa;
-    }
-
-    public String getNombre_empleado() {
-        return empleado;
-    }
-
-    public void setNombre_empleado(String nombre_empleado) {
-        this.empleado = nombre_empleado;
-    }
-
-    public String getContrasena() {
-        return contrasena;
-    }
-
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
     }
 
     public String getDepartamento() {
@@ -113,8 +89,6 @@ public class Operador {
         return "Operador{" +
                 "id=" + id +
                 ", nombre_empresa='" + empresa + '\'' +
-                ", nombre_empleado='" + empleado + '\'' +
-                ", contrasena='" + contrasena + '\'' +
                 ", departamento='" + departamento + '\'' +
                 ", telefono=" + telefono +
                 ", email_contacto='" + emailcontacto + '\'' +

@@ -29,10 +29,10 @@ public class OperadorMgr {
         //operadorRepository.save(operador);
     }*/
 
-    public void addOperador(String nombreEmpresa, String nombreEmpleado, String contrasena, String departamento,
+    public void addOperador(String nombreEmpresa, String departamento,
                             Long telefono, String emailContacto, String direccion) throws InformacionInvalida, OperadorYaExiste {
 
-        if (nombreEmpresa.equals("") || nombreEmpleado.equals("") || contrasena.equals("") || departamento.equals("") ||
+        if (nombreEmpresa.equals("") || departamento.equals("") ||
                 telefono == 0 || emailContacto.equals("") || direccion.equals("")) {
             throw new InformacionInvalida();
         }
@@ -42,8 +42,8 @@ public class OperadorMgr {
             throw new OperadorYaExiste();
         }
 
-        Operador operador = new Operador(nombreEmpresa, nombreEmpleado, contrasena, departamento,
-                telefono, emailContacto,direccion);
+        Operador operador = new Operador(nombreEmpresa, departamento,
+                telefono, emailContacto, direccion);
 
         operadorRepository.save(operador);
     }

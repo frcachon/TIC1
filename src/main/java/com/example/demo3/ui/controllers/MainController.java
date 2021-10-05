@@ -15,44 +15,22 @@ public class MainController {
     private AnchorPane pane_reg;
 
     @FXML
+    private ImageView caratula;
+
+    @FXML
     void registerWindow(ActionEvent event) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
-
-        AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("Register.fxml"));
+        AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("AddClient.fxml"));
         pane_reg.getChildren().setAll(pane);
-
-        //Parent root = fxmlLoader.load(ClienteController.class.getResourceAsStream("Register.fxml"));
-        //Stage stage = new Stage();
-        //stage.setScene(new Scene(root));
-        //stage.setTitle("Registrarse");
-        //stage.show();
     }
-
-    @FXML
-    private ImageView caratula;
-
-    //void display() {
-    //Image image = new Image(getClass().getResourceAsStream("logo.jpg"));
-    //caratula.setImage(image);
-    //}
-
 
     @FXML
     void loginWindow(ActionEvent event) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
-
         AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("Login.fxml"));
         pane_reg.getChildren().setAll(pane);
-
-        //Parent root = fxmlLoader.load(ClienteController.class.getResourceAsStream("Login.fxml"));
-        //Stage stage = new Stage();
-        //stage.setScene(new Scene(root));
-        //stage.setTitle("Iniciar Sesión");
-        //stage.show();
-
     }
-
 
 }

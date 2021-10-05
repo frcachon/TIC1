@@ -2,6 +2,7 @@ package com.example.demo3.ui.controllers;
 
 import com.example.demo3.Demo3Application;
 import com.example.demo3.entities.Actividad;
+import com.example.demo3.entities.Cliente;
 import com.example.demo3.persistence.ActividadRepository;
 import com.example.demo3.persistence.OperadorRepository;
 import javafx.collections.FXCollections;
@@ -11,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -30,8 +32,16 @@ public class HomeClienteController implements Initializable {
     private ActividadRepository actvidadRepository;
 
     @Autowired
+    private ActividadViewController actVC;
+
+    @Autowired
     private OperadorRepository operadorRepository;
     // para traer el nombre del operador a partir de su id
+
+    Cliente cliente;
+    void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
 
     @FXML
     private AnchorPane home_pane;
@@ -63,6 +73,9 @@ public class HomeClienteController implements Initializable {
     @FXML
     private TableColumn<Actividad, String> nombre_operador;
 
+    @FXML
+    private Label username_label;
+
 
     @FXML
     void ampliar_actividad(MouseEvent event) throws Exception {
@@ -70,6 +83,7 @@ public class HomeClienteController implements Initializable {
         fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
 
         Actividad act = tabla_actividades.getSelectionModel().getSelectedItem();
+        actVC.setActividad(act);
 
         AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("ActividadView.fxml"));
         home_pane.getChildren().setAll(pane);
@@ -113,6 +127,7 @@ public class HomeClienteController implements Initializable {
 
    @Override
     public void initialize(URL location, ResourceBundle rb) {
+        username_label.setText(cliente.getUsername());
         List<Actividad> q = (List<Actividad>) actvidadRepository.findAll();
         lista = FXCollections.observableArrayList();
         lista.addAll(q);
@@ -120,22 +135,5 @@ public class HomeClienteController implements Initializable {
         nombre_actividad.setCellValueFactory(new PropertyValueFactory<>("titulo"));
         nombre_operador.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
     }
-
-/*    @Override
-    public void start(Stage primaryStage) throws Exception {
-        TableView<Actividad> table = new TableView<>();
-        table.setRowFactory(tv -> {
-            TableRow<String> row = new TableRow<>();
-            row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 2 && (!row.isEmpty())) {
-                    String rowData = row.getItem();
-                    System.out.println("Double click on: " + rowData.toString());
-                }
-            });
-            return row;
-        });
-        table.getColumns().add(nombre_actividad("Item", Item::nameProperty));
-        table.getColumns().add(nombre_operador("Value", Item::valueProperty));
-    }*/
 
 }

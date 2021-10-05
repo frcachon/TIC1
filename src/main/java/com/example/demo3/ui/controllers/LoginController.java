@@ -31,6 +31,9 @@ import java.time.LocalDate;
 @Component
 public class LoginController {
 
+    @Autowired
+    private HomeClienteController homeClienteController;
+
     @FXML
     private AnchorPane login_pane;
 
@@ -98,6 +101,9 @@ public class LoginController {
             } else if (cliente != null) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
+
+                homeClienteController.setCliente(cliente);
+
                 AnchorPane pane = fxmlLoader.load(ClienteController.class.getResourceAsStream("HomeCliente.fxml"));
                 login_pane.getChildren().setAll(pane);
             } else {

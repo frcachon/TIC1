@@ -23,7 +23,7 @@
           <TableColumn fx:id="nombre_operador" prefWidth="182.0" text="Descripcion" />
         </columns>
       </TableView>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="34.0" layoutY="58.0" prefHeight="42.0" prefWidth="129.0" text="Nombre Usuario">
+      <Label fx:id="username_label" alignment="CENTER" contentDisplay="CENTER" layoutX="34.0" layoutY="58.0" prefHeight="42.0" prefWidth="129.0" text="Nombre Usuario">
          <font>
             <Font size="17.0" />
          </font>
