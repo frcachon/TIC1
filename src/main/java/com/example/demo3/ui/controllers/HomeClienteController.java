@@ -30,6 +30,9 @@ public class HomeClienteController implements Initializable {
     private ActividadRepository actvidadRepository;
 
     @Autowired
+    private ActividadViewController actVC;
+
+    @Autowired
     private OperadorRepository operadorRepository;
     // para traer el nombre del operador a partir de su id
 
@@ -70,6 +73,7 @@ public class HomeClienteController implements Initializable {
         fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
 
         Actividad act = tabla_actividades.getSelectionModel().getSelectedItem();
+        actVC.setActividad(act);
 
         AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("ActividadView.fxml"));
         home_pane.getChildren().setAll(pane);

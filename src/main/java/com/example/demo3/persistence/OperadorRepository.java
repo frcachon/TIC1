@@ -10,4 +10,5 @@ import java.util.List;
 public interface OperadorRepository extends CrudRepository<Operador,Integer> {
 
     List<Operador> findAllByempresa(String empresa);
+    Operador findOperadorById(Integer id);
 }
