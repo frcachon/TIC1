@@ -13,10 +13,10 @@
          <font>
             <Font name="System Bold" size="17.0" />
          </font></Label>
-      <Label fx:id="descripcion" layoutX="182.0" layoutY="295.0" prefHeight="26.0" prefWidth="153.0" text="descripcion" />
+      <Label fx:id="descripcion" layoutX="182.0" layoutY="295.0" prefHeight="26.0" prefWidth="370.0" text="descripcion" />
       <Text layoutX="117.0" layoutY="291.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Horario" />
       <Text layoutX="92.0" layoutY="313.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Descripción" />
-      <Label fx:id="horario" layoutX="182.0" layoutY="278.0" text="horario" />
+      <Label fx:id="horario" layoutX="182.0" layoutY="278.0" prefHeight="17.0" prefWidth="203.0" text="horario" />
       <Text layoutX="69.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Admite reservas" />
       <Text layoutX="105.0" layoutY="357.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Operador" />
       <Label fx:id="admite_reservas" layoutX="182.0" layoutY="322.0" text="admitereservas" />

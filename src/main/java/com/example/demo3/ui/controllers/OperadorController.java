@@ -35,7 +35,7 @@ public class OperadorController implements Initializable {
     private TextField phone_field;
 
     @FXML
-    private Button siguiente_button;
+    private Button finalizar_button;
 
     @FXML
     private ChoiceBox<String> depto_choice;
@@ -47,13 +47,7 @@ public class OperadorController implements Initializable {
     private TextField direccion_field;
 
     @FXML
-    private TextField employee_name_field;
-
-    @FXML
     private Button atrasButton;
-
-    @FXML
-    private PasswordField password_field;
 
     @FXML
     void descripOffersWindow(ActionEvent event) {
@@ -63,7 +57,7 @@ public class OperadorController implements Initializable {
     void goBack(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
-        AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("OperadorChoice.fxml"));
+        AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("HomeAdmin.fxml"));
         pane_empresa.getChildren().setAll(pane);
     }
 
@@ -92,8 +86,6 @@ public class OperadorController implements Initializable {
     @FXML
     void addOperador(ActionEvent event) {
         if (operador_name_field.getText() == null || operador_name_field.getText().equals("")||
-                employee_name_field.getText() == null || employee_name_field.getText().equals("") ||  //chequeamos que nada sea nulo
-                password_field.getText() == null || password_field.getText().equals("") ||
                 depto_choice.getValue() == null || depto_choice.getValue().equals("") ||
                 phone_field.getText() == null || phone_field.getText().equals("") ||
                 email_field.getText() == null || email_field.getText().equals("") ||
@@ -107,8 +99,6 @@ public class OperadorController implements Initializable {
 
             try {
                 String nombreEmpresa = operador_name_field.getText();
-                String nombreEmpleado = employee_name_field.getText();
-                String contrasena = password_field.getText();
                 String departamento = depto_choice.getValue();
                 Long telefono = Long.valueOf(phone_field.getText());
                 String emailContacto = email_field.getText();
@@ -116,12 +106,14 @@ public class OperadorController implements Initializable {
 
                 try {
 
-                    operadorMgr.addOperador(nombreEmpresa,nombreEmpleado,contrasena,departamento,telefono,
+                    operadorMgr.addOperador(nombreEmpresa,departamento,telefono,
                             emailContacto,direccion);
 
-                    showAlert("Operador agregado", "Se agrego con exitosamente al operador");
+                    FXMLLoader fxmlLoader = new FXMLLoader();
+                    fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
+                    AnchorPane pane = fxmlLoader.load(ClienteController.class.getResourceAsStream("HomeAdmin.fxml"));
+                    pane_empresa.getChildren().setAll(pane);
 
-                    close(event);
                 } catch (InformacionInvalida informacionInvalida) {
                     showAlert(
                             "Informacion invalida !",
@@ -130,13 +122,15 @@ public class OperadorController implements Initializable {
                     showAlert(
                             "Los datos ingresados pertenecen a un operador ya registrado!",
                             " ");
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
 
             } catch (NumberFormatException e) {
 
                 showAlert(
                         "Datos incorrectos!",
-                        "El ID no tiene el formato esperado (numerico).");
+                        "El teléfono no tiene el formato esperado (numerico).");
 
             }
         }

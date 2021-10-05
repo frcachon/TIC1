@@ -51,8 +51,7 @@ public class RegisterController {
     void agregarOperadorAction(ActionEvent event) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
-
-        AnchorPane pane = fxmlLoader.load(ClienteController.class.getResourceAsStream("OperadorChoice.fxml"));
+        AnchorPane pane = fxmlLoader.load(ClienteController.class.getResourceAsStream("AddEmpleado.fxml"));
         pane_reg.getChildren().setAll(pane);
 
         //Parent root = fxmlLoader.load(ClienteController.class.getResourceAsStream("AddOperador.fxml"));
