@@ -70,7 +70,7 @@ public class ActividadViewController implements Initializable {
         descripcion.setText(actividad.getDescripcion());
         horario.setText(actividad.getApertura() + " - " + actividad.getCierre());
         admite_reservas.setText( actividad.getUtiliza_reservas() ? "Sí" : "No");
-        operador_actividad.setText(operador.getNombre_empresa());
+        operador_actividad.setText(operador.getEmpresa());
     }
 
 }

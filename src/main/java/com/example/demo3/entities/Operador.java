@@ -25,6 +25,9 @@ public class Operador {
     @Column(name="direccion")
     private String direccion;
 
+    @Column(name="bloqueado")
+    private Boolean bloqueado;
+
     public Operador() {
     }
 
@@ -35,14 +38,23 @@ public class Operador {
         this.telefono = telefono;
         this.emailcontacto = email_contacto;
         this.direccion = direccion;
+        this.bloqueado = false;
     }
 
-    public String getNombre_empresa() {
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getEmpresa() {
         return empresa;
     }
 
-    public void setNombre_empresa(String nombre_empresa) {
-        this.empresa = nombre_empresa;
+    public void setEmpresa(String empresa) {
+        this.empresa = empresa;
     }
 
     public String getDepartamento() {
@@ -61,12 +73,12 @@ public class Operador {
         this.telefono = telefono;
     }
 
-    public String getEmail_contacto() {
+    public String getEmailcontacto() {
         return emailcontacto;
     }
 
-    public void setEmail_contacto(String email_contacto) {
-        this.emailcontacto = email_contacto;
+    public void setEmailcontacto(String emailcontacto) {
+        this.emailcontacto = emailcontacto;
     }
 
     public String getDireccion() {
@@ -77,11 +89,12 @@ public class Operador {
         this.direccion = direccion;
     }
 
-    public Integer getId() {
-        return id;
+    public Boolean getBloqueado() {
+        return bloqueado;
     }
-    public void setId(Integer id) {
-        this.id = id;
+
+    public void setBloqueado(Boolean bloqueado) {
+        this.bloqueado = bloqueado;
     }
 
     @Override
