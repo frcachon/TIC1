@@ -36,6 +36,12 @@ public class LoginController {
     @Autowired
     private HomeClienteController homeClienteController;
 
+    @Autowired
+    private HomeOperadorController homeOperadorController;
+
+    @Autowired
+    private OperadorRepository operadorRepository;
+
     @FXML
     private AnchorPane login_pane;
 
@@ -112,9 +118,10 @@ public class LoginController {
             } else if (empleado != null) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
-                //homeEmpleadoController.setEmpleado(empleado)
-                //AnchorPane pane = fxmlLoader.load(ClienteController.class.getResourceAsStream("HomeEmpleado.fxml"));
-                //login_pane.getChildren().setAll(pane);
+                Operador op = operadorRepository.findOperadorById(empleado.getIdoperador());
+                homeOperadorController.setOperador(op);
+                AnchorPane pane = fxmlLoader.load(ClienteController.class.getResourceAsStream("HomeOperador.fxml"));
+                login_pane.getChildren().setAll(pane);
 
             } else {
                 showAlert("Datos incorrectos", "Verifique los datos ingresados.");
