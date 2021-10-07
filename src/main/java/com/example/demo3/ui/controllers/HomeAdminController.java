@@ -75,8 +75,11 @@ public class HomeAdminController {
     }
 
     @FXML
-    void val_operador(ActionEvent event) {
-
+    void val_actividad(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
+        AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("ValidarActividad.fxml"));
+        home_pane.getChildren().setAll(pane);
     }
 
 }
