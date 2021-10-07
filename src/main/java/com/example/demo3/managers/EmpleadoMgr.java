@@ -3,34 +3,34 @@ package com.example.demo3.managers;
 import com.example.demo3.entities.Admin;
 import com.example.demo3.entities.Cliente;
 import com.example.demo3.entities.Empleado;
-import com.example.demo3.exceptions.DocumentoYaExisteParaMismoPais;
-import com.example.demo3.exceptions.InformacionInvalida;
+import com.example.demo3.entities.Operador;
 import com.example.demo3.exceptions.NombreDeUsuarioYaExiste;
 import com.example.demo3.persistence.AdminRepository;
 import com.example.demo3.persistence.ClienteRepository;
 import com.example.demo3.persistence.EmpleadoRepository;
+import com.example.demo3.persistence.OperadorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Service
-public class ClienteMgr {
-
-    @Autowired
-    private ClienteRepository clienteRepository;
+public class EmpleadoMgr {
 
     @Autowired
     private EmpleadoRepository empleadoRepository;
 
     @Autowired
+    private OperadorRepository operadorRepository;
+
+    @Autowired
+    private ClienteRepository clienteRepository;
+
+    @Autowired
     private AdminRepository adminRepository;
 
-    public void addClient(String username, String mail, String contrasena, Long documento, String tipo_documento, LocalDate fecha_nacimiento, Boolean vacuna_covid, String pais) throws NombreDeUsuarioYaExiste, InformacionInvalida, DocumentoYaExisteParaMismoPais {
-        //if (document == 0 || name.equals("") || email.equals("")) {
-        //    throw new InformacionInvalida();
-        //}
+    public void addEmpleado(String username, String password, String empresa) throws NombreDeUsuarioYaExiste {
+        Operador op = operadorRepository.findOperadorByEmpresa(empresa);
 
         List<Cliente> client_username_check = clienteRepository.findAllByUsername(username);
         if (client_username_check != null && client_username_check.size() > 0) {
@@ -47,13 +47,9 @@ public class ClienteMgr {
             throw new NombreDeUsuarioYaExiste();
         }// chequeo que ese nombre de usuario no este asociado a ningun admin
 
-        List<Cliente> doc_check = clienteRepository.findAllByDocumentoAndAndPais(documento, pais);
-        if (doc_check != null && doc_check.size() > 0) {
-            throw new DocumentoYaExisteParaMismoPais();
-        }
+        Empleado empleado = new Empleado(username, password, op.getId());
+        empleadoRepository.save(empleado);
 
-        Cliente cliente = new Cliente(username, mail, contrasena, documento, tipo_documento, fecha_nacimiento, vacuna_covid, pais);
-        clienteRepository.save(cliente);
     }
 
 }
