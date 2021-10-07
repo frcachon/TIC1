@@ -10,5 +10,6 @@ import java.util.List;
 public interface EmpleadoRepository extends CrudRepository<Empleado,Integer> {
 
     List<Empleado> findAllByUsername(String username);
+    Empleado findByUsernameAndPassword(String username, String password);
 
 }
