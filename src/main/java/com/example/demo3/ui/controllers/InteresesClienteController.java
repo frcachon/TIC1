@@ -50,6 +50,8 @@ public class InteresesClienteController implements Initializable {
 
     @FXML
     void agregarPreferencia(ActionEvent event) {
+        String tempInteres = interesChoiceBox.getValue();
+
         // 1- debo hacer que agregue el interes al cliente
         // 2- debo ejecutar la query para actualizar la tabla con el nuevo interes
     }
@@ -81,7 +83,6 @@ public class InteresesClienteController implements Initializable {
         //lista.addAll(q);
 
         interesChoiceBox.getItems().addAll(inters);
-
 
         //tablaIntereses.setItems(lista);
         //interesesColumn.setCellValueFactory(new PropertyValueFactory<>("interes"));

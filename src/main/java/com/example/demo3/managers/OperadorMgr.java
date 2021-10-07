@@ -47,4 +47,15 @@ public class OperadorMgr {
 
         operadorRepository.save(operador);
     }
+
+    public void bloquearOperador(Operador operador) {
+        operador.setBloqueado(true);
+        operadorRepository.save(operador);
+    }
+
+    public void desbloquearOperador(Operador operador) {
+        operador.setBloqueado(false);
+        operadorRepository.save(operador);
+    }
+
 }
