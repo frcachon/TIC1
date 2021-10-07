@@ -43,8 +43,11 @@ public class HomeAdminController {
     }
 
     @FXML
-    void agregar_admin(ActionEvent event) {
-
+    void agregar_admin(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
+        AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("AddAdmin.fxml"));
+        home_pane.getChildren().setAll(pane);
     }
 
     @FXML
