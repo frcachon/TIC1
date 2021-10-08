@@ -9,4 +9,7 @@ import java.util.List;
 @Repository
 public interface InteresRepository extends CrudRepository<Interes,Integer> {
 
+    Interes findByNombre(String nombre);
+
+
 }

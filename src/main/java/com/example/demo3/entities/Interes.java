@@ -6,36 +6,36 @@ import javax.persistence.*;
 public class Interes {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO) // "id" es el id de la tabla
-    private Integer id_interes;
+    private Integer idinteres;
 
-    @Column(name="interes")
-    private String interes;
+    @Column(name="nombre")
+    private String nombre;
 
     public Interes() {
     }
 
     public Interes(String interes) {
-        this.interes = interes;
+        this.nombre = interes;
     }
 
-    public Integer getId_interes() {
-        return id_interes;
+    public Integer getIdinteres() {
+        return idinteres;
     }
 
-    public void setId_interes(Integer id_interes) {
-        this.id_interes = id_interes;
+    public void setIdinteres(Integer id_interes) {
+        this.idinteres = id_interes;
     }
 
     public String getInteres() {
-        return interes;
+        return nombre;
     }
 
     public void setInteres(String interes) {
-        this.interes = interes;
+        this.nombre = interes;
     }
 
     @Override
     public String toString() {
-        return interes;
+        return nombre;
     }
 }

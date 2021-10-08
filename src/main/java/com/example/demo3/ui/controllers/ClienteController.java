@@ -1,10 +1,12 @@
 package com.example.demo3.ui.controllers;
 
 import com.example.demo3.Demo3Application;
+import com.example.demo3.entities.Cliente;
 import com.example.demo3.exceptions.DocumentoYaExisteParaMismoPais;
 import com.example.demo3.managers.ClienteMgr;
 import com.example.demo3.exceptions.NombreDeUsuarioYaExiste;
 import com.example.demo3.exceptions.InformacionInvalida;
+import com.example.demo3.persistence.ClienteRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,6 +28,12 @@ public class ClienteController implements Initializable {
 
     @Autowired
     private ClienteMgr clienteMgr;
+
+    @Autowired
+    private ClienteRepository clienteRepository;
+
+    @Autowired
+    private InteresesClienteController interesesClienteController;
 
     @FXML
     private TextField username_field;
@@ -122,9 +130,11 @@ public class ClienteController implements Initializable {
                 try {
                     FXMLLoader fxmlLoader = new FXMLLoader();
                     fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
+                    clienteMgr.addClient(username, mail, contrasena, documento, tipo_documento, fecha_nacimiento, vacuna_covid, pais);
+                    Cliente cliente = clienteRepository.findByMailAndAndContrasena(mail,contrasena);
+                    interesesClienteController.setCliente(cliente);
                     AnchorPane pane = fxmlLoader.load(ClienteController.class.getResourceAsStream("InteresesCliente.fxml"));
                     cliente_pane.getChildren().setAll(pane);
-                    clienteMgr.addClient(username, mail, contrasena, documento, tipo_documento, fecha_nacimiento, vacuna_covid, pais);
 
                     //showAlert("Cliente agregado", "Se registro con exitosamente al cliente");
                     //close(event);
