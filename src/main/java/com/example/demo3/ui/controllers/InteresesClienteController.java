@@ -32,6 +32,9 @@ public class InteresesClienteController implements Initializable {
     void setCliente(Cliente cliente){this.cliente = cliente;}
 
     @Autowired
+    private HomeClienteController homeClienteController;
+
+    @Autowired
     private InteresRepository interesRepository;
 
     @Autowired
@@ -122,7 +125,8 @@ public class InteresesClienteController implements Initializable {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
-            AnchorPane pane = fxmlLoader.load(ClienteController.class.getResourceAsStream("Main.fxml"));
+            homeClienteController.setCliente(cliente);
+            AnchorPane pane = fxmlLoader.load(ClienteController.class.getResourceAsStream("HomeCliente.fxml"));
             pane_intereses.getChildren().setAll(pane);
         }
         catch (IOException ioException){
