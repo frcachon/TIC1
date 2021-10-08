@@ -8,14 +8,14 @@ public class Interes {
     @GeneratedValue(strategy=GenerationType.AUTO) // "id" es el id de la tabla
     private Integer id_interes;
 
-    @Column(name="interes")
-    private String interes;
+    @Column(name="nombre")
+    private String nombre;
 
     public Interes() {
     }
 
-    public Interes(String interes) {
-        this.interes = interes;
+    public Interes(String nombre) {
+        this.nombre = nombre;
     }
 
     public Integer getId_interes() {
@@ -26,16 +26,16 @@ public class Interes {
         this.id_interes = id_interes;
     }
 
-    public String getInteres() {
-        return interes;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setInteres(String interes) {
-        this.interes = interes;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     @Override
     public String toString() {
-        return interes;
+        return nombre;
     }
 }

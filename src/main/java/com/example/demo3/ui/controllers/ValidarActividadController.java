@@ -74,14 +74,14 @@ public class ValidarActividadController implements Initializable {
         Actividad act = tablaActividades.getSelectionModel().getSelectedItem();
         actividadMgr.rechazarActividad(act);
 
-        List<Actividad> q = (List<Actividad>) actividadRepository.findAll();
+        List<Actividad> q = (List<Actividad>) actividadRepository.findAllByValidadaIsFalse();
         lista.removeAll();
         lista = FXCollections.observableArrayList();
         lista.addAll(q);
         tablaActividades.setItems(lista);
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("titulo"));
         operadorColumn.setCellValueFactory(cellData -> {
-            Integer id_operador = cellData.getValue().getId_operador();
+            Integer id_operador = cellData.getValue().getIdoperador();
             String nombre_operador = operadorRepository.findOperadorById(id_operador).getEmpresa();
             return new ReadOnlyStringWrapper(nombre_operador);
         });
@@ -92,14 +92,14 @@ public class ValidarActividadController implements Initializable {
         Actividad act = tablaActividades.getSelectionModel().getSelectedItem();
         actividadMgr.validarActividad(act);
 
-        List<Actividad> q = (List<Actividad>) actividadRepository.findAll();
+        List<Actividad> q = (List<Actividad>) actividadRepository.findAllByValidadaIsFalse();
         lista.removeAll();
         lista = FXCollections.observableArrayList();
         lista.addAll(q);
         tablaActividades.setItems(lista);
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("titulo"));
         operadorColumn.setCellValueFactory(cellData -> {
-            Integer id_operador = cellData.getValue().getId_operador();
+            Integer id_operador = cellData.getValue().getIdoperador();
             String nombre_operador = operadorRepository.findOperadorById(id_operador).getEmpresa();
             return new ReadOnlyStringWrapper(nombre_operador);
         });
@@ -107,13 +107,13 @@ public class ValidarActividadController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        List<Actividad> q = (List<Actividad>) actividadRepository.findAll();
+        List<Actividad> q = (List<Actividad>) actividadRepository.findAllByValidadaIsFalse();
         lista = FXCollections.observableArrayList();
         lista.addAll(q);
         tablaActividades.setItems(lista);
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("titulo"));
         operadorColumn.setCellValueFactory(cellData -> {
-            Integer id_operador = cellData.getValue().getId_operador();
+            Integer id_operador = cellData.getValue().getIdoperador();
             String nombre_operador = operadorRepository.findOperadorById(id_operador).getEmpresa();
             return new ReadOnlyStringWrapper(nombre_operador);
         });

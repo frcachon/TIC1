@@ -56,4 +56,14 @@ public class ClienteMgr {
         clienteRepository.save(cliente);
     }
 
+    public void bloquearCliente(Cliente cliente) {
+        cliente.setBloqueado(true);
+        clienteRepository.save(cliente);
+    }
+
+    public void desbloquearCliente(Cliente cliente) {
+        cliente.setBloqueado(false);
+        clienteRepository.save(cliente);
+    }
+
 }

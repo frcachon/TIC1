@@ -13,8 +13,8 @@ public class Actividad {
     @Column(name="titulo")
     private String titulo;
 
-    @Column(name="id_operador")
-    private Integer id_operador;
+    @Column(name="idoperador")
+    private Integer idoperador;
 
     @Column(name="descripcion")
     private String descripcion;
@@ -36,11 +36,11 @@ public class Actividad {
 
     public Actividad(){}
 
-    public Actividad(Integer id, String titulo, Integer id_operador, String descripcion, LocalTime apertura,
+    public Actividad(Integer id, String titulo, Integer idoperador, String descripcion, LocalTime apertura,
                      LocalTime cierre, Boolean validada, Integer cupo, Boolean utiliza_reservas) {
         this.id = id;
         this.titulo = titulo;
-        this.id_operador = id_operador;
+        this.idoperador = idoperador;
         this.descripcion = descripcion;
         this.apertura = apertura;
         this.cierre = cierre;
@@ -63,11 +63,11 @@ public class Actividad {
         this.titulo = titulo;
     }
 
-    public Integer getId_operador() {
-        return id_operador;
+    public Integer getIdoperador() {
+        return idoperador;
     }
-    public void setId_operador(Integer id_operador) {
-        this.id_operador = id_operador;
+    public void setIdoperador(Integer idoperador) {
+        this.idoperador = idoperador;
     }
 
     public String getDescripcion() {
@@ -119,7 +119,7 @@ public class Actividad {
         return "Actividad{" +
                 "id=" + id +
                 ", titulo='" + titulo + '\'' +
-                ", id_operador=" + id_operador +
+                ", idoperador=" + idoperador +
                 ", descripcion='" + descripcion + '\'' +
                 ", apertura=" + apertura +
                 ", cierre=" + cierre +
