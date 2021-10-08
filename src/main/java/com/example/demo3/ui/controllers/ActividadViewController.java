@@ -31,7 +31,7 @@ public class ActividadViewController implements Initializable {
 
     public void setActividad(Actividad act) {
         this.actividad = act;
-        this.operador = operadorRepository.findOperadorById(act.getId_operador());
+        this.operador = operadorRepository.findOperadorById(act.getIdoperador());
     }
 
     @FXML

@@ -23,7 +23,7 @@ public class HomeAdminController {
     private Button bloq_operador;
 
     @FXML
-    private Button val_operador;
+    private Button val_actividad;
 
     @FXML
     private Button reg_operador;
@@ -33,6 +33,17 @@ public class HomeAdminController {
 
     @FXML
     private Button agregar_admin;
+
+    @FXML
+    private Button bloq_cliente;
+
+    @FXML
+    void bloq_cliente(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
+        AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("BloqueoCliente.fxml"));
+        home_pane.getChildren().setAll(pane);
+    }
 
     @FXML
     void bloq_operador(ActionEvent event) throws IOException {

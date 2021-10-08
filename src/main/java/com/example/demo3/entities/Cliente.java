@@ -33,6 +33,9 @@ public class Cliente {
     @Column(name="pais")
     private String pais;
 
+    @Column(name="bloqueado")
+    private Boolean bloqueado;
+
     public Cliente() {
     }
 
@@ -45,6 +48,7 @@ public class Cliente {
         this.fecha_nacimiento = fecha_nacimiento;
         this.vacuna_covid = vacuna_covid;
         this.pais = pais;
+        this.bloqueado = false;
     }
 
     public Integer getId() {
@@ -119,6 +123,14 @@ public class Cliente {
         this.pais = pais;
     }
 
+    public Boolean getBloqueado() {
+        return bloqueado;
+    }
+
+    public void setBloqueado(Boolean bloqueado) {
+        this.bloqueado = bloqueado;
+    }
+
     @Override
     public String toString() {
         return "Cliente{" +
@@ -127,11 +139,11 @@ public class Cliente {
                 ", mail='" + mail + '\'' +
                 ", contrasena='" + contrasena + '\'' +
                 ", documento=" + documento +
-                ", tipo_documento=" + tipo_documento +
+                ", tipo_documento='" + tipo_documento + '\'' +
                 ", fecha_nacimiento=" + fecha_nacimiento +
                 ", vacuna_covid=" + vacuna_covid +
                 ", pais='" + pais + '\'' +
+                ", bloqueado=" + bloqueado +
                 '}';
     }
-
 }

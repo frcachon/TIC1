@@ -3,19 +3,19 @@ package com.example.demo3.ui.controllers;
 import com.example.demo3.Demo3Application;
 import com.example.demo3.entities.Actividad;
 import com.example.demo3.entities.Cliente;
+import com.example.demo3.entities.Operador;
 import com.example.demo3.persistence.ActividadRepository;
 import com.example.demo3.persistence.OperadorRepository;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,8 +61,6 @@ public class HomeClienteController implements Initializable {
     @FXML
     private Button editar_perfil_button;
 
-    @FXML
-    private Button buscar_button;
 
     @FXML
     private TableView<Actividad> tabla_actividades;
@@ -76,6 +74,23 @@ public class HomeClienteController implements Initializable {
     @FXML
     private Label username_label;
 
+    @FXML
+    private TextField search_field;
+
+    @FXML
+    void busquedaDinamica(KeyEvent event) {
+        List<Actividad> q = (List<Actividad>) actvidadRepository.findAllByTituloContaining(search_field.getText());
+        lista = FXCollections.observableArrayList();
+        lista.removeAll();
+        lista.addAll(q);
+        tabla_actividades.setItems(lista);
+        nombre_actividad.setCellValueFactory(new PropertyValueFactory<>("titulo"));
+        nombre_operador.setCellValueFactory(cellData -> {
+            Integer idoperador = cellData.getValue().getIdoperador();
+            String nombre_operador = operadorRepository.findOperadorById(idoperador).getEmpresa();
+            return new ReadOnlyStringWrapper(nombre_operador);
+        });
+    }
 
     @FXML
     void ampliar_actividad(MouseEvent event) throws Exception {
@@ -92,6 +107,17 @@ public class HomeClienteController implements Initializable {
 
     @FXML
     void buscar(ActionEvent event) {
+        List<Actividad> q = (List<Actividad>) actvidadRepository.findAllByTituloContaining(search_field.getText());
+        lista = FXCollections.observableArrayList();
+        lista.removeAll();
+        lista.addAll(q);
+        tabla_actividades.setItems(lista);
+        nombre_actividad.setCellValueFactory(new PropertyValueFactory<>("titulo"));
+        nombre_operador.setCellValueFactory(cellData -> {
+            Integer idoperador = cellData.getValue().getIdoperador();
+            String nombre_operador = operadorRepository.findOperadorById(idoperador).getEmpresa();
+            return new ReadOnlyStringWrapper(nombre_operador);
+        });
     }
 
     @FXML
