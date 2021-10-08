@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class Interes {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO) // "id" es el id de la tabla
-    private Integer id_interes;
+    private Integer idinteres;
 
     @Column(name="nombre")
     private String nombre;
@@ -14,24 +14,24 @@ public class Interes {
     public Interes() {
     }
 
-    public Interes(String nombre) {
-        this.nombre = nombre;
+    public Interes(String interes) {
+        this.nombre = interes;
     }
 
-    public Integer getId_interes() {
-        return id_interes;
+    public Integer getIdinteres() {
+        return idinteres;
     }
 
-    public void setId_interes(Integer id_interes) {
-        this.id_interes = id_interes;
+    public void setIdinteres(Integer id_interes) {
+        this.idinteres = id_interes;
     }
 
-    public String getNombre() {
+    public String getInteres() {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setInteres(String interes) {
+        this.nombre = interes;
     }
 
     @Override
