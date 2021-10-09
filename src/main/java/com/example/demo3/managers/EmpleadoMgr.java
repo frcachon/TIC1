@@ -32,7 +32,7 @@ public class EmpleadoMgr {
     public void addEmpleado(String username, String password, String empresa) throws NombreDeUsuarioYaExiste {
         Operador op = operadorRepository.findOperadorByEmpresa(empresa);
 
-        List<Cliente> client_username_check = clienteRepository.findAllByUsername(username);
+        List<Cliente> client_username_check = clienteRepository.findAllByMail(username);
         if (client_username_check != null && client_username_check.size() > 0) {
             throw new NombreDeUsuarioYaExiste();
         }// chequeo que ese nombre de usuario no este asociado a ningun cliente

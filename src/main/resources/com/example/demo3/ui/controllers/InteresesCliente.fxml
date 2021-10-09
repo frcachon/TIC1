@@ -14,16 +14,15 @@
          <font>
             <Font size="20.0" />
          </font></Text>
-      <ChoiceBox fx:id="interesChoiceBox" layoutX="61.0" layoutY="118.0" prefHeight="26.0" prefWidth="193.0" />
-      <Text layoutX="61.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Elija un interés y presione agregar. Puede agregar tantos como desee." textAlignment="CENTER" wrappingWidth="193.255859375" />
-      <Button fx:id="agregarButton" layoutX="98.0" layoutY="160.0" mnemonicParsing="false" onAction="#agregarPreferencia" prefHeight="26.0" prefWidth="119.0" text="Agregar interés" />
+      <ChoiceBox fx:id="interesChoiceBox" layoutX="58.0" layoutY="127.0" prefHeight="26.0" prefWidth="217.0" />
+      <Button fx:id="agregarButton" layoutX="58.0" layoutY="169.0" mnemonicParsing="false" onAction="#agregarPreferencia" prefHeight="26.0" prefWidth="106.0" text="Agregar interés" />
       <TableView fx:id="tablaIntereses" layoutX="339.0" layoutY="78.0" prefHeight="248.0" prefWidth="193.0">
         <columns>
-          <TableColumn fx:id="interesesColumn" prefWidth="198.0" text="Intereses" />
+          <TableColumn fx:id="interesesColumn" prefWidth="198.0" text="Intereses actuales" />
         </columns>
       </TableView>
       <Button fx:id="finalizarButton" layoutX="479.0" layoutY="360.0" mnemonicParsing="false" onAction="#endRegister" text="Finalizar registro" />
-      <Button fx:id="eliminarButton" layoutX="98.0" layoutY="300.0" mnemonicParsing="false" onAction="#eliminarInteres" prefHeight="26.0" prefWidth="119.0" text="Eliminar interés" />
-      <Text layoutX="61.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Puede seleccionar uno de sus intereses de la tabla y eliminarlo presionando este botón." textAlignment="CENTER" wrappingWidth="193.255859375" />
+      <Button fx:id="eliminarButton" layoutX="169.0" layoutY="169.0" mnemonicParsing="false" onAction="#eliminarInteres" prefHeight="26.0" prefWidth="106.0" text="Eliminar interés" />
+      <Text layoutX="107.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestione sus intereses" />
    </children>
 </AnchorPane>

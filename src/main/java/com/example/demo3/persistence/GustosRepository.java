@@ -14,6 +14,10 @@ public interface GustosRepository extends JpaRepository<Gustos, GustosId> {
 
     List<Gustos> findAllByIdIdgustosAndAndIdUsuario(Integer idgustos, String usuario);
 
+    List<Gustos> findAllById(Integer id);
+
+
     @Override
     List<Gustos> findAllById(Iterable<GustosId> gustosIds);
+
 }

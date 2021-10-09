@@ -9,9 +9,6 @@ public class Cliente {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
 
-    @Column(name="username")
-    private String username;
-
     @Column(name="mail")
     private String mail;
 
@@ -39,8 +36,7 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(String username, String mail, String contrasena, Long documento, String tipo_documento, LocalDate fecha_nacimiento, Boolean vacuna_covid, String pais) {
-        this.username = username;
+    public Cliente(String mail, String contrasena, Long documento, String tipo_documento, LocalDate fecha_nacimiento, Boolean vacuna_covid, String pais) {
         this.mail = mail;
         this.contrasena = contrasena;
         this.documento = documento;
@@ -57,14 +53,6 @@ public class Cliente {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String nombre_usuario) {
-        this.username = nombre_usuario;
     }
 
     public String getMail() {
@@ -135,7 +123,6 @@ public class Cliente {
     public String toString() {
         return "Cliente{" +
                 "id=" + id +
-                ", username='" + username + '\'' +
                 ", mail='" + mail + '\'' +
                 ", contrasena='" + contrasena + '\'' +
                 ", documento=" + documento +

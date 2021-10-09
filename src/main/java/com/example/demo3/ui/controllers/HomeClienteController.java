@@ -153,7 +153,7 @@ public class HomeClienteController implements Initializable {
 
    @Override
     public void initialize(URL location, ResourceBundle rb) {
-        username_label.setText(cliente.getUsername());
+        username_label.setText(cliente.getMail());
         List<Actividad> q = (List<Actividad>) actvidadRepository.findAll();
         lista = FXCollections.observableArrayList();
         lista.addAll(q);

@@ -44,7 +44,7 @@ public class AdminMgr {
             throw new OperadorYaExiste();
         }
 
-        List<Cliente> lista3 = clienteRepository.findAllByUsername(username);
+        List<Cliente> lista3 = clienteRepository.findAllByMail(username);
         if (lista3 != null && lista3.size() > 0) {
             throw new NombreDeUsuarioYaExiste();
         }

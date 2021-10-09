@@ -11,5 +11,7 @@ public interface InteresRepository extends CrudRepository<Interes,Integer> {
 
     Interes findByNombre(String nombre);
 
+    Interes findByIdinteres(Integer id);
+
 
 }

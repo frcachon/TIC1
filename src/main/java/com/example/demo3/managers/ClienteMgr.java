@@ -27,22 +27,22 @@ public class ClienteMgr {
     @Autowired
     private AdminRepository adminRepository;
 
-    public void addClient(String username, String mail, String contrasena, Long documento, String tipo_documento, LocalDate fecha_nacimiento, Boolean vacuna_covid, String pais) throws NombreDeUsuarioYaExiste, InformacionInvalida, DocumentoYaExisteParaMismoPais {
+    public void addClient(String mail, String contrasena, Long documento, String tipo_documento, LocalDate fecha_nacimiento, Boolean vacuna_covid, String pais) throws NombreDeUsuarioYaExiste, InformacionInvalida, DocumentoYaExisteParaMismoPais {
         //if (document == 0 || name.equals("") || email.equals("")) {
         //    throw new InformacionInvalida();
         //}
 
-        List<Cliente> client_username_check = clienteRepository.findAllByUsername(username);
+        List<Cliente> client_username_check = clienteRepository.findAllByMail(mail);
         if (client_username_check != null && client_username_check.size() > 0) {
             throw new NombreDeUsuarioYaExiste();
         }// chequeo que ese nombre de usuario no este asociado a ningun cliente
 
-        List<Empleado> emp_username_check = empleadoRepository.findAllByUsername(username);
+        List<Empleado> emp_username_check = empleadoRepository.findAllByUsername(mail);
         if (emp_username_check != null && emp_username_check.size() > 0) {
             throw new NombreDeUsuarioYaExiste();
         }// chequeo que ese nombre de usuario no este asociado a ningun empleado
 
-        List<Admin> admin_username_check = adminRepository.findAllByMail(username);
+        List<Admin> admin_username_check = adminRepository.findAllByMail(mail);
         if (admin_username_check != null && admin_username_check.size() > 0) {
             throw new NombreDeUsuarioYaExiste();
         }// chequeo que ese nombre de usuario no este asociado a ningun admin
@@ -52,7 +52,7 @@ public class ClienteMgr {
             throw new DocumentoYaExisteParaMismoPais();
         }
 
-        Cliente cliente = new Cliente(username, mail, contrasena, documento, tipo_documento, fecha_nacimiento, vacuna_covid, pais);
+        Cliente cliente = new Cliente(mail, contrasena, documento, tipo_documento, fecha_nacimiento, vacuna_covid, pais);
         clienteRepository.save(cliente);
     }
 

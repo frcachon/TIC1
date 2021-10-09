@@ -22,16 +22,16 @@ public class Interes {
         return idinteres;
     }
 
-    public void setIdinteres(Integer id_interes) {
-        this.idinteres = id_interes;
+    public void setIdinteres(Integer idinteres) {
+        this.idinteres = idinteres;
     }
 
-    public String getInteres() {
+    public String getNombre() {
         return nombre;
     }
 
-    public void setInteres(String interes) {
-        this.nombre = interes;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     @Override

@@ -31,4 +31,12 @@ public class GustosId implements Serializable {
         this.idgustos = idgustos;
         this.usuario = usuario;
     }
+
+    @Override
+    public String toString() {
+        return "GustosId{" +
+                "idgustos=" + idgustos +
+                ", usuario='" + usuario + '\'' +
+                '}';
+    }
 }

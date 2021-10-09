@@ -36,9 +36,6 @@ public class ClienteController implements Initializable {
     private InteresesClienteController interesesClienteController;
 
     @FXML
-    private TextField username_field;
-
-    @FXML
     private TextField mail_field;
 
     @FXML
@@ -118,7 +115,6 @@ public class ClienteController implements Initializable {
         } else {
 
             try {
-                String username = username_field.getText();
                 String mail = mail_field.getText();
                 String contrasena = password_field.getText();
                 Long documento = Long.valueOf(document_field.getText());
@@ -130,7 +126,7 @@ public class ClienteController implements Initializable {
                 try {
                     FXMLLoader fxmlLoader = new FXMLLoader();
                     fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
-                    clienteMgr.addClient(username, mail, contrasena, documento, tipo_documento, fecha_nacimiento, vacuna_covid, pais);
+                    clienteMgr.addClient(mail, contrasena, documento, tipo_documento, fecha_nacimiento, vacuna_covid, pais);
                     Cliente cliente = clienteRepository.findByMailAndAndContrasena(mail,contrasena);
                     interesesClienteController.setCliente(cliente);
                     AnchorPane pane = fxmlLoader.load(ClienteController.class.getResourceAsStream("InteresesCliente.fxml"));
