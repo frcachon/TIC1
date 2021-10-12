@@ -15,6 +15,11 @@ public class OperadorMgr {
     @Autowired
     private OperadorRepository operadorRepository;
 
+    Operador operador;
+    public void setOperador(Operador operador) {
+        this.operador = operador;
+    }
+
     /*public void addOperador(Long identificador, String name, String email) throws OperadorYaExiste, InformacionInvalida {
         if (identificador == 0 || name.equals("") || email.equals("")) {
             throw new InformacionInvalida();
@@ -56,6 +61,11 @@ public class OperadorMgr {
     public void desbloquearOperador(Operador operador) {
         operador.setBloqueado(false);
         operadorRepository.save(operador);
+    }
+
+    public void updateOperador (String nombreEmpresa, String departamento, Long telefono,
+                                String emailContacto, String direccion) {
+
     }
 
 }

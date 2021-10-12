@@ -35,6 +35,9 @@ public class HomeOperadorController implements Initializable {
     }
 
     @Autowired
+    private EditarPerfilOperadorController editarPerfilOperadorController;
+
+    @Autowired
     private ActividadRepository actividadRepository;
 
     @Autowired
@@ -93,8 +96,12 @@ public class HomeOperadorController implements Initializable {
     }
 
     @FXML
-    void editarPerfil(ActionEvent event) {
-
+    void editarPerfil(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
+        editarPerfilOperadorController.setOperador(operador);
+        AnchorPane pane = fxmlLoader.load(ClienteController.class.getResourceAsStream("EditarPerfilOperador.fxml"));
+        home_pane.getChildren().setAll(pane);
     }
 
     @FXML
