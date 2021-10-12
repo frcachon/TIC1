@@ -21,6 +21,7 @@ import javafx.scene.layout.AnchorPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -42,6 +43,9 @@ public class HomeClienteController implements Initializable {
     void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
+
+    @Autowired
+    private EditarInteresesClienteController editarInteresesClienteController;
 
     @FXML
     private AnchorPane home_pane;
@@ -85,11 +89,12 @@ public class HomeClienteController implements Initializable {
         lista.addAll(q);
         tabla_actividades.setItems(lista);
         nombre_actividad.setCellValueFactory(new PropertyValueFactory<>("titulo"));
-        nombre_operador.setCellValueFactory(cellData -> {
-            Integer idoperador = cellData.getValue().getIdoperador();
-            String nombre_operador = operadorRepository.findOperadorById(idoperador).getEmpresa();
-            return new ReadOnlyStringWrapper(nombre_operador);
-        });
+        nombre_operador.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+        //nombre_operador.setCellValueFactory(cellData -> {
+        //    Integer idoperador = cellData.getValue().getIdoperador();
+        //    String nombre_operador = operadorRepository.findOperadorById(idoperador).getEmpresa();
+        //    return new ReadOnlyStringWrapper(nombre_operador);
+        //});
     }
 
     @FXML
@@ -104,30 +109,18 @@ public class HomeClienteController implements Initializable {
         home_pane.getChildren().setAll(pane);
     }
 
-
-    @FXML
-    void buscar(ActionEvent event) {
-        List<Actividad> q = (List<Actividad>) actvidadRepository.findAllByTituloContaining(search_field.getText());
-        lista = FXCollections.observableArrayList();
-        lista.removeAll();
-        lista.addAll(q);
-        tabla_actividades.setItems(lista);
-        nombre_actividad.setCellValueFactory(new PropertyValueFactory<>("titulo"));
-        nombre_operador.setCellValueFactory(cellData -> {
-            Integer idoperador = cellData.getValue().getIdoperador();
-            String nombre_operador = operadorRepository.findOperadorById(idoperador).getEmpresa();
-            return new ReadOnlyStringWrapper(nombre_operador);
-        });
-    }
-
     @FXML
     void editar_perfil(ActionEvent event) {
 
     }
 
     @FXML
-    void editar_preferencia(ActionEvent event) {
-
+    void editar_preferencia(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
+        editarInteresesClienteController.setCliente(cliente);
+        AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("EditarInteresesCliente.fxml"));
+        home_pane.getChildren().setAll(pane);
     }
 
     @FXML
