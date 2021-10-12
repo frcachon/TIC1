@@ -65,7 +65,28 @@ public class OperadorMgr {
 
     public void updateOperador (String nombreEmpresa, String departamento, Long telefono,
                                 String emailContacto, String direccion) {
-
+    if (nombreEmpresa != null) {
+        if (!nombreEmpresa.equals("")) {
+            operador.setEmpresa(nombreEmpresa);
+        }
+        }
+    if (departamento != null) {
+        operador.setDepartamento(departamento);
+    }
+    if (telefono != 0L) {
+        operador.setTelefono(telefono);
+    }
+    if (emailContacto != null) {
+        if (!emailContacto.equals("")) {
+            operador.setEmailcontacto(emailContacto);
+        }
+    }
+    if (direccion != null) {
+        if (!direccion.equals("")) {
+            operador.setDireccion(direccion);
+        }
+    }
+    operadorRepository.save(operador);
     }
 
 }
