@@ -1,5 +1,4 @@
 package com.example.demo3.ui.controllers;
-
 import com.example.demo3.Demo3Application;
 import com.example.demo3.entities.Actividad;
 import com.example.demo3.entities.Operador;
@@ -14,8 +13,14 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView ;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -56,6 +61,9 @@ public class ActividadViewController implements Initializable {
     private Label operador_actividad;
 
     @FXML
+    private ImageView imageView_actividad;
+
+    @FXML
     void goBack(ActionEvent event) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
@@ -71,6 +79,24 @@ public class ActividadViewController implements Initializable {
         horario.setText(actividad.getApertura() + " - " + actividad.getCierre());
         admite_reservas.setText( actividad.getUtiliza_reservas() ? "Sí" : "No");
         operador_actividad.setText(operador.getEmpresa());
+
+        InputStream is = new ByteArrayInputStream(actividad.getImagen_actividad());
+        imageView_actividad.setImage(new Image(is));
+
+
+        //BufferedImage imagen_act = null;
+
+        /*
+        try {
+            imagen_act = ImageIO.read(is);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Image image = SwingFXUtils.toFXImage(imagen_act, null);
+        imageView_actividad.setImage(image);
+        */
+
+
     }
 
 }

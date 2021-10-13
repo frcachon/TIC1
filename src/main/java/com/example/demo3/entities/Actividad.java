@@ -1,5 +1,7 @@
 package com.example.demo3.entities;
 
+import javafx.scene.image.Image;
+
 import javax.persistence.*;
 import java.time.LocalTime;
 
@@ -12,6 +14,10 @@ public class Actividad {
 
     @Column(name="titulo")
     private String titulo;
+
+    @Lob
+    @Column(name="imagen_actividad", columnDefinition = "BLOB")
+    private byte[] imagen_actividad;
 
     @Column(name="id_operador")
     private Integer id_operador;
@@ -34,12 +40,14 @@ public class Actividad {
     @Column(name="utiliza_reservas")
     private Boolean utiliza_reservas;
 
+
+
     public Actividad(){}
 
-    public Actividad(Integer id, String titulo, Integer id_operador, String descripcion, LocalTime apertura,
+    public Actividad(String titulo, byte[] imagen_actividad, Integer id_operador, String descripcion, LocalTime apertura,
                      LocalTime cierre, Boolean validada, Integer cupo, Boolean utiliza_reservas) {
-        this.id = id;
         this.titulo = titulo;
+        this.imagen_actividad = imagen_actividad;
         this.id_operador = id_operador;
         this.descripcion = descripcion;
         this.apertura = apertura;
@@ -62,6 +70,11 @@ public class Actividad {
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
+
+    public byte[] getImagen_actividad() {
+        return imagen_actividad;
+    }
+    public void setImagen_actividad(byte[] imagen_actividad) { this.imagen_actividad = imagen_actividad; }
 
     public Integer getId_operador() {
         return id_operador;
@@ -119,6 +132,7 @@ public class Actividad {
         return "Actividad{" +
                 "id=" + id +
                 ", titulo='" + titulo + '\'' +
+                "imagen=" + imagen_actividad + '\'' +
                 ", id_operador=" + id_operador +
                 ", descripcion='" + descripcion + '\'' +
                 ", apertura=" + apertura +
