@@ -18,7 +18,7 @@
    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
    <Text layoutX="248.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenido" wrappingWidth="101.607421875">
       <font>
-         <Font size="21.0" />
+         <Font size="19.0" />
       </font>
    </Text>
 </AnchorPane>
