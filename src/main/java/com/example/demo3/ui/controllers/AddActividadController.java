@@ -42,8 +42,6 @@ public class AddActividadController {
 
         Operador operador;
 
-
-
         @FXML
         private AnchorPane act_pane;
 

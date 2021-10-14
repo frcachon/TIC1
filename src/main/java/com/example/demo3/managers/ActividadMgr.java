@@ -34,7 +34,6 @@ public class ActividadMgr {
     public void registrarActividad(String titulo, byte[] imagen_actividad, Integer idoperador, String descripcion, LocalTime apertura,
                                           LocalTime cierre, Boolean validada, Integer cupo, Boolean utiliza_reservas)  {
 
-
         Actividad actividad = new Actividad(titulo, imagen_actividad, idoperador, descripcion, apertura,
                 cierre, validada, cupo, utiliza_reservas);
         actividad.setValidada(false); //al inicio no esta validada

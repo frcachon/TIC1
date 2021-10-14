@@ -74,8 +74,11 @@ public class HomeOperadorController implements Initializable {
     private Button agregar_actividad_button;
 
     @FXML
-    void agregarActividad(ActionEvent event) {
-
+    void agregarActividad(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
+        AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("AddActividad.fxml"));
+        home_pane.getChildren().setAll(pane);
     }
 
     @FXML
