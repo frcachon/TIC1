@@ -27,6 +27,9 @@ public class ClienteMgr {
     @Autowired
     private AdminRepository adminRepository;
 
+    Cliente cliente;
+    public void setCliente(Cliente cliente){this.cliente = cliente;}
+
     public void addClient(String mail, String contrasena, Long documento, String tipo_documento, LocalDate fecha_nacimiento, Boolean vacuna_covid, String pais) throws NombreDeUsuarioYaExiste, InformacionInvalida, DocumentoYaExisteParaMismoPais {
         //if (document == 0 || name.equals("") || email.equals("")) {
         //    throw new InformacionInvalida();
@@ -63,6 +66,22 @@ public class ClienteMgr {
 
     public void desbloquearCliente(Cliente cliente) {
         cliente.setBloqueado(false);
+        clienteRepository.save(cliente);
+    }
+
+    public void updateCliente(String contrasena, Boolean vacuna){
+        if(contrasena != null){
+            if (!contrasena.equals("") && !contrasena.equals(cliente.getContrasena())){
+                cliente.setContrasena(contrasena);
+            }
+        }
+
+        if(vacuna){
+            if (vacuna != cliente.getVacuna_covid()){
+                cliente.setVacuna_covid(vacuna);
+            }
+        }
+
         clienteRepository.save(cliente);
     }
 

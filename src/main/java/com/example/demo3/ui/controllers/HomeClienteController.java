@@ -47,6 +47,9 @@ public class HomeClienteController implements Initializable {
     @Autowired
     private EditarInteresesClienteController editarInteresesClienteController;
 
+    @Autowired
+    private EditarPerfilClienteController editarPerfilClienteController;
+
     @FXML
     private AnchorPane home_pane;
 
@@ -110,7 +113,12 @@ public class HomeClienteController implements Initializable {
     }
 
     @FXML
-    void editar_perfil(ActionEvent event) {
+    void editar_perfil(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
+        editarPerfilClienteController.setCliente(cliente);
+        AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("EditarPerfilCliente.fxml"));
+        home_pane.getChildren().setAll(pane);
 
     }
 
