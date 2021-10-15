@@ -1,9 +1,12 @@
 package com.example.demo3.entities;
 
+import com.example.demo3.persistence.OperadorRepository;
 import javafx.scene.image.Image;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.time.LocalTime;
+import java.util.Arrays;
 
 @Entity
 public class Actividad {
@@ -40,6 +43,12 @@ public class Actividad {
     @Column(name="utiliza_reservas")
     private Boolean utiliza_reservas;
 
+    @Column(name="promediopuntuaciones")
+    private Float promediopuntuaciones;
+
+    @Column(name="cantidadpuntuaciones")
+    private Integer cantidadpuntuaciones;
+
     public Actividad(){}
 
     public Actividad(String titulo, byte[] imagenactividad, Integer idoperador, String descripcion, LocalTime apertura,
@@ -53,11 +62,14 @@ public class Actividad {
         this.validada = validada;
         this.cupo = cupo;
         this.utiliza_reservas = utiliza_reservas;
+        this.promediopuntuaciones = 0F;
+        this.cantidadpuntuaciones = 0;
     }
 
     public Integer getId() {
         return id;
     }
+
     public void setId(Integer id) {
         this.id = id;
     }
@@ -65,6 +77,7 @@ public class Actividad {
     public String getTitulo() {
         return titulo;
     }
+
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
@@ -72,11 +85,15 @@ public class Actividad {
     public byte[] getImagenactividad() {
         return imagenactividad;
     }
-    public void setImagenactividad(byte[] imagenactividad) { this.imagenactividad = imagenactividad; }
+
+    public void setImagenactividad(byte[] imagenactividad) {
+        this.imagenactividad = imagenactividad;
+    }
 
     public Integer getIdoperador() {
         return idoperador;
     }
+
     public void setIdoperador(Integer idoperador) {
         this.idoperador = idoperador;
     }
@@ -84,29 +101,9 @@ public class Actividad {
     public String getDescripcion() {
         return descripcion;
     }
+
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public Boolean getValidada() {
-        return validada;
-    }
-    public void setValidada(Boolean validada) {
-        this.validada = validada;
-    }
-
-    public Integer getCupo() {
-        return cupo;
-    }
-    public void setCupo(Integer cupo) {
-        this.cupo = cupo;
-    }
-
-    public Boolean getUtiliza_reservas() {
-        return utiliza_reservas;
-    }
-    public void setUtiliza_reservas(Boolean utiliza_reservas) {
-        this.utiliza_reservas = utiliza_reservas;
     }
 
     public LocalTime getApertura() {
@@ -125,12 +122,52 @@ public class Actividad {
         this.cierre = cierre;
     }
 
+    public Boolean getValidada() {
+        return validada;
+    }
+
+    public void setValidada(Boolean validada) {
+        this.validada = validada;
+    }
+
+    public Integer getCupo() {
+        return cupo;
+    }
+
+    public void setCupo(Integer cupo) {
+        this.cupo = cupo;
+    }
+
+    public Boolean getUtiliza_reservas() {
+        return utiliza_reservas;
+    }
+
+    public void setUtiliza_reservas(Boolean utiliza_reservas) {
+        this.utiliza_reservas = utiliza_reservas;
+    }
+
+    public Float getPromediopuntuaciones() {
+        return promediopuntuaciones;
+    }
+
+    public void setPromediopuntuaciones(Float promediopuntuaciones) {
+        this.promediopuntuaciones = promediopuntuaciones;
+    }
+
+    public Integer getCantidadpuntuaciones() {
+        return cantidadpuntuaciones;
+    }
+
+    public void setCantidadpuntuaciones(Integer cantidadpuntuaciones) {
+        this.cantidadpuntuaciones = cantidadpuntuaciones;
+    }
+
     @Override
     public String toString() {
         return "Actividad{" +
                 "id=" + id +
                 ", titulo='" + titulo + '\'' +
-                "imagen=" + imagenactividad + '\'' +
+                ", imagenactividad=" + Arrays.toString(imagenactividad) +
                 ", idoperador=" + idoperador +
                 ", descripcion='" + descripcion + '\'' +
                 ", apertura=" + apertura +
@@ -138,6 +175,8 @@ public class Actividad {
                 ", validada=" + validada +
                 ", cupo=" + cupo +
                 ", utiliza_reservas=" + utiliza_reservas +
+                ", promediopuntuaciones=" + promediopuntuaciones +
+                ", cantidadpuntuaciones=" + cantidadpuntuaciones +
                 '}';
     }
 

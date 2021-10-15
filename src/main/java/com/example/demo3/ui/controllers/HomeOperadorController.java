@@ -43,6 +43,9 @@ public class HomeOperadorController implements Initializable {
     @Autowired
     private ActividadViewController actVC;
 
+    @Autowired
+    private AddActividadController addActividadController;
+
     @FXML
     private AnchorPane home_pane;
 
@@ -77,6 +80,7 @@ public class HomeOperadorController implements Initializable {
     void agregarActividad(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
+        addActividadController.setOperador(operador);
         AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("AddActividad.fxml"));
         home_pane.getChildren().setAll(pane);
     }
@@ -117,8 +121,12 @@ public class HomeOperadorController implements Initializable {
     }
 
     @FXML
-    void verReservas(ActionEvent event) {
-
+    void verReservas(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
+        //validarReservaController.setOperador(operador);
+        AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("ValidarReserva.fxml"));
+        home_pane.getChildren().setAll(pane);
     }
 
     ObservableList<Actividad> lista;

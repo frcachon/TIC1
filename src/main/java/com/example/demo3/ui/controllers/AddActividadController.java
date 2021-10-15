@@ -42,6 +42,10 @@ public class AddActividadController {
 
         Operador operador;
 
+        void setOperador(Operador operador) {
+                this.operador = operador;
+        }
+
         @FXML
         private AnchorPane act_pane;
 
@@ -73,14 +77,14 @@ public class AddActividadController {
         private Button siguiente_button;
 
         @FXML
-        private ImageView imagenVw;
+        private ImageView imagenVw;// = new ImageView();
 
 
         @FXML
         void goBack(ActionEvent event) throws IOException {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
-            AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("HomeAdmin.fxml"));
+            AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("HomeOperador.fxml"));
             act_pane.getChildren().setAll(pane);
         }
 
@@ -99,7 +103,7 @@ public class AddActividadController {
                         (descripcion_field.getText() == null) || descripcion_field.getText().equals("") ||
                         (cupo_field.getText() == null) || cupo_field.getText().equals("") ||
                         (horarioApertura_field.getText() == null) || horarioApertura_field.getText().equals("") ||
-                        (horarioCierre_field.getText() == null) || horarioCierre_field.getText().equals("") || !reservas_check.isSelected())  {
+                        (horarioCierre_field.getText() == null) || horarioCierre_field.getText().equals(""))  {
 
                         showAlert(
                                 "Faltan datos",
@@ -109,7 +113,7 @@ public class AddActividadController {
 
                         try {
 
-                                Integer id_operador = operador.getId(); ;
+                                Integer id_operador = operador.getId();
                                 String titulo = titulo_field.getText();
                                 byte[] imagen_actividad = image_bytes;
                                 String descripcion = descripcion_field.getText();
@@ -124,7 +128,7 @@ public class AddActividadController {
                                 try {
                                         FXMLLoader fxmlLoader = new FXMLLoader();
                                         fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
-                                        AnchorPane pane = fxmlLoader.load(ClienteController.class.getResourceAsStream("InteresesCliente.fxml"));
+                                        AnchorPane pane = fxmlLoader.load(ClienteController.class.getResourceAsStream("HomeOperador.fxml"));
                                         act_pane.getChildren().setAll(pane);
                                         actividadMgr.registrarActividad(titulo, imagen_actividad, id_operador, descripcion, apertura, cierre, false,  cupo, utiliza_reservas);
 
