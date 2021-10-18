@@ -93,8 +93,8 @@ public class HomeOperadorController implements Initializable {
         Actividad act = tabla_actividades.getSelectionModel().getSelectedItem();
         actVC.setActividad(act);
 
-        //AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("ActividadView.fxml"));
-        //home_pane.getChildren().setAll(pane);
+        AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("ActividadView.fxml"));
+        home_pane.getChildren().setAll(pane);
     }
 
     @FXML
