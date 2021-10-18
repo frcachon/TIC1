@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
@@ -20,6 +21,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -84,6 +86,7 @@ public class HomeClienteController implements Initializable {
 
     @FXML
     void busquedaDinamica(KeyEvent event) {
+        actividadesGrid.getChildren().clear();
         List<Actividad> q = (List<Actividad>) actvidadRepository.findAllByTituloContaining(search_field.getText());
         int columnns = 0;
         int row = 1;
@@ -92,10 +95,11 @@ public class HomeClienteController implements Initializable {
             for (int i = 0; i < q.size(); i++) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("ActividadThumb.fxml"));
+                fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
                 HBox box = fxmlLoader.load();
                 actividadThumbController = fxmlLoader.getController();
-                //actividadThumbController.setPane(home_pane);
                 actividadThumbController.setData(q.get(i));
+                actividadThumbController.setPane(home_pane);
 
                 if (columnns == 1) {
                     columnns = 0;
@@ -105,6 +109,7 @@ public class HomeClienteController implements Initializable {
                 GridPane.setMargin(box, new Insets(10));
             }
         }
+
         catch (IOException e) {
             e.printStackTrace();
         }
@@ -124,16 +129,6 @@ public class HomeClienteController implements Initializable {
         //    String nombre_operador = operadorRepository.findOperadorById(idoperador).getEmpresa();
         //    return new ReadOnlyStringWrapper(nombre_operador);
         //});
-    }
-
-    @FXML
-    void ampliar_actividad(MouseEvent event) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
-        //Actividad act = actividadesGrid.setOnMouseClicked(e -> );
-        //actVC.setActividad(act);
-        AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("ActividadView.fxml"));
-        home_pane.getChildren().setAll(pane);
     }
 
     @FXML
@@ -179,10 +174,11 @@ public class HomeClienteController implements Initializable {
            for (int i = 0; i < actividades.size(); i++) {
                FXMLLoader fxmlLoader = new FXMLLoader();
                fxmlLoader.setLocation(getClass().getResource("ActividadThumb.fxml"));
+               fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
                HBox box = fxmlLoader.load();
                actividadThumbController = fxmlLoader.getController();
-               //actividadThumbController.setPane(home_pane);
                actividadThumbController.setData(actividades.get(i));
+               actividadThumbController.setPane(home_pane);
 
                if (columnns == 1) {
                    columnns = 0;

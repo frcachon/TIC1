@@ -6,6 +6,7 @@ import com.example.demo3.persistence.OperadorRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Component;
 import javafx.scene.input.MouseEvent;
 
 import javax.annotation.PostConstruct;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 @Component
 public class ActividadThumbController {
@@ -55,14 +58,13 @@ public class ActividadThumbController {
         //imagen.setImage();
         nombreLabel.setText(actividad.getTitulo());
         puntuacionLabel.setText(actividad.getPromediopuntuaciones() + " estrellas.");
-        operadorLabel.setText("Nombre operador");
-        //operadorLabel.setText(operadorRepository.findOperadorById(actividad.getIdoperador()).getEmpresa());
+        operadorLabel.setText(operadorRepository.findOperadorById(this.actividad.getIdoperador()).getEmpresa());
         descripcionLabel.setWrapText(true);
         descripcionLabel.setText(actividad.getDescripcion());
     }
 
     @FXML
-    void ampliarActividad(MouseEvent event) throws Exception {
+    void ampliarActividad(ActionEvent event) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
         actividadViewController.setActividad(actividad);

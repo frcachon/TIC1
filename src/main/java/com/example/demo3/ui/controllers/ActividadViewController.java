@@ -80,8 +80,8 @@ public class ActividadViewController implements Initializable {
         admite_reservas.setText( actividad.getUtiliza_reservas() ? "Sí" : "No");
         operador_actividad.setText(operador.getEmpresa());
 
-        InputStream is = new ByteArrayInputStream(actividad.getImagenactividad());
-        imageView_actividad.setImage(new Image(is));
+        //InputStream is = new ByteArrayInputStream(actividad.getImagenactividad());
+        //imageView_actividad.setImage(new Image(is));
 
 
         //BufferedImage imagen_act = null;
