@@ -10,7 +10,6 @@ import java.util.List;
 public interface ActividadRepository extends CrudRepository<Actividad,Integer> {
 
     List<Actividad> findAllByIdoperador(Integer idoperador);
-    List<Actividad> findAllByTitulo(String titulo);
     List<Actividad> findAllByTituloContaining(String titulo);
     List<Actividad> findAllByValidadaIsFalse();
 

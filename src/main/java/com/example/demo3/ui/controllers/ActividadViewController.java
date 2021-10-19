@@ -67,7 +67,7 @@ public class ActividadViewController implements Initializable {
     void goBack(ActionEvent event) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
-        AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("HomeOperador.fxml"));
+        AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("HomeCliente.fxml"));
         act_view_pane.getChildren().setAll(pane);
     }
 
@@ -79,8 +79,8 @@ public class ActividadViewController implements Initializable {
         admite_reservas.setText( actividad.getUtiliza_reservas() ? "Sí" : "No");
         operador_actividad.setText(operador.getEmpresa());
 
-        //InputStream is = new ByteArrayInputStream(actividad.getImagenactividad());
-        //imageView_actividad.setImage(new Image(is));
+        InputStream is = new ByteArrayInputStream(actividad.getImagenactividad());
+        imageView_actividad.setImage(new Image(is));
 
 
         //BufferedImage imagen_act = null;
