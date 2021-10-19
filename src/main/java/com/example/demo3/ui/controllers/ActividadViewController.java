@@ -88,6 +88,7 @@ public class ActividadViewController implements Initializable {
         horario.setText(actividad.getApertura() + " - " + actividad.getCierre());
         admite_reservas.setText( actividad.getUtiliza_reservas() ? "Sí" : "No");
         operador_actividad.setText(operador.getEmpresa());
+        puntuacion_label.setText(actividad.getPromediopuntuaciones() + " estrellas");
 
         if (actividad.getImagenactividad() != null) {
             InputStream is = new ByteArrayInputStream(actividad.getImagenactividad());

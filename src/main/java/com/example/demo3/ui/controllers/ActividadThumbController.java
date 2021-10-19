@@ -63,7 +63,7 @@ public class ActividadThumbController {
             imagen.setImage(new Image(is));
         }
         nombreLabel.setText(actividad.getTitulo());
-        puntuacionLabel.setText(actividad.getPromediopuntuaciones() + " estrellas.");
+        puntuacionLabel.setText(actividad.getPromediopuntuaciones() + " estrellas");
         operadorLabel.setText(operadorRepository.findOperadorById(actividad.getIdoperador()).getEmpresa());
         descripcionLabel.setWrapText(true);
         descripcionLabel.setText(actividad.getDescripcion());
