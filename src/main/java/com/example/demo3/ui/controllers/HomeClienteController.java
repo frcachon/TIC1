@@ -11,7 +11,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
@@ -19,6 +21,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -34,22 +37,21 @@ public class HomeClienteController implements Initializable {
     private ActividadRepository actvidadRepository;
 
     @Autowired
-    private ActividadViewController actVC;
+    private ActividadViewController actividadViewController;
 
     @Autowired
     private ActividadThumbController actividadThumbController;
 
     @Autowired
     private OperadorRepository operadorRepository;
-    // para traer el nombre del operador a partir de su id
+
+    @Autowired
+    private EditarInteresesClienteController editarInteresesClienteController;
 
     Cliente cliente;
     void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-
-    @Autowired
-    private EditarInteresesClienteController editarInteresesClienteController;
 
     @Autowired
     private EditarPerfilClienteController editarPerfilClienteController;
@@ -86,28 +88,64 @@ public class HomeClienteController implements Initializable {
     private List<Actividad> actividades;
 
     @FXML
+    private void mouseClick(MouseEvent event) throws IOException {
+        Node source = (Node) event.getSource();
+
+        //Bounds b = source.getBoundsInLocal();
+        //Bounds c = source.getBoundsInParent();
+
+        //Node temp =
+
+        //boolean a = source.getBoundsInLocal().contains(x,y);
+        //int colIndex = GridPane.getColumnIndex(source);
+        //int rowIndex = GridPane.getRowIndex(source);
+
+/*        for( Node node: actividadesGrid.getChildren()) {
+            if( node instanceof HBox) {
+                if(source.getBoundsInParent().contains(event.getX(), event.getY())) {
+                    rowIndex =  GridPane.getRowIndex(node);
+                    colIndex = GridPane.getColumnIndex(node);
+                }
+            }
+        }*/
+
+        int rowIndex = 0;
+        for(Node node: actividadesGrid.getChildren()) {
+            if(node instanceof HBox) {
+                if(node.getBoundsInParent().contains(event.getX(), event.getY())) {
+                    rowIndex =  GridPane.getRowIndex(node) - 1;
+                    //System.out.println(rowIndex);
+                }
+            }
+        }
+        Actividad act = actividadThumbController.actividades.get(rowIndex);
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
+        actividadViewController.setActividad(act);
+        AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("ActividadView.fxml"));
+        home_pane.getChildren().setAll(pane);
+    }
+
+    @FXML
     void busquedaDinamica(KeyEvent event) {
+        actividadesGrid.getChildren().clear();
         List<Actividad> q = (List<Actividad>) actvidadRepository.findAllByTituloContaining(search_field.getText());
-        int columnns = 0;
         int row = 1;
 
         try {
-            for (int i = 0; i < q.size(); i++) {
+            for (Actividad actividad : q) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("ActividadThumb.fxml"));
+                fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
                 HBox box = fxmlLoader.load();
                 actividadThumbController = fxmlLoader.getController();
-                //actividadThumbController.setPane(home_pane);
-                actividadThumbController.setData(q.get(i));
-
-                if (columnns == 1) {
-                    columnns = 0;
-                    ++row;
-                }
-                actividadesGrid.add(box,columnns++,row);
-                GridPane.setMargin(box, new Insets(10));
+                actividadThumbController.setData(actividad);
+                actividadThumbController.setPane(home_pane);
+                actividadesGrid.addRow(row, box);
+                row++;
             }
         }
+
         catch (IOException e) {
             e.printStackTrace();
         }
@@ -127,16 +165,6 @@ public class HomeClienteController implements Initializable {
         //    String nombre_operador = operadorRepository.findOperadorById(idoperador).getEmpresa();
         //    return new ReadOnlyStringWrapper(nombre_operador);
         //});
-    }
-
-    @FXML
-    void ampliar_actividad(MouseEvent event) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
-        //Actividad act = actividadesGrid.setOnMouseClicked(e -> );
-        //actVC.setActividad(act);
-        AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("ActividadView.fxml"));
-        home_pane.getChildren().setAll(pane);
     }
 
     @FXML
@@ -179,30 +207,36 @@ public class HomeClienteController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle rb) {
         username_label.setText(cliente.getMail());
+        actividadesGrid.getChildren().clear();
         actividades = (List<Actividad>) actvidadRepository.findAll();
-        int columnns = 0;
         int row = 1;
 
         try {
-           for (int i = 0; i < actividades.size(); i++) {
-               FXMLLoader fxmlLoader = new FXMLLoader();
-               fxmlLoader.setLocation(getClass().getResource("ActividadThumb.fxml"));
-               HBox box = fxmlLoader.load();
-               actividadThumbController = fxmlLoader.getController();
-               //actividadThumbController.setPane(home_pane);
-               actividadThumbController.setData(actividades.get(i));
+            for (Actividad actividad : actividades) {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("ActividadThumb.fxml"));
+                fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
+                HBox box = fxmlLoader.load();
+                actividadThumbController = fxmlLoader.getController();
+                actividadThumbController.setData(actividad);
+                actividadThumbController.setPane(home_pane);
+                actividadesGrid.addRow(row, box);
+                row++;
+            }
+        }
 
-               if (columnns == 1) {
-                   columnns = 0;
-                   ++row;
-               }
-               actividadesGrid.add(box,columnns++,row);
-               GridPane.setMargin(box, new Insets(10));
-           }
-        }
         catch (IOException e) {
-           e.printStackTrace();
+            e.printStackTrace();
         }
+
     }
+
+/*    EventHandler<ActionEvent> buttonEventHandler(){
+        return event -> {
+            Node node = (Node) event.getTarget();
+            int row = GridPane.getRowIndex(node);
+            int column = GridPane.getColumnIndex(node);
+        };
+    }*/
 
 }
