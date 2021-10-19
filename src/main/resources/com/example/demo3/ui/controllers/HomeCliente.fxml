@@ -26,7 +26,7 @@
       <TextField fx:id="search_field" layoutX="424.0" layoutY="13.0" onKeyTyped="#busquedaDinamica" prefHeight="22.0" prefWidth="160.0" promptText="Buscar" />
       <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" layoutX="215.0" layoutY="55.0" prefHeight="329.0" prefWidth="369.0">
          <content>
-            <GridPane fx:id="actividadesGrid" maxWidth="369.0" minWidth="369.0" prefWidth="369.0">
+            <GridPane fx:id="actividadesGrid" maxWidth="369.0" minWidth="369.0" onMouseClicked="#mouseClick" prefWidth="369.0">
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
