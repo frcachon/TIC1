@@ -63,6 +63,15 @@ public class ActividadViewController implements Initializable {
     @FXML
     private ImageView imageView_actividad;
 
+
+    @FXML
+    private Label puntuacion_label;
+
+    @FXML
+    void realizarComentario(ActionEvent event) {
+
+    }
+
     @FXML
     void goBack(ActionEvent event) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader();
@@ -74,13 +83,16 @@ public class ActividadViewController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         label_nombre_actividad.setText(actividad.getTitulo());
+        descripcion.setWrapText(true);
         descripcion.setText(actividad.getDescripcion());
         horario.setText(actividad.getApertura() + " - " + actividad.getCierre());
         admite_reservas.setText( actividad.getUtiliza_reservas() ? "Sí" : "No");
         operador_actividad.setText(operador.getEmpresa());
 
-        InputStream is = new ByteArrayInputStream(actividad.getImagenactividad());
-        imageView_actividad.setImage(new Image(is));
+        if (actividad.getImagenactividad() != null) {
+            InputStream is = new ByteArrayInputStream(actividad.getImagenactividad());
+            imageView_actividad.setImage(new Image(is));
+        }
 
 
         //BufferedImage imagen_act = null;

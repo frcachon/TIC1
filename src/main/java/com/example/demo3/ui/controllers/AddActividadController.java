@@ -120,11 +120,12 @@ public class AddActividadController {
                                 byte[] imagen_actividad = image_bytes;
 
                                 try {
+                                        actividadMgr.registrarActividad(titulo, imagen_actividad, idoperador, descripcion, apertura, cierre,false,   cupo, utiliza_reservas);
                                         FXMLLoader fxmlLoader = new FXMLLoader();
                                         fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
                                         AnchorPane pane = fxmlLoader.load(ClienteController.class.getResourceAsStream("HomeOperador.fxml"));
                                         act_pane.getChildren().setAll(pane);
-                                        actividadMgr.registrarActividad(titulo, imagen_actividad, idoperador, descripcion, apertura, cierre,false,   cupo, utiliza_reservas);
+                                        //actividadMgr.registrarActividad(titulo, imagen_actividad, idoperador, descripcion, apertura, cierre,false,   cupo, utiliza_reservas);
 
 
                                         //showAlert("Actividad agregada", "Se registro con exitosamente la actividad");

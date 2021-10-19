@@ -187,11 +187,6 @@ public class HomeClienteController implements Initializable {
     }
 
     @FXML
-    void realizar_comentario(ActionEvent event) {
-
-    }
-
-    @FXML
     void ver_itinerario(ActionEvent event) {
 
     }

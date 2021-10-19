@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -17,6 +18,8 @@ import org.springframework.stereotype.Component;
 import javafx.scene.input.MouseEvent;
 
 import javax.annotation.PostConstruct;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,8 +58,10 @@ public class ActividadThumbController {
 
     public void setData(Actividad actividad) {
         actividades.add(actividad);
-        //hay que traer la imagen de la BD
-        //imagen.setImage();
+        if (actividad.getImagenactividad() != null) {
+            InputStream is = new ByteArrayInputStream(actividad.getImagenactividad());
+            imagen.setImage(new Image(is));
+        }
         nombreLabel.setText(actividad.getTitulo());
         puntuacionLabel.setText(actividad.getPromediopuntuaciones() + " estrellas.");
         operadorLabel.setText(operadorRepository.findOperadorById(actividad.getIdoperador()).getEmpresa());
