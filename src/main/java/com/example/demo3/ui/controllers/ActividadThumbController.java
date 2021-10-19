@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 @Component
-public class ActividadThumbController implements Initializable {
+public class ActividadThumbController {
 
     @Autowired
     private ActividadViewController actividadViewController;
@@ -35,9 +35,6 @@ public class ActividadThumbController implements Initializable {
 
     @Autowired
     private OperadorRepository operadorRepository;
-
-    @Autowired
-    private HomeClienteController homeClienteController;
 
     @FXML
     private ImageView imagen;
@@ -67,18 +64,4 @@ public class ActividadThumbController implements Initializable {
         descripcionLabel.setText(actividad.getDescripcion());
     }
 
-    @FXML
-    void ampliarActividad(ActionEvent event) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
-        //actividadViewController.setActividad(actividad);
-        AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("ActividadView.fxml"));
-        home_pane.getChildren().setAll(pane);
-    }
-
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-    }
 }

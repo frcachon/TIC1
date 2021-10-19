@@ -107,7 +107,7 @@ public class HomeClienteController implements Initializable {
         for(Node node: actividadesGrid.getChildren()) {
             if(node instanceof HBox) {
                 if(node.getBoundsInParent().contains(event.getX(), event.getY())) {
-                    rowIndex =  GridPane.getRowIndex(node);
+                    rowIndex =  GridPane.getRowIndex(node) - 1;
                     //System.out.println(rowIndex);
                 }
             }
@@ -196,8 +196,9 @@ public class HomeClienteController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle rb) {
         username_label.setText(cliente.getMail());
+        actividadesGrid.getChildren().clear();
         actividades = (List<Actividad>) actvidadRepository.findAll();
-        int row = 0;
+        int row = 1;
 
         try {
             for (Actividad actividad : actividades) {
