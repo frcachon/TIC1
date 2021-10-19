@@ -3,21 +3,22 @@ package com.example.demo3.ui.controllers;
 import com.example.demo3.Demo3Application;
 import com.example.demo3.entities.Actividad;
 import com.example.demo3.entities.Cliente;
-import com.example.demo3.entities.Operador;
 import com.example.demo3.persistence.ActividadRepository;
 import com.example.demo3.persistence.OperadorRepository;
-import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -34,6 +35,9 @@ public class HomeClienteController implements Initializable {
 
     @Autowired
     private ActividadViewController actVC;
+
+    @Autowired
+    private ActividadThumbController actividadThumbController;
 
     @Autowired
     private OperadorRepository operadorRepository;
@@ -68,16 +72,6 @@ public class HomeClienteController implements Initializable {
     @FXML
     private Button editar_perfil_button;
 
-
-    @FXML
-    private TableView<Actividad> tabla_actividades;
-
-    @FXML
-    private TableColumn<Actividad, String> nombre_actividad;
-
-    @FXML
-    private TableColumn<Actividad, String> nombre_operador;
-
     @FXML
     private Label username_label;
 
@@ -85,14 +79,49 @@ public class HomeClienteController implements Initializable {
     private TextField search_field;
 
     @FXML
+    private ScrollPane scrollPane;
+
+    @FXML
+    private GridPane actividadesGrid;
+    private List<Actividad> actividades;
+
+    @FXML
     void busquedaDinamica(KeyEvent event) {
         List<Actividad> q = (List<Actividad>) actvidadRepository.findAllByTituloContaining(search_field.getText());
-        lista = FXCollections.observableArrayList();
-        lista.removeAll();
-        lista.addAll(q);
-        tabla_actividades.setItems(lista);
-        nombre_actividad.setCellValueFactory(new PropertyValueFactory<>("titulo"));
-        nombre_operador.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+        int columnns = 0;
+        int row = 1;
+
+        try {
+            for (int i = 0; i < q.size(); i++) {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("ActividadThumb.fxml"));
+                HBox box = fxmlLoader.load();
+                actividadThumbController = fxmlLoader.getController();
+                //actividadThumbController.setPane(home_pane);
+                actividadThumbController.setData(q.get(i));
+
+                if (columnns == 1) {
+                    columnns = 0;
+                    ++row;
+                }
+                actividadesGrid.add(box,columnns++,row);
+                GridPane.setMargin(box, new Insets(10));
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
+        //ObservableList<Actividad> lista;
+        //lista = FXCollections.observableArrayList();
+        //lista.removeAll();
+        //lista.addAll(q);
+
+        //tabla_actividades.setItems(lista);
+        //nombre_actividad.setCellValueFactory(new PropertyValueFactory<>("titulo"));
+        //nombre_operador.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
         //nombre_operador.setCellValueFactory(cellData -> {
         //    Integer idoperador = cellData.getValue().getIdoperador();
         //    String nombre_operador = operadorRepository.findOperadorById(idoperador).getEmpresa();
@@ -104,10 +133,8 @@ public class HomeClienteController implements Initializable {
     void ampliar_actividad(MouseEvent event) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
-
-        Actividad act = tabla_actividades.getSelectionModel().getSelectedItem();
-        actVC.setActividad(act);
-
+        //Actividad act = actividadesGrid.setOnMouseClicked(e -> );
+        //actVC.setActividad(act);
         AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("ActividadView.fxml"));
         home_pane.getChildren().setAll(pane);
     }
@@ -145,22 +172,37 @@ public class HomeClienteController implements Initializable {
     void goBack(ActionEvent event) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
-
         AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("Login.fxml"));
         home_pane.getChildren().setAll(pane);
     }
 
-    ObservableList<Actividad> lista;
-
-   @Override
+    @Override
     public void initialize(URL location, ResourceBundle rb) {
         username_label.setText(cliente.getMail());
-        List<Actividad> q = (List<Actividad>) actvidadRepository.findAll();
-        lista = FXCollections.observableArrayList();
-        lista.addAll(q);
-        tabla_actividades.setItems(lista);
-        nombre_actividad.setCellValueFactory(new PropertyValueFactory<>("titulo"));
-        nombre_operador.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+        actividades = (List<Actividad>) actvidadRepository.findAll();
+        int columnns = 0;
+        int row = 1;
+
+        try {
+           for (int i = 0; i < actividades.size(); i++) {
+               FXMLLoader fxmlLoader = new FXMLLoader();
+               fxmlLoader.setLocation(getClass().getResource("ActividadThumb.fxml"));
+               HBox box = fxmlLoader.load();
+               actividadThumbController = fxmlLoader.getController();
+               //actividadThumbController.setPane(home_pane);
+               actividadThumbController.setData(actividades.get(i));
+
+               if (columnns == 1) {
+                   columnns = 0;
+                   ++row;
+               }
+               actividadesGrid.add(box,columnns++,row);
+               GridPane.setMargin(box, new Insets(10));
+           }
+        }
+        catch (IOException e) {
+           e.printStackTrace();
+        }
     }
 
 }

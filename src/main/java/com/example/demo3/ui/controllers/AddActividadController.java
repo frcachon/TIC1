@@ -3,36 +3,32 @@ package com.example.demo3.ui.controllers;
 import com.example.demo3.Demo3Application;
 
 import com.example.demo3.entities.Operador;
-import com.example.demo3.exceptions.InformacionInvalida;
 import com.example.demo3.managers.ActividadMgr;
-import com.example.demo3.managers.ClienteMgr;
 import com.example.demo3.persistence.OperadorRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.imageio.ImageIO;
-import javax.imageio.stream.ImageInputStream;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalTime;
-import java.util.ResourceBundle;
 
 @Component
 public class AddActividadController {
 
         private byte[] image_bytes;
+        // private File file = null;
 
         @Autowired
         OperadorRepository operadorRepository;
@@ -41,6 +37,10 @@ public class AddActividadController {
         private ActividadMgr actividadMgr;
 
         Operador operador;
+
+        void setOperador(Operador operador) {
+                this.operador = operador;
+        }
 
         @FXML
         private AnchorPane act_pane;
@@ -73,14 +73,14 @@ public class AddActividadController {
         private Button siguiente_button;
 
         @FXML
-        private ImageView imagenVw;
+        private ImageView imagenVw  = new ImageView();
 
 
         @FXML
         void goBack(ActionEvent event) throws IOException {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
-            AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("HomeAdmin.fxml"));
+            AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("HomeOperador.fxml"));
             act_pane.getChildren().setAll(pane);
         }
 
@@ -99,7 +99,7 @@ public class AddActividadController {
                         (descripcion_field.getText() == null) || descripcion_field.getText().equals("") ||
                         (cupo_field.getText() == null) || cupo_field.getText().equals("") ||
                         (horarioApertura_field.getText() == null) || horarioApertura_field.getText().equals("") ||
-                        (horarioCierre_field.getText() == null) || horarioCierre_field.getText().equals("") || !reservas_check.isSelected())  {
+                        (horarioCierre_field.getText() == null) || horarioCierre_field.getText().equals(""))  {
 
                         showAlert(
                                 "Faltan datos",
@@ -109,24 +109,23 @@ public class AddActividadController {
 
                         try {
 
-                                Integer id_operador = operador.getId(); ;
+
+                                Integer idoperador = operador.getId();
                                 String titulo = titulo_field.getText();
-                                byte[] imagen_actividad = image_bytes;
                                 String descripcion = descripcion_field.getText();
                                 LocalTime apertura = LocalTime.parse(horarioApertura_field.getText());
                                 LocalTime cierre = LocalTime.parse(horarioCierre_field.getText());
                                 Integer cupo = Integer.valueOf(cupo_field.getText());
                                 Boolean utiliza_reservas = reservas_check.isSelected();
-
-
-                                
+                                byte[] imagen_actividad = image_bytes;
 
                                 try {
                                         FXMLLoader fxmlLoader = new FXMLLoader();
                                         fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
-                                        AnchorPane pane = fxmlLoader.load(ClienteController.class.getResourceAsStream("InteresesCliente.fxml"));
+                                        AnchorPane pane = fxmlLoader.load(ClienteController.class.getResourceAsStream("HomeOperador.fxml"));
                                         act_pane.getChildren().setAll(pane);
-                                        actividadMgr.registrarActividad(titulo, imagen_actividad, id_operador, descripcion, apertura, cierre, false,  cupo, utiliza_reservas);
+                                        actividadMgr.registrarActividad(titulo, imagen_actividad, idoperador, descripcion, apertura, cierre,false,   cupo, utiliza_reservas);
+
 
                                         //showAlert("Actividad agregada", "Se registro con exitosamente la actividad");
                                         //close(event);
@@ -157,6 +156,7 @@ public class AddActividadController {
                         new FileChooser.ExtensionFilter("PNG", "*.png")
                 );
 
+                /*
                 // Obtener la imagen seleccionada
                 File imgFile = fileChooser.showOpenDialog(null);
 
@@ -172,7 +172,22 @@ public class AddActividadController {
                         image_bytes = baos.toByteArray();
 
                 }
+                */
 
+                //Seleccionar la imagen
+                Stage stage = (Stage)act_pane.getScene().getWindow();
+                //this.file = fileChooser.showOpenDialog(stage);
+
+                File file = fileChooser.showOpenDialog(stage);
+
+                if (file != null) {
+                        Path path = Paths.get(file.getAbsolutePath());
+                        this.image_bytes = Files.readAllBytes(path);
+
+                      //Mostrar la imagen seleccionada
+                        Image image = new Image("file:" + ((File) file).getAbsolutePath());
+                        imagenVw.setImage(image);
+                }
 
 
         }
