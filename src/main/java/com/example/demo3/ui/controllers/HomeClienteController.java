@@ -116,15 +116,17 @@ public class HomeClienteController implements Initializable {
 
         try {
             for (Actividad actividad : q) {
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("ActividadThumb.fxml"));
-                fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
-                HBox box = fxmlLoader.load();
-                actividadThumbController = fxmlLoader.getController();
-                actividadThumbController.setData(actividad);
-                actividadThumbController.setPane(home_pane);
-                actividadesGrid.addRow(row, box);
-                row++;
+                if (actividad.getValidada()) {
+                    FXMLLoader fxmlLoader = new FXMLLoader();
+                    fxmlLoader.setLocation(getClass().getResource("ActividadThumb.fxml"));
+                    fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
+                    HBox box = fxmlLoader.load();
+                    actividadThumbController = fxmlLoader.getController();
+                    actividadThumbController.setData(actividad);
+                    actividadThumbController.setPane(home_pane);
+                    actividadesGrid.addRow(row, box);
+                    row++;
+                }
             }
         }
 
@@ -212,15 +214,17 @@ public class HomeClienteController implements Initializable {
         try {
             if (actividades.size() > 0) {
                 for (Actividad actividad : actividades) {
-                    FXMLLoader fxmlLoader = new FXMLLoader();
-                    fxmlLoader.setLocation(getClass().getResource("ActividadThumb.fxml"));
-                    fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
-                    HBox box = fxmlLoader.load();
-                    actividadThumbController = fxmlLoader.getController();
-                    actividadThumbController.setData(actividad);
-                    actividadThumbController.setPane(home_pane);
-                    actividadesGrid.addRow(row, box);
-                    row++;
+                    if (actividad.getValidada()) {
+                        FXMLLoader fxmlLoader = new FXMLLoader();
+                        fxmlLoader.setLocation(getClass().getResource("ActividadThumb.fxml"));
+                        fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
+                        HBox box = fxmlLoader.load();
+                        actividadThumbController = fxmlLoader.getController();
+                        actividadThumbController.setData(actividad);
+                        actividadThumbController.setPane(home_pane);
+                        actividadesGrid.addRow(row, box);
+                        row++;
+                    }
                 }
             }
         }
