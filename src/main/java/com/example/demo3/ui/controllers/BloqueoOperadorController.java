@@ -1,10 +1,8 @@
 package com.example.demo3.ui.controllers;
 
 import com.example.demo3.Demo3Application;
-import com.example.demo3.entities.Actividad;
 import com.example.demo3.entities.Operador;
 import com.example.demo3.managers.OperadorMgr;
-import com.example.demo3.persistence.OperadorRepository;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,7 +10,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -27,9 +24,6 @@ import java.util.ResourceBundle;
 
 @Component
 public class BloqueoOperadorController implements Initializable {
-
-    @Autowired
-    private OperadorRepository operadorRepository;
 
     @Autowired
     private OperadorMgr operadorMgr;
@@ -50,20 +44,11 @@ public class BloqueoOperadorController implements Initializable {
     private TableColumn<Operador, String> estadoColumn;
 
     @FXML
-    private Button bloquearButton;
-
-    @FXML
-    private Button desbloquearButton;
-
-    @FXML
-    private Button atrasButton;
-
-    @FXML
     void bloquearOperador(ActionEvent event) {
         Operador ope = tablaOperadores.getSelectionModel().getSelectedItem();
         operadorMgr.bloquearOperador(ope);
 
-        List<Operador> q = (List<Operador>) operadorRepository.findAll();
+        List<Operador> q = operadorMgr.getAll();
         lista.removeAll();
         lista = FXCollections.observableArrayList();
         lista.addAll(q);
@@ -89,7 +74,7 @@ public class BloqueoOperadorController implements Initializable {
         Operador ope = tablaOperadores.getSelectionModel().getSelectedItem();
         operadorMgr.desbloquearOperador(ope);
 
-        List<Operador> q = (List<Operador>) operadorRepository.findAll();
+        List<Operador> q = operadorMgr.getAll();
         lista.removeAll();
         lista = FXCollections.observableArrayList();
         lista.addAll(q);
@@ -121,7 +106,7 @@ public class BloqueoOperadorController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        List<Operador> q = (List<Operador>) operadorRepository.findAll();
+        List<Operador> q = operadorMgr.getAll();
         lista = FXCollections.observableArrayList();
         lista.addAll(q);
         tablaOperadores.setItems(lista);

@@ -3,25 +3,18 @@ package com.example.demo3.ui.controllers;
 import com.example.demo3.Demo3Application;
 import com.example.demo3.entities.Actividad;
 import com.example.demo3.entities.Cliente;
-import com.example.demo3.persistence.ActividadRepository;
-import com.example.demo3.persistence.OperadorRepository;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import com.example.demo3.managers.ActividadMgr;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Bounds;
-import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -34,16 +27,13 @@ import java.util.ResourceBundle;
 public class HomeClienteController implements Initializable {
 
     @Autowired
-    private ActividadRepository actvidadRepository;
+    private ActividadMgr actividadMgr;
 
     @Autowired
     private ActividadViewController actividadViewController;
 
     @Autowired
     private ActividadThumbController actividadThumbController;
-
-    @Autowired
-    private OperadorRepository operadorRepository;
 
     @Autowired
     private EditarInteresesClienteController editarInteresesClienteController;
@@ -60,28 +50,10 @@ public class HomeClienteController implements Initializable {
     private AnchorPane home_pane;
 
     @FXML
-    private Button atrasButton;
-
-    @FXML
-    private Button itinerario_button;
-
-    @FXML
-    private Button editar_preferencia_button;
-
-    @FXML
-    private Button realizar_comentario_button;
-
-    @FXML
-    private Button editar_perfil_button;
-
-    @FXML
     private Label username_label;
 
     @FXML
     private TextField search_field;
-
-    @FXML
-    private ScrollPane scrollPane;
 
     @FXML
     private GridPane actividadesGrid;
@@ -129,7 +101,7 @@ public class HomeClienteController implements Initializable {
     @FXML
     void busquedaDinamica(KeyEvent event) {
         actividadesGrid.getChildren().clear();
-        List<Actividad> q = (List<Actividad>) actvidadRepository.findAllByTituloContaining(search_field.getText());
+        List<Actividad> q = actividadMgr.getActividadesFromTituloContaining(search_field.getText());
         int row = 1;
 
         try {
@@ -203,7 +175,7 @@ public class HomeClienteController implements Initializable {
     public void initialize(URL location, ResourceBundle rb) {
         username_label.setText(cliente.getMail());
         actividadesGrid.getChildren().clear();
-        actividades = (List<Actividad>) actvidadRepository.findAll();
+        actividades = actividadMgr.getAll();
         int row = 1;
 
         try {

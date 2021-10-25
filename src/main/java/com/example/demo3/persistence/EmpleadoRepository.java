@@ -11,5 +11,6 @@ public interface EmpleadoRepository extends CrudRepository<Empleado,Integer> {
 
     List<Empleado> findAllByUsername(String username);
     Empleado findByUsernameAndPassword(String username, String password);
+    Empleado findEmpleadoById(Integer id);
 
 }

@@ -35,9 +35,6 @@ public class OperadorController implements Initializable {
     private TextField phone_field;
 
     @FXML
-    private Button finalizar_button;
-
-    @FXML
     private ChoiceBox<String> depto_choice;
 
     @FXML
@@ -45,13 +42,6 @@ public class OperadorController implements Initializable {
 
     @FXML
     private TextField direccion_field;
-
-    @FXML
-    private Button atrasButton;
-
-    @FXML
-    void descripOffersWindow(ActionEvent event) {
-    }
 
     @FXML
     void goBack(ActionEvent event) throws IOException {
@@ -138,7 +128,7 @@ public class OperadorController implements Initializable {
     }
 
 
-    private String[] deptos = {"Artigas", "Canelones", "Cerro Largo", "Colonia", "Durazno", "Flores", "Florida", "Lavalleja", "Maldonado", "Montevideo", "Paysandú", "Río Negro", "Rivera", "Rocha", "Salto", "San José", "Soriano", "Tacuarembó", "Treinta y Tres",};
+    private final String[] deptos = {"Artigas", "Canelones", "Cerro Largo", "Colonia", "Durazno", "Flores", "Florida", "Lavalleja", "Maldonado", "Montevideo", "Paysandú", "Río Negro", "Rivera", "Rocha", "Salto", "San José", "Soriano", "Tacuarembó", "Treinta y Tres",};
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

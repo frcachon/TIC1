@@ -2,8 +2,6 @@ package com.example.demo3.ui.controllers;
 
 import com.example.demo3.Demo3Application;
 import com.example.demo3.entities.Operador;
-import com.example.demo3.exceptions.InformacionInvalida;
-import com.example.demo3.exceptions.OperadorYaExiste;
 import com.example.demo3.managers.OperadorMgr;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -43,9 +41,6 @@ public class EditarPerfilOperadorController implements Initializable {
 
     @FXML
     private TextField phone_field;
-
-    @FXML
-    private Button finalizar_button;
 
     @FXML
     private ChoiceBox<String> depto_choice;

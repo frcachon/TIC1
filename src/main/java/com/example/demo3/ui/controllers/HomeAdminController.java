@@ -4,7 +4,6 @@ import com.example.demo3.Demo3Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import org.springframework.stereotype.Component;
 
@@ -15,27 +14,6 @@ public class HomeAdminController {
 
     @FXML
     private AnchorPane home_pane;
-
-    @FXML
-    private Button atrasButton;
-
-    @FXML
-    private Button bloq_operador;
-
-    @FXML
-    private Button val_actividad;
-
-    @FXML
-    private Button reg_operador;
-
-    @FXML
-    private Button agregar_empleado;
-
-    @FXML
-    private Button agregar_admin;
-
-    @FXML
-    private Button bloq_cliente;
 
     @FXML
     void bloq_cliente(ActionEvent event) throws IOException {

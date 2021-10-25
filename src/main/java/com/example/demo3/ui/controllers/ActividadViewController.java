@@ -2,24 +2,19 @@ package com.example.demo3.ui.controllers;
 import com.example.demo3.Demo3Application;
 import com.example.demo3.entities.Actividad;
 import com.example.demo3.entities.Operador;
-import com.example.demo3.persistence.ActividadRepository;
-import com.example.demo3.persistence.OperadorRepository;
+import com.example.demo3.managers.OperadorMgr;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView ;
+import javafx.scene.image.ImageView;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -28,7 +23,7 @@ import java.util.ResourceBundle;
 public class ActividadViewController implements Initializable {
 
     @Autowired
-    OperadorRepository operadorRepository;
+    OperadorMgr operadorMgr;
 
     Operador operador;
 
@@ -36,14 +31,11 @@ public class ActividadViewController implements Initializable {
 
     public void setActividad(Actividad act) {
         this.actividad = act;
-        this.operador = operadorRepository.findOperadorById(act.getIdoperador());
+        this.operador = operadorMgr.getOperadorFromId(act.getIdoperador());
     }
 
     @FXML
     private AnchorPane act_view_pane;
-
-    @FXML
-    private Button atras_button;
 
     @FXML
     private Label label_nombre_actividad;
@@ -62,7 +54,6 @@ public class ActividadViewController implements Initializable {
 
     @FXML
     private ImageView imageView_actividad;
-
 
     @FXML
     private Label puntuacion_label;

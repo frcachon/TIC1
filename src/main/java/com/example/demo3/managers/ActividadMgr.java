@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ActividadMgr {
@@ -38,6 +40,22 @@ public class ActividadMgr {
                 cierre, validada, cupo, utiliza_reservas);
         actividad.setValidada(false); //al inicio no esta validada
         actividadRepository.save(actividad);
+    }
+
+    public List<Actividad> getActividadesNoValidadas() {
+        return  (List<Actividad>) actividadRepository.findAllByValidadaIsFalse();
+    }
+
+    public List<Actividad> getActividadesFromOperador(Integer id_operador) {
+        return  (List<Actividad>) actividadRepository.findAllByIdoperador(id_operador);
+    }
+
+    public List<Actividad> getAll() {
+        return  (List<Actividad>) actividadRepository.findAll();
+    }
+
+    public List<Actividad> getActividadesFromTituloContaining(String str) {
+        return (List<Actividad>) actividadRepository.findAllByTituloContaining(str);
     }
 
 }

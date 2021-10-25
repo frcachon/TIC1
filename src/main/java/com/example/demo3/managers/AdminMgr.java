@@ -3,7 +3,6 @@ package com.example.demo3.managers;
 import com.example.demo3.entities.Admin;
 import com.example.demo3.entities.Cliente;
 import com.example.demo3.entities.Empleado;
-import com.example.demo3.entities.Operador;
 import com.example.demo3.exceptions.AdminYaExiste;
 import com.example.demo3.exceptions.InformacionInvalida;
 import com.example.demo3.exceptions.NombreDeUsuarioYaExiste;
@@ -51,6 +50,10 @@ public class AdminMgr {
 
         Admin admin = new Admin(username, password);
         adminRepository.save(admin);
+    }
+
+    public Admin getAdminFromMailAndPassword(String mail, String contrasena) {
+        return adminRepository.findByMailAndPassword(mail,contrasena);
     }
 
 }

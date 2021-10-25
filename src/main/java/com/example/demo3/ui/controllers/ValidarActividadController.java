@@ -4,6 +4,7 @@ import com.example.demo3.Demo3Application;
 import com.example.demo3.entities.Actividad;
 import com.example.demo3.entities.Operador;
 import com.example.demo3.managers.ActividadMgr;
+import com.example.demo3.managers.OperadorMgr;
 import com.example.demo3.persistence.ActividadRepository;
 import com.example.demo3.persistence.OperadorRepository;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -30,13 +31,10 @@ import java.util.ResourceBundle;
 public class ValidarActividadController implements Initializable {
 
     @Autowired
-    private ActividadRepository actividadRepository;
-
-    @Autowired
     private ActividadMgr actividadMgr;
 
     @Autowired
-    private OperadorRepository operadorRepository;
+    private OperadorMgr operadorMgr;
 
     @FXML
     private AnchorPane val_pane;
@@ -49,15 +47,6 @@ public class ValidarActividadController implements Initializable {
 
     @FXML
     private TableColumn<Actividad, String> operadorColumn;
-
-    @FXML
-    private Button bloquearButton;
-
-    @FXML
-    private Button desbloquearButton;
-
-    @FXML
-    private Button atrasButton;
 
     @FXML
     void goBack(ActionEvent event) throws IOException {
@@ -74,7 +63,7 @@ public class ValidarActividadController implements Initializable {
         Actividad act = tablaActividades.getSelectionModel().getSelectedItem();
         actividadMgr.rechazarActividad(act);
 
-        List<Actividad> q = (List<Actividad>) actividadRepository.findAllByValidadaIsFalse();
+        List<Actividad> q = actividadMgr.getActividadesNoValidadas();
         lista.removeAll();
         lista = FXCollections.observableArrayList();
         lista.addAll(q);
@@ -82,7 +71,7 @@ public class ValidarActividadController implements Initializable {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("titulo"));
         operadorColumn.setCellValueFactory(cellData -> {
             Integer id_operador = cellData.getValue().getIdoperador();
-            String nombre_operador = operadorRepository.findOperadorById(id_operador).getEmpresa();
+            String nombre_operador = operadorMgr.getOperadorFromId(id_operador).getEmpresa();
             return new ReadOnlyStringWrapper(nombre_operador);
         });
     }
@@ -92,7 +81,7 @@ public class ValidarActividadController implements Initializable {
         Actividad act = tablaActividades.getSelectionModel().getSelectedItem();
         actividadMgr.validarActividad(act);
 
-        List<Actividad> q = (List<Actividad>) actividadRepository.findAllByValidadaIsFalse();
+        List<Actividad> q = actividadMgr.getActividadesNoValidadas();
         lista.removeAll();
         lista = FXCollections.observableArrayList();
         lista.addAll(q);
@@ -100,21 +89,21 @@ public class ValidarActividadController implements Initializable {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("titulo"));
         operadorColumn.setCellValueFactory(cellData -> {
             Integer id_operador = cellData.getValue().getIdoperador();
-            String nombre_operador = operadorRepository.findOperadorById(id_operador).getEmpresa();
+            String nombre_operador = operadorMgr.getOperadorFromId(id_operador).getEmpresa();
             return new ReadOnlyStringWrapper(nombre_operador);
         });
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        List<Actividad> q = (List<Actividad>) actividadRepository.findAllByValidadaIsFalse();
+        List<Actividad> q = actividadMgr.getActividadesNoValidadas();
         lista = FXCollections.observableArrayList();
         lista.addAll(q);
         tablaActividades.setItems(lista);
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("titulo"));
         operadorColumn.setCellValueFactory(cellData -> {
             Integer id_operador = cellData.getValue().getIdoperador();
-            String nombre_operador = operadorRepository.findOperadorById(id_operador).getEmpresa();
+            String nombre_operador = operadorMgr.getOperadorFromId(id_operador).getEmpresa();
             return new ReadOnlyStringWrapper(nombre_operador);
         });
     }

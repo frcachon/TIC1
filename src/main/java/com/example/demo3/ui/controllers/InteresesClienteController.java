@@ -5,8 +5,7 @@ import com.example.demo3.entities.*;
 import com.example.demo3.exceptions.GustoYaExiste;
 import com.example.demo3.exceptions.InformacionInvalida;
 import com.example.demo3.managers.GustosMgr;
-import com.example.demo3.persistence.GustosRepository;
-import com.example.demo3.persistence.InteresRepository;
+import com.example.demo3.managers.InteresMgr;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,7 +21,6 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -36,10 +34,7 @@ public class InteresesClienteController implements Initializable {
     private HomeClienteController homeClienteController;
 
     @Autowired
-    private InteresRepository interesRepository;
-
-    @Autowired
-    private GustosRepository gustosRepository;
+    private InteresMgr interesMgr;
 
     @Autowired
     private GustosMgr gustosMgr;
@@ -48,19 +43,10 @@ public class InteresesClienteController implements Initializable {
     private AnchorPane pane_intereses;
 
     @FXML
-    private Button agregarButton;
-
-    @FXML
     private TableView<Interes> tablaIntereses;
 
     @FXML
     private TableColumn<Interes, String> interesesColumn;
-
-    @FXML
-    private Button finalizarButton;
-
-    @FXML
-    private Button eliminarButton;
 
     @FXML
     private ChoiceBox<String> interesChoiceBox;
@@ -85,12 +71,12 @@ public class InteresesClienteController implements Initializable {
                 String tempInteres = interesChoiceBox.getValue();
                 String usuario = this.cliente.getMail();
 
-                Interes interes = interesRepository.findByNombre(tempInteres);
+                Interes interes = interesMgr.getInteresFromNombre(tempInteres);
                 Integer idgusto = interes.getIdinteres();
 
                 gustosMgr.addGusto(usuario, idgusto);
 
-                List<Gustos> todos_gustos = gustosRepository.findAll();
+                List<Gustos> todos_gustos = gustosMgr.getAll();
                 List<Integer> gustos_cliente = new ArrayList<>();
                 if (todos_gustos.size() > 0) {
                     for (Gustos g : todos_gustos) {
@@ -105,7 +91,7 @@ public class InteresesClienteController implements Initializable {
                 // hasta este punto tengo los id de los intereses del cliente (en gustos_cliente)
                 if (gustos_cliente.size() > 0) {
                     for (Integer i : gustos_cliente) {
-                        intereses.add(interesRepository.findByIdinteres(i));
+                        intereses.add(interesMgr.getInteresFromId(i));
                     }
                 }
                 ObservableList<Interes> lista;
@@ -136,12 +122,12 @@ public class InteresesClienteController implements Initializable {
                 String tempInteres = interesChoiceBox.getValue();
                 String usuario = this.cliente.getMail();
 
-                Interes interes = interesRepository.findByNombre(tempInteres);
+                Interes interes = interesMgr.getInteresFromNombre(tempInteres);
                 Integer idgusto = interes.getIdinteres();
 
                 gustosMgr.deleteGusto(usuario, idgusto);
 
-                List<Gustos> todos_gustos = gustosRepository.findAll();
+                List<Gustos> todos_gustos = gustosMgr.getAll();
                 List<Integer> gustos_cliente = new ArrayList<>();
                 if (todos_gustos.size() > 0) {
                     for (Gustos g : todos_gustos) {
@@ -156,7 +142,7 @@ public class InteresesClienteController implements Initializable {
                 // hasta este punto tengo los id de los intereses del cliente (en gustos_cliente)
                 if (gustos_cliente.size() > 0) {
                     for (Integer i : gustos_cliente) {
-                        intereses.add(interesRepository.findByIdinteres(i));
+                        intereses.add(interesMgr.getInteresFromId(i));
                     }
                 }
                 ObservableList<Interes> lista;
@@ -189,7 +175,7 @@ public class InteresesClienteController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle rb) {
-        List<Interes> q = (List<Interes>) interesRepository.findAll();
+        List<Interes> q = interesMgr.getAll();
         String[] inters = new String[q.size()];
         for (int i = 0; i < q.size(); i++) {
             if (q.get(i) != null) {
@@ -197,7 +183,6 @@ public class InteresesClienteController implements Initializable {
             }
         }
         interesChoiceBox.getItems().addAll(inters);
-
     }
 
 }

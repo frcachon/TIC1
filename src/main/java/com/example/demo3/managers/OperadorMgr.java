@@ -89,4 +89,12 @@ public class OperadorMgr {
     operadorRepository.save(operador);
     }
 
+    public Operador getOperadorFromId(Integer id_operador) {
+        return operadorRepository.findOperadorById(id_operador);
+    }
+
+    public List<Operador> getAll() {
+        return (List<Operador>) operadorRepository.findAll();
+    }
+
 }

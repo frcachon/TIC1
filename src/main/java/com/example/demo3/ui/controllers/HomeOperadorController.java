@@ -2,16 +2,14 @@ package com.example.demo3.ui.controllers;
 
 import com.example.demo3.Demo3Application;
 import com.example.demo3.entities.Actividad;
-import com.example.demo3.entities.Cliente;
 import com.example.demo3.entities.Operador;
-import com.example.demo3.persistence.ActividadRepository;
+import com.example.demo3.managers.ActividadMgr;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -38,28 +36,16 @@ public class HomeOperadorController implements Initializable {
     private EditarPerfilOperadorController editarPerfilOperadorController;
 
     @Autowired
-    private ActividadRepository actividadRepository;
+    private ActividadMgr actividadMgr;
 
     @Autowired
-    private ActividadViewController actVC;
+    private ActividadViewController actividadViewController;
 
     @Autowired
     private AddActividadController addActividadController;
 
     @FXML
     private AnchorPane home_pane;
-
-    @FXML
-    private Button atrasButton;
-
-    @FXML
-    private Button reservas_button;
-
-    @FXML
-    private Button editar_perfil_button;
-
-    @FXML
-    private Button buscar_button;
 
     @FXML
     private TableView<Actividad> tabla_actividades;
@@ -72,9 +58,6 @@ public class HomeOperadorController implements Initializable {
 
     @FXML
     private Label username_label;
-
-    @FXML
-    private Button agregar_actividad_button;
 
     @FXML
     void agregarActividad(ActionEvent event) throws IOException {
@@ -91,7 +74,7 @@ public class HomeOperadorController implements Initializable {
         fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
 
         Actividad act = tabla_actividades.getSelectionModel().getSelectedItem();
-        actVC.setActividad(act);
+        actividadViewController.setActividad(act);
 
         AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("ActividadView.fxml"));
         home_pane.getChildren().setAll(pane);
@@ -134,7 +117,7 @@ public class HomeOperadorController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         username_label.setText(operador.getEmpresa());
-        List<Actividad> q = (List<Actividad>) actividadRepository.findAllByIdoperador(operador.getId());
+        List<Actividad> q = (List<Actividad>) actividadMgr.getActividadesFromOperador(operador.getId());
         lista = FXCollections.observableArrayList();
         lista.addAll(q);
         tabla_actividades.setItems(lista);

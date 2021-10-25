@@ -38,5 +38,8 @@ public class GustosMgr {
         gustosRepository.delete(gustos_check.get(0));
     }
 
+    public List<Gustos> getAll() {
+        return (List<Gustos>) gustosRepository.findAll();
+    }
 
 }

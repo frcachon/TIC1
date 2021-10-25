@@ -7,8 +7,7 @@ import com.example.demo3.entities.Interes;
 import com.example.demo3.exceptions.GustoYaExiste;
 import com.example.demo3.exceptions.InformacionInvalida;
 import com.example.demo3.managers.GustosMgr;
-import com.example.demo3.persistence.GustosRepository;
-import com.example.demo3.persistence.InteresRepository;
+import com.example.demo3.managers.InteresMgr;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -34,13 +33,10 @@ import java.util.ResourceBundle;
 public class EditarInteresesClienteController implements Initializable {
 
     @Autowired
-    private GustosRepository gustosRepository;
-
-    @Autowired
     private GustosMgr gustosMgr;
 
     @Autowired
-    private InteresRepository interesRepository;
+    private InteresMgr interesMgr;
 
     @Autowired
     private HomeClienteController homeClienteController;
@@ -74,12 +70,12 @@ public class EditarInteresesClienteController implements Initializable {
         String tempInteres = interesChoiceBox.getValue();
         String usuario = this.cliente.getMail();
 
-        Interes interes = interesRepository.findByNombre(tempInteres);
+        Interes interes = interesMgr.getInteresFromNombre(tempInteres);
         Integer idgusto = interes.getIdinteres();
 
         gustosMgr.addGusto(usuario, idgusto);
 
-        List<Gustos> todos_gustos = gustosRepository.findAll();
+        List<Gustos> todos_gustos = gustosMgr.getAll();
         List<Integer> gustos_cliente = new ArrayList<>();
         if (todos_gustos.size() > 0) {
             for (Gustos g : todos_gustos) {
@@ -94,7 +90,7 @@ public class EditarInteresesClienteController implements Initializable {
         // hasta este punto tengo los id de los intereses del cliente (en gustos_cliente)
         if (gustos_cliente.size() > 0) {
             for (Integer i : gustos_cliente) {
-                intereses.add(interesRepository.findByIdinteres(i));
+                intereses.add(interesMgr.getInteresFromId(i));
             }
         }
         ObservableList<Interes> lista;
@@ -109,12 +105,12 @@ public class EditarInteresesClienteController implements Initializable {
         String tempInteres = interesChoiceBox.getValue();
         String usuario = this.cliente.getMail();
 
-        Interes interes = interesRepository.findByNombre(tempInteres);
+        Interes interes = interesMgr.getInteresFromNombre(tempInteres);
         Integer idgusto = interes.getIdinteres();
 
         gustosMgr.deleteGusto(usuario, idgusto);
 
-        List<Gustos> todos_gustos = gustosRepository.findAll();
+        List<Gustos> todos_gustos = gustosMgr.getAll();
         List<Integer> gustos_cliente = new ArrayList<>();
         if (todos_gustos.size() > 0) {
             for (Gustos g : todos_gustos) {
@@ -129,7 +125,7 @@ public class EditarInteresesClienteController implements Initializable {
         // hasta este punto tengo los id de los intereses del cliente (en gustos_cliente)
         if (gustos_cliente.size() > 0) {
             for (Integer i : gustos_cliente) {
-                intereses.add(interesRepository.findByIdinteres(i));
+                intereses.add(interesMgr.getInteresFromId(i));
             }
         }
         ObservableList<Interes> lista;
@@ -150,7 +146,7 @@ public class EditarInteresesClienteController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        List<Interes> q = (List<Interes>) interesRepository.findAll();
+        List<Interes> q = (List<Interes>) interesMgr.getAll();
         String[] inters = new String[q.size()];
         for (int i = 0; i < q.size(); i++) {
             if (q.get(i) != null) {
@@ -159,7 +155,7 @@ public class EditarInteresesClienteController implements Initializable {
         }
         interesChoiceBox.getItems().addAll(inters);
 
-        List<Gustos> todos_gustos = gustosRepository.findAll();
+        List<Gustos> todos_gustos = gustosMgr.getAll();
         List<Integer> gustos_cliente = new ArrayList<>();
         if (todos_gustos.size() > 0) {
             for (Gustos g : todos_gustos) {
@@ -174,7 +170,7 @@ public class EditarInteresesClienteController implements Initializable {
         // hasta este punto tengo los id de los intereses del cliente (en gustos_cliente)
         if (gustos_cliente.size() > 0) {
             for (Integer i : gustos_cliente) {
-                intereses.add(interesRepository.findByIdinteres(i));
+                intereses.add(interesMgr.getInteresFromId(i));
             }
         }
         ObservableList<Interes> lista;

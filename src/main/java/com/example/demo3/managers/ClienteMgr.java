@@ -85,4 +85,12 @@ public class ClienteMgr {
         clienteRepository.save(cliente);
     }
 
+    public Cliente getClienteFromMailAndPassword(String mail, String contrasena) {
+        return clienteRepository.findByMailAndAndContrasena(mail,contrasena);
+    }
+
+    public List<Cliente> getAll() {
+        return (List<Cliente>) clienteRepository.findAll();
+    }
+
 }

@@ -33,14 +33,8 @@ public class AddAdminController {
     @FXML
     private PasswordField password_field;
 
-    @FXML
-    private Button atras_button;
-
-    @FXML
-    private Button registrar_button;
-
     private void showAlert(String title, String contextText) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);   //Como is lanzara una excepcion cuando algo falla
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);   //Como si lanzara una excepcion cuando algo falla
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(contextText);

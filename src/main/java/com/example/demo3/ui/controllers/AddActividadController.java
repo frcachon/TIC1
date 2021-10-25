@@ -4,7 +4,6 @@ import com.example.demo3.Demo3Application;
 
 import com.example.demo3.entities.Operador;
 import com.example.demo3.managers.ActividadMgr;
-import com.example.demo3.persistence.OperadorRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,9 +28,6 @@ public class AddActividadController {
 
         private byte[] image_bytes;
         // private File file = null;
-
-        @Autowired
-        OperadorRepository operadorRepository;
 
         @Autowired
         private ActividadMgr actividadMgr;

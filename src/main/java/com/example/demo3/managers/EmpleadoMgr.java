@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmpleadoMgr {
@@ -50,6 +51,20 @@ public class EmpleadoMgr {
         Empleado empleado = new Empleado(username, password, op.getId());
         empleadoRepository.save(empleado);
 
+    }
+
+    public Operador getOperadorFromEmpleado(Integer id_empleado) {
+        Empleado emp = empleadoRepository.findEmpleadoById(id_empleado);
+        Operador op = null;
+
+        if (emp != null) {
+            op = operadorRepository.findOperadorById(emp.getIdoperador());
+        }
+        return op;
+    }
+
+    public Empleado getEmpleadoFromMailAndPassword(String mail, String contrasena) {
+        return empleadoRepository.findByUsernameAndPassword(mail,contrasena);
     }
 
 }

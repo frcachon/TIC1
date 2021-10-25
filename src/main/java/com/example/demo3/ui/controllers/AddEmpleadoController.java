@@ -1,13 +1,10 @@
 package com.example.demo3.ui.controllers;
 
 import com.example.demo3.Demo3Application;
-import com.example.demo3.entities.Interes;
 import com.example.demo3.entities.Operador;
-import com.example.demo3.exceptions.DocumentoYaExisteParaMismoPais;
-import com.example.demo3.exceptions.InformacionInvalida;
 import com.example.demo3.exceptions.NombreDeUsuarioYaExiste;
 import com.example.demo3.managers.EmpleadoMgr;
-import com.example.demo3.persistence.OperadorRepository;
+import com.example.demo3.managers.OperadorMgr;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +16,6 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -30,22 +26,16 @@ public class AddEmpleadoController implements Initializable {
     private EmpleadoMgr empleadoMgr;
 
     @Autowired
-    private OperadorRepository operadorRepository;
+    private OperadorMgr operadorMgr;
 
     @FXML
     private AnchorPane emp_pane;
-
-    @FXML
-    private Button atras_button;
 
     @FXML
     private TextField username_field;
 
     @FXML
     private ChoiceBox<String> operador_choiceBox;
-
-    @FXML
-    private Button registrarButton;
 
     @FXML
     private PasswordField password_field;
@@ -101,7 +91,7 @@ public class AddEmpleadoController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        List<Operador> q = (List<Operador>) operadorRepository.findAll();
+        List<Operador> q = operadorMgr.getAll();
 
         String[] opes = new String[q.size()];
         for (int i = 0; i < q.size(); i++) {
@@ -109,10 +99,6 @@ public class AddEmpleadoController implements Initializable {
                 opes[i] = q.get(i).getEmpresa();
             }
         }
-
-        //ObservableList<Interes> lista = FXCollections.observableArrayList();
-        //lista.addAll(q);
-
         operador_choiceBox.getItems().addAll(opes);
     }
 
