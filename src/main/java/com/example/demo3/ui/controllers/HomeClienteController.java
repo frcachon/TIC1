@@ -4,6 +4,7 @@ import com.example.demo3.Demo3Application;
 import com.example.demo3.entities.Actividad;
 import com.example.demo3.entities.Cliente;
 import com.example.demo3.managers.ActividadMgr;
+import com.example.demo3.managers.OperadorMgr;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,6 +29,9 @@ public class HomeClienteController implements Initializable {
 
     @Autowired
     private ActividadMgr actividadMgr;
+
+    @Autowired
+    private OperadorMgr operadorMgr;
 
     @Autowired
     private ActividadViewController actividadViewController;
@@ -102,6 +106,12 @@ public class HomeClienteController implements Initializable {
     void busquedaDinamica(KeyEvent event) {
         actividadesGrid.getChildren().clear();
         List<Actividad> q = actividadMgr.getActividadesFromTituloContaining(search_field.getText());
+        for (int i = 0; i < q.size(); i++) {
+            if (operadorMgr.getOperadorFromId(q.get(i).getIdoperador()).getBloqueado()) {
+                q.remove(i);
+            }
+        }
+
         int row = 1;
 
         try {
@@ -176,19 +186,42 @@ public class HomeClienteController implements Initializable {
         username_label.setText(cliente.getMail());
         actividadesGrid.getChildren().clear();
         actividades = actividadMgr.getAll();
+        int acts_size = actividades.size();
+        int i = 0;
+        while (i < acts_size) {
+            try {
+                if (operadorMgr.getOperadorFromId(actividades.get(i).getIdoperador()).getBloqueado()) {
+                    actividades.remove(i);
+                    continue;
+                }
+                i++;
+            }
+            catch (Exception e) {
+                break;
+            }
+        }
+
+/*        for (int i = 0; i < acts_size; i++) {
+            if (operadorMgr.getOperadorFromId(actividades.get(i).getIdoperador()).getBloqueado()) {
+                actividades.remove(i);
+            }
+        }*/
+
         int row = 1;
 
         try {
-            for (Actividad actividad : actividades) {
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("ActividadThumb.fxml"));
-                fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
-                HBox box = fxmlLoader.load();
-                actividadThumbController = fxmlLoader.getController();
-                actividadThumbController.setData(actividad);
-                actividadThumbController.setPane(home_pane);
-                actividadesGrid.addRow(row, box);
-                row++;
+            if (actividades.size() > 0) {
+                for (Actividad actividad : actividades) {
+                    FXMLLoader fxmlLoader = new FXMLLoader();
+                    fxmlLoader.setLocation(getClass().getResource("ActividadThumb.fxml"));
+                    fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
+                    HBox box = fxmlLoader.load();
+                    actividadThumbController = fxmlLoader.getController();
+                    actividadThumbController.setData(actividad);
+                    actividadThumbController.setPane(home_pane);
+                    actividadesGrid.addRow(row, box);
+                    row++;
+                }
             }
         }
 
