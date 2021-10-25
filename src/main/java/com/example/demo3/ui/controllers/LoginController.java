@@ -96,6 +96,11 @@ public class LoginController {
                     AnchorPane pane = fxmlLoader.load(ClienteController.class.getResourceAsStream("HomeCliente.fxml"));
                     login_pane.getChildren().setAll(pane);
                 }
+                else {
+                    showAlert(
+                            "Usuario bloqueado",
+                            "Por favor, comuníquese con nosotros.");
+                }
 
             } else if (empleado != null) {
                 Operador op = empleadoMgr.getOperadorFromEmpleado(empleado.getId());
@@ -105,6 +110,11 @@ public class LoginController {
                     homeOperadorController.setOperador(op);
                     AnchorPane pane = fxmlLoader.load(ClienteController.class.getResourceAsStream("HomeOperador.fxml"));
                     login_pane.getChildren().setAll(pane);
+                }
+                else {
+                    showAlert(
+                            "Operador bloqueado",
+                            "Por favor, comuníquese con nosotros.");
                 }
 
             } else {
