@@ -18,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -34,6 +35,9 @@ public class ValidarActividadController implements Initializable {
     private ActividadMgr actividadMgr;
 
     @Autowired
+    ActividadAdminController actividadAdminController;
+
+    @Autowired
     private OperadorMgr operadorMgr;
 
     @FXML
@@ -47,6 +51,18 @@ public class ValidarActividadController implements Initializable {
 
     @FXML
     private TableColumn<Actividad, String> operadorColumn;
+
+    @FXML
+    void ampliarActividad(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
+
+        Actividad act = tablaActividades.getSelectionModel().getSelectedItem();
+        actividadAdminController.setActividad(act);
+
+        AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("ActividadAdmin.fxml"));
+        val_pane.getChildren().setAll(pane);
+    }
 
     @FXML
     void goBack(ActionEvent event) throws IOException {
@@ -107,4 +123,6 @@ public class ValidarActividadController implements Initializable {
             return new ReadOnlyStringWrapper(nombre_operador);
         });
     }
+
+
 }

@@ -1,4 +1,5 @@
 package com.example.demo3.ui.controllers;
+
 import com.example.demo3.Demo3Application;
 import com.example.demo3.entities.Actividad;
 import com.example.demo3.entities.Operador;
@@ -7,32 +8,33 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 @Component
-public class ActividadViewController implements Initializable {
-
-    @Autowired
-    OperadorMgr operadorMgr;
-
-    Operador operador;
+public class ActividadAdminController implements Initializable {
 
     Actividad actividad;
+    Operador operador;
 
     public void setActividad(Actividad act) {
         this.actividad = act;
         this.operador = operadorMgr.getOperadorFromId(act.getIdoperador());
     }
+
+    @Autowired
+    OperadorMgr operadorMgr;
 
     @FXML
     private AnchorPane act_view_pane;
@@ -59,20 +61,10 @@ public class ActividadViewController implements Initializable {
     private Label puntuacion_label;
 
     @FXML
-    void realizarComentario(ActionEvent event) {
-
-    }
-
-    @FXML
-    void reservar(ActionEvent event) {
-
-    }
-
-    @FXML
-    void goBack(ActionEvent event) throws Exception {
+    void goBack(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
-        AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("HomeCliente.fxml"));
+        AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("ValidarActividad.fxml"));
         act_view_pane.getChildren().setAll(pane);
     }
 
@@ -90,21 +82,6 @@ public class ActividadViewController implements Initializable {
             InputStream is = new ByteArrayInputStream(actividad.getImagenactividad());
             imageView_actividad.setImage(new Image(is));
         }
-
-
-        //BufferedImage imagen_act = null;
-
-        /*
-        try {
-            imagen_act = ImageIO.read(is);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Image image = SwingFXUtils.toFXImage(imagen_act, null);
-        imageView_actividad.setImage(image);
-        */
-
-
     }
 
 }
