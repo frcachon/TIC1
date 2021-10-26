@@ -10,19 +10,30 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 
 @Component
 public class EditActividadController implements Initializable {
+
+    private byte[] image_bytes;
 
     @Autowired
     private ActividadMgr actividadMgr;
@@ -74,8 +85,28 @@ public class EditActividadController implements Initializable {
     }
 
     @FXML
-    void seleccionarImagen(ActionEvent event) {
+    void seleccionarImagen(ActionEvent event) throws IOException {
 
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Buscar Imagen");
+
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("All Images", "*.*"),
+                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+                new FileChooser.ExtensionFilter("PNG", "*.png")
+        );
+
+        Stage stage = (Stage) act_pane.getScene().getWindow();
+        File file = fileChooser.showOpenDialog(stage);
+
+        if (file != null) {
+            Path path = Paths.get(file.getAbsolutePath());
+            this.image_bytes = Files.readAllBytes(path);
+
+            //Mostrar la imagen seleccionada
+            Image image = new Image("file:" + ((File) file).getAbsolutePath());
+            imagenVw.setImage(image);
+        }
     }
 
     @FXML
@@ -87,10 +118,11 @@ public class EditActividadController implements Initializable {
             LocalTime cierre = LocalTime.parse(horarioCierre_field.getText());
             Integer cupo = Integer.valueOf(cupo_field.getText());
             Boolean utiliza_reservas = reservas_check.isSelected();
+            byte[] imagen_actividad = image_bytes;
 
             try {
                 actividadMgr.setActividad(actividad);
-                actividadMgr.updateActividad(titulo,descripcion,apertura,cierre,cupo,utiliza_reservas);
+                actividadMgr.updateActividad(titulo,descripcion,apertura,cierre,cupo,utiliza_reservas, imagen_actividad);
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
                 AnchorPane pane = fxmlLoader.load(ClienteController.class.getResourceAsStream("HomeOperador.fxml"));
@@ -108,6 +140,15 @@ public class EditActividadController implements Initializable {
         }
     }
 
+    @FXML
+    void eliminarActividad(ActionEvent event) throws IOException {
+        actividadMgr.eliminarActividad(actividad);
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
+        AnchorPane pane = fxmlLoader.load(ClienteController.class.getResourceAsStream("HomeOperador.fxml"));
+        act_pane.getChildren().setAll(pane);
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         titulo_field.setText(actividad.getTitulo());
@@ -117,6 +158,10 @@ public class EditActividadController implements Initializable {
         horarioApertura_field.setText(actividad.getApertura().toString());
         horarioCierre_field.setText(actividad.getCierre().toString());
         reservas_check.setSelected(actividad.getUtiliza_reservas());
+        if (actividad.getImagenactividad() != null) {
+            InputStream is = new ByteArrayInputStream(actividad.getImagenactividad());
+            imagenVw.setImage(new Image(is));
+        }
     }
 
 }

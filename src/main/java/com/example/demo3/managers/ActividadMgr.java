@@ -55,7 +55,7 @@ public class ActividadMgr {
     }
 
     public void updateActividad(String titulo, String descripcion, LocalTime apertura, LocalTime cierre,
-                                Integer cupo, Boolean utiliza_reservas) {
+                                Integer cupo, Boolean utiliza_reservas, byte[] imagen) {
 
         if (titulo != null) {
             if (!titulo.equals("")) {
@@ -81,9 +81,17 @@ public class ActividadMgr {
             actividad.setCupo(cupo);
         }
 
+        if (cierre != null) {
+            actividad.setImagenactividad(imagen);
+        }
+
         actividad.setUtiliza_reservas(utiliza_reservas);
         actividad.setValidada(false);
         actividadRepository.save(actividad);
+    }
+
+    public void eliminarActividad(Actividad actividad){
+        actividadRepository.delete(actividad);
     }
 
 }
