@@ -39,7 +39,7 @@ public class HomeOperadorController implements Initializable {
     private ActividadMgr actividadMgr;
 
     @Autowired
-    private ActividadViewController actividadViewController;
+    private EditActividadController editActividadController;
 
     @Autowired
     private AddActividadController addActividadController;
@@ -74,9 +74,9 @@ public class HomeOperadorController implements Initializable {
         fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
 
         Actividad act = tabla_actividades.getSelectionModel().getSelectedItem();
-        actividadViewController.setActividad(act);
+        editActividadController.setActividad(act);
 
-        AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("ActividadView.fxml"));
+        AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("EditActividad.fxml"));
         home_pane.getChildren().setAll(pane);
     }
 

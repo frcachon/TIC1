@@ -94,6 +94,11 @@ public class EditarPerfilOperadorController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        operador_name_field.setText(operador.getEmpresa());
+        phone_field.setText(operador.getTelefono().toString());
+        email_field.setText(operador.getEmailcontacto());
+        direccion_field.setText(operador.getDireccion());
+
         String[] deptos = {"Artigas", "Canelones", "Cerro Largo", "Colonia", "Durazno", "Flores", "Florida", "Lavalleja", "Maldonado", "Montevideo", "Paysandú", "Río Negro", "Rivera", "Rocha", "Salto", "San José", "Soriano", "Tacuarembó", "Treinta y Tres",};
         depto_choice.getItems().addAll(deptos);
     }

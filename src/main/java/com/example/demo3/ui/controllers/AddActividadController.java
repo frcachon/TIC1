@@ -71,7 +71,6 @@ public class AddActividadController {
         @FXML
         private ImageView imagenVw  = new ImageView();
 
-
         @FXML
         void goBack(ActionEvent event) throws IOException {
             FXMLLoader fxmlLoader = new FXMLLoader();
@@ -87,7 +86,6 @@ public class AddActividadController {
                 alert.setContentText(contextText);
                 alert.showAndWait();
         }
-        
         
         @FXML
         void AddActividad (ActionEvent event) {
@@ -192,5 +190,3 @@ public class AddActividadController {
 
 
 }
-
-
