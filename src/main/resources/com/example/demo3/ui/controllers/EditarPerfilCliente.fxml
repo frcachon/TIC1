@@ -27,8 +27,9 @@
          </font>
       </CheckBox>
       <ImageView fx:id="perfil_view" fitHeight="142.0" fitWidth="187.0" layoutX="206.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="foto_button" layoutX="233.0" layoutY="190.0" mnemonicParsing="false" text="Cambiar Foto de Perfil" />
+      <Button fx:id="foto_button" layoutX="233.0" layoutY="190.0" mnemonicParsing="false" onAction="#seleccionar_imagen" text="Cambiar Foto de Perfil" />
       <PasswordField fx:id="contrasena_field" layoutX="187.0" layoutY="232.0" prefHeight="25.0" prefWidth="226.0" />
       <PasswordField fx:id="confirmacion_field" layoutX="188.0" layoutY="267.0" prefHeight="25.0" prefWidth="226.0" />
+      <ImageView fx:id="perfil_view" fitHeight="150.0" fitWidth="200.0" layoutX="200.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

@@ -10,6 +10,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -18,7 +20,9 @@ import javafx.scene.layout.HBox;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -54,6 +58,9 @@ public class HomeClienteController implements Initializable {
 
     @FXML
     private TextField search_field;
+
+    @FXML
+    private ImageView perfil_view;
 
     @FXML
     private GridPane actividadesGrid;
@@ -176,6 +183,10 @@ public class HomeClienteController implements Initializable {
         username_label.setText(cliente.getMail());
         actividadesGrid.getChildren().clear();
         actividades = actividadMgr.getAll();
+        if(cliente.getImagencliente() != null) {
+            InputStream img = new ByteArrayInputStream(cliente.getImagencliente());
+            perfil_view.setImage(new Image(img));
+        }
         int row = 1;
 
         try {
