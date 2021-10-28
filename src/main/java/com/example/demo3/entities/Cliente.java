@@ -2,6 +2,7 @@ package com.example.demo3.entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Arrays;
 
 @Entity // This tells Hibernate to make a table out of this class
 public class Cliente {
@@ -33,10 +34,15 @@ public class Cliente {
     @Column(name="bloqueado")
     private Boolean bloqueado;
 
+    @Lob
+    @Column(name="imagencliente", columnDefinition = "BLOB")
+    private byte[] imagencliente;
+
     public Cliente() {
     }
 
-    public Cliente(String mail, String contrasena, Long documento, String tipo_documento, LocalDate fecha_nacimiento, Boolean vacuna_covid, String pais) {
+    public Cliente(String mail, String contrasena, Long documento, String tipo_documento, LocalDate fecha_nacimiento,
+                   Boolean vacuna_covid, String pais, byte[] imagencliente) {
         this.mail = mail;
         this.contrasena = contrasena;
         this.documento = documento;
@@ -45,6 +51,7 @@ public class Cliente {
         this.vacuna_covid = vacuna_covid;
         this.pais = pais;
         this.bloqueado = false;
+        this.imagencliente = imagencliente;
     }
 
     public Integer getId() {
@@ -119,6 +126,14 @@ public class Cliente {
         this.bloqueado = bloqueado;
     }
 
+    public byte[] getImagencliente() {
+        return imagencliente;
+    }
+
+    public void setImagencliente(byte[] imagencliente) {
+        this.imagencliente = imagencliente;
+    }
+
     @Override
     public String toString() {
         return "Cliente{" +
@@ -131,6 +146,7 @@ public class Cliente {
                 ", vacuna_covid=" + vacuna_covid +
                 ", pais='" + pais + '\'' +
                 ", bloqueado=" + bloqueado +
+                ", imagencliente=" + Arrays.toString(imagencliente) +
                 '}';
     }
 }

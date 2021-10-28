@@ -12,18 +12,28 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.swing.text.html.ImageView;
+import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ResourceBundle;
 
 @Component
-public class EditarPerfilClienteController {
+public class EditarPerfilClienteController implements Initializable{
 
+    private byte[] image_bytes;
     Cliente cliente;
     void setCliente(Cliente cliente){this.cliente = cliente;}
 
@@ -48,8 +58,8 @@ public class EditarPerfilClienteController {
     @FXML
     private Button editar_button;
 
-    /*@FXML
-    private ImageView perfil_view;*/
+    @FXML
+    private ImageView perfil_view;
 
     @FXML
     private Button foto_button;
@@ -63,11 +73,24 @@ public class EditarPerfilClienteController {
 
     }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        if (cliente.getImagencliente() != null) {
+            InputStream is = new ByteArrayInputStream(cliente.getImagencliente());
+            perfil_view.setImage(new Image(is));
+            this.image_bytes = cliente.getImagencliente();
+        }
+    }
+
     @FXML
     void updateCliente(ActionEvent event) {
         String contrasena = contrasena_field.getText();
         String confirmar = confirmacion_field.getText();
         Boolean vacuna = vacunado_field.isSelected();
+
+        clienteMgr.setCliente(cliente);
+        byte[] imagen_perfil = image_bytes;
+        clienteMgr.updateImagen(imagen_perfil);
 
         if(!contrasena.equals("") && !confirmar.equals("")){
 
@@ -111,5 +134,31 @@ public class EditarPerfilClienteController {
             }
         }
 
+    }
+
+    @FXML
+    public void seleccionar_imagen(ActionEvent action) throws IOException {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Buscar Imagen");
+
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("All Images", "*.*"),
+                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+                new FileChooser.ExtensionFilter("PNG", "*.png")
+        );
+
+        Stage stage = (Stage)editar_pane.getScene().getWindow();
+
+        File file = fileChooser.showOpenDialog(stage);
+
+        if (file != null) {
+            Path path = Paths.get(file.getAbsolutePath());
+            this.image_bytes = Files.readAllBytes(path);
+
+            //Mostrar la imagen seleccionada
+            Image image = new Image("file:" + ((File) file).getAbsolutePath());
+            perfil_view.setImage(image);
+            perfil_view.autosize();
+        }
     }
 }

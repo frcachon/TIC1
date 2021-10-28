@@ -12,13 +12,20 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
@@ -55,6 +62,13 @@ public class ClienteController implements Initializable {
     @FXML
     private AnchorPane cliente_pane;
 
+    @FXML
+    private javafx.scene.image.ImageView perfil_image = new ImageView();
+
+    @FXML
+    private Button seleccionar_button;
+
+    private byte[] image_bytes;
     private final String[] paises = {"Afganistán","Albania","Alemania","Andorra","Angola","Antigua y Barbuda","Arabia Saudita","Argelia","Argentina","Armenia","Australia","Austria","Azerbaiyán","Bahamas","Bangladés","Barbados","Baréin","Bélgica","Belice","Benín","Bielorrusia","Birmania","Bolivia","Bosnia y Herzegovina","Botsuana","Brasil","Brunéi","Bulgaria","Burkina Faso","Burundi","Bután","Cabo Verde","Camboya","Camerún","Canadá","Catar","Chad","Chile","China","Chipre","Ciudad del Vaticano","Colombia","Comoras","Corea del Norte","Corea del Sur","Costa de Marfil","Costa Rica","Croacia","Cuba","Dinamarca","Dominica","Ecuador","Egipto","El Salvador","Emiratos Árabes Unidos","Eritrea","Eslovaquia","Eslovenia","España","Estados Unidos","Estonia","Etiopía","Filipinas","Finlandia","Fiyi","Francia","Gabón","Gambia","Georgia","Ghana","Granada","Grecia","Guatemala","Guyana","Guinea","Guinea ecuatorial","Guinea-Bisáu","Haití","Honduras","Hungría","India","Indonesia","Irak","Irán","Irlanda","Islandia","Islas Marshall","Islas Salomón","Israel","Italia","Jamaica","Japón","Jordania","Kazajistán","Kenia","Kirguistán","Kiribati","Kuwait","Laos","Lesoto","Letonia","Líbano","Liberia","Libia","Liechtenstein","Lituania","Luxemburgo","Madagascar","Malasia","Malaui","Maldivas","Malí","Malta","Marruecos","Mauricio","Mauritania","México","Micronesia","Moldavia","Mónaco","Mongolia","Montenegro","Mozambique","Namibia","Nauru","Nepal","Nicaragua","Níger","Nigeria","Noruega","Nueva Zelanda","Omán","Países Bajos","Pakistán","Palaos","Palestina","Panamá","Papúa Nueva Guinea","Paraguay","Perú","Polonia","Portugal","Reino Unido","República Centroafricana","República Checa","República de Macedonia","República del Congo","República Democrática del Congo","República Dominicana","República Sudafricana","Ruanda","Rumanía","Rusia","Samoa","San Cristóbal y Nieves","San Marino","San Vicente y las Granadinas","Santa Lucía","Santo Tomé y Príncipe","Senegal","Serbia","Seychelles","Sierra Leona","Singapur","Siria","Somalia","Sri Lanka","Suazilandia","Sudán","Sudán del Sur","Suecia","Suiza","Surinam","Tailandia","Tanzania","Tayikistán","Timor Oriental","Togo","Tonga","Trinidad y Tobago","Túnez","Turkmenistán","Turquía","Tuvalu","Ucrania","Uganda","Uruguay","Uzbekistán","Vanuatu","Venezuela","Vietnam","Yemen","Yibuti","Zambia","Zimbabue"};
     private final String[] documentos = {"Pasaporte", "Cédula"};
 
@@ -88,6 +102,30 @@ public class ClienteController implements Initializable {
     //}
 
     @FXML
+    void seleccionarImagen(ActionEvent Action) throws IOException{
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Buscar Imagen");
+
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("All Images", "*.*"),
+                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+                new FileChooser.ExtensionFilter("PNG", "*.png")
+        );
+
+        Stage stage = (Stage)cliente_pane.getScene().getWindow();
+
+        File file = fileChooser.showOpenDialog(stage);
+
+        if (file != null) {
+            Path path = Paths.get(file.getAbsolutePath());
+            this.image_bytes = Files.readAllBytes(path);
+            
+            Image image = new Image("file:" + ((File) file).getAbsolutePath());
+            perfil_image.setImage(image);
+        }
+    }
+
+    @FXML
     void addClient(ActionEvent event) {
         if (document_field.getText() == null || document_field.getText().equals("") || //chequeamos que nada sea nulo
                 mail_field.getText() == null || mail_field.getText().equals("") ||
@@ -107,11 +145,13 @@ public class ClienteController implements Initializable {
                 LocalDate fecha_nacimiento = date_picker.getValue();
                 Boolean vacuna_covid = vacuna_check.isSelected();
                 String pais = pais_choicebox.getValue();
+                byte[] imagen_cliente = image_bytes;
 
                 try {
                     FXMLLoader fxmlLoader = new FXMLLoader();
                     fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
-                    clienteMgr.addClient(mail, contrasena, documento, tipo_documento, fecha_nacimiento, vacuna_covid, pais);
+                    clienteMgr.addClient(mail, contrasena, documento, tipo_documento, fecha_nacimiento,
+                            vacuna_covid, pais,imagen_cliente);
                     Cliente cliente = clienteMgr.getClienteFromMailAndPassword(mail,contrasena);
                     interesesClienteController.setCliente(cliente);
                     AnchorPane pane = fxmlLoader.load(ClienteController.class.getResourceAsStream("InteresesCliente.fxml"));
@@ -150,6 +190,7 @@ public class ClienteController implements Initializable {
         pais_choicebox.getItems().addAll(paises);
         document_choicebox.getItems().addAll(documentos);
     }
+
 
 }
 

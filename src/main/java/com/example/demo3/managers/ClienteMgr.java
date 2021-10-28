@@ -30,7 +30,8 @@ public class ClienteMgr {
     Cliente cliente;
     public void setCliente(Cliente cliente){this.cliente = cliente;}
 
-    public void addClient(String mail, String contrasena, Long documento, String tipo_documento, LocalDate fecha_nacimiento, Boolean vacuna_covid, String pais) throws NombreDeUsuarioYaExiste, InformacionInvalida, DocumentoYaExisteParaMismoPais {
+    public void addClient(String mail, String contrasena, Long documento, String tipo_documento,
+                          LocalDate fecha_nacimiento, Boolean vacuna_covid, String pais,byte[] imagencliente) throws NombreDeUsuarioYaExiste, InformacionInvalida, DocumentoYaExisteParaMismoPais {
         //if (document == 0 || name.equals("") || email.equals("")) {
         //    throw new InformacionInvalida();
         //}
@@ -55,7 +56,8 @@ public class ClienteMgr {
             throw new DocumentoYaExisteParaMismoPais();
         }
 
-        Cliente cliente = new Cliente(mail, contrasena, documento, tipo_documento, fecha_nacimiento, vacuna_covid, pais);
+        Cliente cliente = new Cliente(mail, contrasena, documento, tipo_documento, fecha_nacimiento,
+                vacuna_covid, pais, imagencliente);
         clienteRepository.save(cliente);
     }
 
@@ -80,6 +82,14 @@ public class ClienteMgr {
             if (vacuna != cliente.getVacuna_covid()){
                 cliente.setVacuna_covid(vacuna);
             }
+        }
+
+        clienteRepository.save(cliente);
+    }
+
+    public void updateImagen(byte[] imagen){
+        if(imagen != null){
+            cliente.setImagencliente(imagen);
         }
 
         clienteRepository.save(cliente);
