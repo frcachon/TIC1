@@ -32,6 +32,9 @@ public class AddActividadController {
         @Autowired
         private ActividadMgr actividadMgr;
 
+        @Autowired
+        private EditarInteresesActividadController editarInteresesActividadController;
+
         Operador operador;
 
         void setOperador(Operador operador) {
@@ -117,7 +120,7 @@ public class AddActividadController {
                                         actividadMgr.registrarActividad(titulo, imagen_actividad, idoperador, descripcion, apertura, cierre,false,   cupo, utiliza_reservas);
                                         FXMLLoader fxmlLoader = new FXMLLoader();
                                         fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
-                                        AnchorPane pane = fxmlLoader.load(ClienteController.class.getResourceAsStream("HomeOperador.fxml"));
+                                        AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("EditarInteresesActividad.fxml"));
                                         act_pane.getChildren().setAll(pane);
                                         //actividadMgr.registrarActividad(titulo, imagen_actividad, idoperador, descripcion, apertura, cierre,false,   cupo, utiliza_reservas);
 
