@@ -122,6 +122,25 @@ public class ClienteController implements Initializable {
             
             Image image = new Image("file:" + ((File) file).getAbsolutePath());
             perfil_image.setImage(image);
+
+            double w = 0;
+            double h = 0;
+
+            double ratioX = perfil_image.getFitWidth() / image.getWidth();
+            double ratioY = perfil_image.getFitHeight() / image.getHeight();
+
+            double reducCoeff = 0;
+            if(ratioX >= ratioY) {
+                reducCoeff = ratioY;
+            } else {
+                reducCoeff = ratioX;
+            }
+
+            w = image.getWidth() * reducCoeff;
+            h = image.getHeight() * reducCoeff;
+
+            perfil_image.setX((perfil_image.getFitWidth() - w) / 2);
+            perfil_image.setY((perfil_image.getFitHeight() - h) / 2);
         }
     }
 

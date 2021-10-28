@@ -197,8 +197,39 @@ public class HomeClienteController implements Initializable {
         actividades = actividadMgr.getAll();
         if(cliente.getImagencliente() != null) {
             InputStream img = new ByteArrayInputStream(cliente.getImagencliente());
-            perfil_view.setImage(new Image(img));
+            Image foto = new Image(img);
+            perfil_view.setImage(foto);
+
+            double w = 0;
+            double h = 0;
+
+            double ratioX = perfil_view.getFitWidth() / foto.getWidth();
+            double ratioY = perfil_view.getFitHeight() / foto.getHeight();
+
+            double reducCoeff = 0;
+            if(ratioX >= ratioY) {
+                reducCoeff = ratioY;
+            } else {
+                reducCoeff = ratioX;
+            }
+
+            w = foto.getWidth() * reducCoeff;
+            h = foto.getHeight() * reducCoeff;
+
+            perfil_view.setX((perfil_view.getFitWidth() - w) / 2);
+            perfil_view.setY((perfil_view.getFitHeight() - h) / 2);
         }
+
+
+
+
+
+
+
+
+
+
+
         int acts_size = actividades.size();
         int i = 0;
         while (i < acts_size) {

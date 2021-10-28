@@ -77,8 +77,28 @@ public class EditarPerfilClienteController implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
         if (cliente.getImagencliente() != null) {
             InputStream is = new ByteArrayInputStream(cliente.getImagencliente());
-            perfil_view.setImage(new Image(is));
+            Image foto = new Image(is);
+            perfil_view.setImage(foto);
             this.image_bytes = cliente.getImagencliente();
+
+            double w = 0;
+            double h = 0;
+
+            double ratioX = perfil_view.getFitWidth() / foto.getWidth();
+            double ratioY = perfil_view.getFitHeight() / foto.getHeight();
+
+            double reducCoeff = 0;
+            if(ratioX >= ratioY) {
+                reducCoeff = ratioY;
+            } else {
+                reducCoeff = ratioX;
+            }
+
+            w = foto.getWidth() * reducCoeff;
+            h = foto.getHeight() * reducCoeff;
+
+            perfil_view.setX((perfil_view.getFitWidth() - w) / 2);
+            perfil_view.setY((perfil_view.getFitHeight() - h) / 2);
         }
     }
 
@@ -159,6 +179,24 @@ public class EditarPerfilClienteController implements Initializable{
             Image image = new Image("file:" + ((File) file).getAbsolutePath());
             perfil_view.setImage(image);
             perfil_view.autosize();
+            double w = 0;
+            double h = 0;
+
+            double ratioX = perfil_view.getFitWidth() / image.getWidth();
+            double ratioY = perfil_view.getFitHeight() / image.getHeight();
+
+            double reducCoeff = 0;
+            if(ratioX >= ratioY) {
+                reducCoeff = ratioY;
+            } else {
+                reducCoeff = ratioX;
+            }
+
+            w = image.getWidth() * reducCoeff;
+            h = image.getHeight() * reducCoeff;
+
+            perfil_view.setX((perfil_view.getFitWidth() - w) / 2);
+            perfil_view.setY((perfil_view.getFitHeight() - h) / 2);
         }
     }
 }

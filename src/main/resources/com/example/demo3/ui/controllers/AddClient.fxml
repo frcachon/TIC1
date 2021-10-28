@@ -57,7 +57,7 @@
       <CheckBox fx:id="vacuna_check" layoutX="204.0" layoutY="367.0" mnemonicParsing="false" text="Estoy vacunado contra COVID-19" />
       <Button fx:id="atrasButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goBack" text="Atrás" />
       <PasswordField fx:id="password_field" layoutX="210.0" layoutY="82.0" prefHeight="26.0" prefWidth="208.0" />
-      <ImageView fx:id="perfil_image" fitHeight="69.0" fitWidth="141.0" layoutX="210.0" layoutY="289.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="perfil_image" fitHeight="69.0" fitWidth="205.0" layoutX="210.0" layoutY="289.0" pickOnBounds="true" preserveRatio="true" />
       <Button fx:id="seleccionar_button" layoutX="210.0" layoutY="254.0" mnemonicParsing="false" onAction="#seleccionarImagen" prefHeight="25.0" prefWidth="205.0" text="Seleccionar Imagen" />
    </children>
 </AnchorPane>
