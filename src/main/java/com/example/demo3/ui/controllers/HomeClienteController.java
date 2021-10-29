@@ -104,7 +104,7 @@ public class HomeClienteController implements Initializable {
         Actividad act = actividadThumbController.actividades.get(rowIndex);
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
-        actividadViewController.setActividad(act);
+        actividadViewController.setData(act, cliente);
         AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("ActividadView.fxml"));
         home_pane.getChildren().setAll(pane);
     }

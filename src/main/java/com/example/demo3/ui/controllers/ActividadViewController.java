@@ -1,6 +1,7 @@
 package com.example.demo3.ui.controllers;
 import com.example.demo3.Demo3Application;
 import com.example.demo3.entities.Actividad;
+import com.example.demo3.entities.Cliente;
 import com.example.demo3.entities.Operador;
 import com.example.demo3.managers.OperadorMgr;
 import javafx.event.ActionEvent;
@@ -15,6 +16,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,15 +25,19 @@ import java.util.ResourceBundle;
 public class ActividadViewController implements Initializable {
 
     @Autowired
-    OperadorMgr operadorMgr;
+    private OperadorMgr operadorMgr;
 
-    Operador operador;
+    @Autowired
+    private ReservarController reservarController;
 
     Actividad actividad;
+    Operador operador;
+    Cliente cliente;
 
-    public void setActividad(Actividad act) {
+    public void setData(Actividad act, Cliente cliente) {
         this.actividad = act;
         this.operador = operadorMgr.getOperadorFromId(act.getIdoperador());
+        this.cliente = cliente;
     }
 
     @FXML
@@ -64,8 +70,12 @@ public class ActividadViewController implements Initializable {
     }
 
     @FXML
-    void reservar(ActionEvent event) {
-
+    void reservar(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
+        reservarController.setData(actividad, cliente);
+        AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("Reservar.fxml"));
+        act_view_pane.getChildren().setAll(pane);
     }
 
     @FXML

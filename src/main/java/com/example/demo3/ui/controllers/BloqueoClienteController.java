@@ -1,6 +1,7 @@
 package com.example.demo3.ui.controllers;
 
 import com.example.demo3.Demo3Application;
+import com.example.demo3.entities.Actividad;
 import com.example.demo3.entities.Cliente;
 import com.example.demo3.managers.ClienteMgr;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -12,7 +13,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -44,11 +47,37 @@ public class BloqueoClienteController implements Initializable {
     private TableColumn<Cliente, String> estadoColumn;
 
     @FXML
+    private TextField field;
+
+    @FXML
+    void busqueda(KeyEvent event) {
+        List<Cliente> q = clienteMgr.getClientesFromMailContaining(field.getText());
+        lista = FXCollections.observableArrayList();
+        lista.removeAll();
+        lista.addAll(q);
+
+        tablaClientes.setItems(lista);
+        emailColumn.setCellValueFactory(new PropertyValueFactory<>("mail"));
+        docColumn.setCellValueFactory(new PropertyValueFactory<>("documento"));
+        estadoColumn.setCellValueFactory(cellData -> {
+            boolean estado = cellData.getValue().getBloqueado();
+            String estadoAsString;
+            if(estado) {
+                estadoAsString = "Bloqueado";
+            }
+            else {
+                estadoAsString = "Habilitado";
+            }
+            return new ReadOnlyStringWrapper(estadoAsString);
+        });
+    }
+
+    @FXML
     void bloquearCliente(ActionEvent event) {
         Cliente cli = tablaClientes.getSelectionModel().getSelectedItem();
         clienteMgr.bloquearCliente(cli);
 
-        List<Cliente> q = clienteMgr.getAll();
+        List<Cliente> q = clienteMgr.getClientesFromMailContaining(field.getText());
         lista = FXCollections.observableArrayList();
         lista.removeAll();
         lista.addAll(q);
@@ -73,7 +102,7 @@ public class BloqueoClienteController implements Initializable {
         Cliente cli = tablaClientes.getSelectionModel().getSelectedItem();
         clienteMgr.desbloquearCliente(cli);
 
-        List<Cliente> q = clienteMgr.getAll();
+        List<Cliente> q = clienteMgr.getClientesFromMailContaining(field.getText());
         lista = FXCollections.observableArrayList();
         lista.removeAll();
         lista.addAll(q);
