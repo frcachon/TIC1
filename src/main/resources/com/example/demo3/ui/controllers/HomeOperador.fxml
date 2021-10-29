@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -14,7 +15,6 @@
       <Button fx:id="atrasButton" layoutX="41.0" layoutY="361.0" mnemonicParsing="false" onAction="#goBack" prefHeight="25.0" prefWidth="111.0" text="Cerrar Sesión" />
       <Button fx:id="reservas_button" layoutX="31.0" layoutY="157.0" mnemonicParsing="false" onAction="#verReservas" prefHeight="25.0" prefWidth="129.0" text="Bandeja de reservas" />
       <Button fx:id="editar_perfil_button" layoutX="31.0" layoutY="114.0" mnemonicParsing="false" onAction="#editarPerfil" prefHeight="25.0" prefWidth="129.0" text="Editar Perfil" />
-      <Button fx:id="buscar_button" layoutX="475.0" layoutY="14.0" mnemonicParsing="false" onAction="#buscar" prefHeight="26.0" prefWidth="111.0" text="Buscar" />
       <TableView fx:id="tabla_actividades" layoutX="215.0" layoutY="51.0" onMouseClicked="#ampliar_actividad" prefHeight="338.0" prefWidth="369.0">
         <columns>
           <TableColumn fx:id="actvidadColumn" prefWidth="186.0" text="Actividad" />
@@ -27,5 +27,6 @@
          </font>
       </Label>
       <Button fx:id="agregar_actividad_button" layoutX="31.0" layoutY="200.0" mnemonicParsing="false" onAction="#agregarActividad" prefHeight="26.0" prefWidth="129.0" text="Agregar Actividad" />
+      <TextField fx:id="field" layoutX="423.0" layoutY="14.0" onKeyTyped="#busqueda" promptText="Buscar" />
    </children>
 </AnchorPane>

@@ -13,7 +13,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +62,9 @@ public class HomeOperadorController implements Initializable {
     private Label username_label;
 
     @FXML
+    private TextField field;
+
+    @FXML
     void agregarActividad(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
@@ -81,8 +86,15 @@ public class HomeOperadorController implements Initializable {
     }
 
     @FXML
-    void buscar(ActionEvent event) {
+    void busqueda(KeyEvent event) {
+        List<Actividad> q = actividadMgr.getActividadesFromTituloContaining(field.getText());
+        lista = FXCollections.observableArrayList();
+        lista.removeAll();
+        lista.addAll(q);
 
+        tabla_actividades.setItems(lista);
+        actvidadColumn.setCellValueFactory(new PropertyValueFactory<>("titulo"));
+        descripcionColumn.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
     }
 
     @FXML

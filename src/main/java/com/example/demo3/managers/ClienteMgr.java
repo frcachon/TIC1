@@ -99,6 +99,10 @@ public class ClienteMgr {
         return clienteRepository.findByMailAndAndContrasena(mail,contrasena);
     }
 
+    public List<Cliente> getClientesFromMailContaining(String mail) {
+        return (List<Cliente>) clienteRepository.findAllByMailContaining(mail);
+    }
+
     public List<Cliente> getAll() {
         return (List<Cliente>) clienteRepository.findAll();
     }
