@@ -30,6 +30,9 @@ public class ActividadViewController implements Initializable {
     @Autowired
     private ReservarController reservarController;
 
+    @Autowired
+    private ComentariosController comentariosController;
+
     Actividad actividad;
     Operador operador;
     Cliente cliente;
@@ -65,8 +68,12 @@ public class ActividadViewController implements Initializable {
     private Label puntuacion_label;
 
     @FXML
-    void realizarComentario(ActionEvent event) {
-
+    void realizarComentario(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
+        comentariosController.setData(actividad, cliente);
+        AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("Comentarios.fxml"));
+        act_view_pane.getChildren().setAll(pane);
     }
 
     @FXML

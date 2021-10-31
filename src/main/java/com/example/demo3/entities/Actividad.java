@@ -46,9 +46,6 @@ public class Actividad {
     @Column(name="promediopuntuaciones")
     private Float promediopuntuaciones;
 
-    @Column(name="cantidadpuntuaciones")
-    private Integer cantidadpuntuaciones;
-
     public Actividad(){}
 
     public Actividad(String titulo, byte[] imagenactividad, Integer idoperador, String descripcion, LocalTime apertura,
@@ -63,7 +60,6 @@ public class Actividad {
         this.cupo = cupo;
         this.utiliza_reservas = utiliza_reservas;
         this.promediopuntuaciones = 0F;
-        this.cantidadpuntuaciones = 0;
     }
 
     public Integer getId() {
@@ -154,14 +150,6 @@ public class Actividad {
         this.promediopuntuaciones = promediopuntuaciones;
     }
 
-    public Integer getCantidadpuntuaciones() {
-        return cantidadpuntuaciones;
-    }
-
-    public void setCantidadpuntuaciones(Integer cantidadpuntuaciones) {
-        this.cantidadpuntuaciones = cantidadpuntuaciones;
-    }
-
     @Override
     public String toString() {
         return "Actividad{" +
@@ -176,7 +164,6 @@ public class Actividad {
                 ", cupo=" + cupo +
                 ", utiliza_reservas=" + utiliza_reservas +
                 ", promediopuntuaciones=" + promediopuntuaciones +
-                ", cantidadpuntuaciones=" + cantidadpuntuaciones +
                 '}';
     }
 
