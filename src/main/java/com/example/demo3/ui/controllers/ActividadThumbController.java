@@ -1,5 +1,6 @@
 package com.example.demo3.ui.controllers;
 import com.example.demo3.entities.Actividad;
+import com.example.demo3.managers.CalificacionMgr;
 import com.example.demo3.managers.OperadorMgr;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -25,6 +26,9 @@ public class ActividadThumbController {
     @Autowired
     private OperadorMgr operadorMgr;
 
+    @Autowired
+    private CalificacionMgr calificacionMgr;
+
     @FXML
     private ImageView imagen;
 
@@ -49,7 +53,7 @@ public class ActividadThumbController {
             imagen.setImage(new Image(is));
         }
         nombreLabel.setText(actividad.getTitulo());
-        puntuacionLabel.setText(actividad.getPromediopuntuaciones() + " estrellas");
+        puntuacionLabel.setText(calificacionMgr.puntuacionPromedio(actividad.getId())+ " estrellas");
         operadorLabel.setText(operadorMgr.getOperadorFromId(actividad.getIdoperador()).getEmpresa());
         descripcionLabel.setWrapText(true);
         descripcionLabel.setText(actividad.getDescripcion());

@@ -13,6 +13,7 @@ public interface ClienteRepository extends CrudRepository<Cliente,Integer> {
     List<Cliente> findAllByDocumentoAndAndPais(Long documento, String pais);
     Cliente findByMailAndAndContrasena(String mail, String contrasena);
     List<Cliente> findAllByMailContaining(String mail);
+    Cliente findClienteById(Integer idCliente);
 
 
 }

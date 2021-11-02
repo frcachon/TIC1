@@ -3,6 +3,7 @@ import com.example.demo3.Demo3Application;
 import com.example.demo3.entities.Actividad;
 import com.example.demo3.entities.Cliente;
 import com.example.demo3.entities.Operador;
+import com.example.demo3.managers.CalificacionMgr;
 import com.example.demo3.managers.OperadorMgr;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -32,6 +33,9 @@ public class ActividadViewController implements Initializable {
 
     @Autowired
     private ComentariosController comentariosController;
+
+    @Autowired
+    private CalificacionMgr calificacionMgr;
 
     Actividad actividad;
     Operador operador;
@@ -101,7 +105,7 @@ public class ActividadViewController implements Initializable {
         horario.setText(actividad.getApertura() + " - " + actividad.getCierre());
         admite_reservas.setText( actividad.getUtiliza_reservas() ? "Sí" : "No");
         operador_actividad.setText(operador.getEmpresa());
-        puntuacion_label.setText(actividad.getPromediopuntuaciones() + " estrellas");
+        puntuacion_label.setText(calificacionMgr.puntuacionPromedio(actividad.getId()) + " estrellas");
 
         if (actividad.getImagenactividad() != null) {
             InputStream is = new ByteArrayInputStream(actividad.getImagenactividad());

@@ -107,4 +107,8 @@ public class ClienteMgr {
         return (List<Cliente>) clienteRepository.findAll();
     }
 
+    public String getUsernameFromId(Integer id_cliente) {
+        return clienteRepository.findClienteById(id_cliente).getMail();
+    }
+
 }
