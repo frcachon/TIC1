@@ -10,11 +10,11 @@ public class Reserva {
     @GeneratedValue(strategy= GenerationType.AUTO) // "id" es el id de la tabla. "identificador" es el id del operador
     private Integer id;
 
-    @Column(name="idactividad")
-    private Integer idactividad;
-
     @Column(name="idcliente")
     private Integer idcliente;
+
+    @Column(name="idactividad")
+    private Integer idactividad;
 
     @Column(name="fecha")
     private LocalDate fecha;
@@ -101,8 +101,8 @@ public class Reserva {
     public String toString() {
         return "Reserva{" +
                 "id=" + id +
-                ", idactividad=" + idactividad +
                 ", idcliente=" + idcliente +
+                ", idactividad=" + idactividad +
                 ", fecha=" + fecha +
                 ", hora=" + hora +
                 ", cantidad=" + cantidad +

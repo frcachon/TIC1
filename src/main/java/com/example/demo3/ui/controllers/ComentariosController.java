@@ -61,6 +61,9 @@ public class ComentariosController implements Initializable {
     @FXML
     private Label commentlabel;
 
+    @FXML
+    private Label numComlabel;
+
     private void showAlert() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);   //Como is lanzara una excepcion cuando algo falla
         alert.setTitle("Demasiados caracteres");
@@ -100,6 +103,7 @@ public class ComentariosController implements Initializable {
             datelabel.setText(com.getFecha().toString());
             commentlabel.setText(com.getComentario());
             commentlabel.setWrapText(true);
+            numComlabel.setText(index+1 + "/" + comentarios.size());
         }
         else {
             index = 0;
@@ -108,6 +112,7 @@ public class ComentariosController implements Initializable {
             datelabel.setText(com.getFecha().toString());
             commentlabel.setText(com.getComentario());
             commentlabel.setWrapText(true);
+            numComlabel.setText(index+1 + "/" + comentarios.size());
         }
     }
 
@@ -132,6 +137,13 @@ public class ComentariosController implements Initializable {
             datelabel.setText(com.getFecha().toString());
             commentlabel.setText(com.getComentario());
             commentlabel.setWrapText(true);
+            numComlabel.setText(1 + "/" + comentarios.size());
+        }
+        else if (comentarios.size() == 0) {
+            usernamelabel.setText("No hay comentarios.");
+            datelabel.setText("");
+            commentlabel.setText("");
+            numComlabel.setText("");
         }
     }
 

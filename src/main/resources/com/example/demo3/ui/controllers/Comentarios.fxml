@@ -34,5 +34,6 @@
       <Label fx:id="datelabel" alignment="CENTER_RIGHT" layoutX="306.0" layoutY="210.0" prefHeight="17.0" prefWidth="179.0" text="fecha" />
       <Label fx:id="commentlabel" alignment="TOP_LEFT" layoutX="110.0" layoutY="238.0" prefHeight="92.0" prefWidth="388.0" text="Label" />
       <Button layoutX="366.0" layoutY="343.0" mnemonicParsing="false" onAction="#siguientecomentario" text="Siguiente comentario" />
+      <Label fx:id="numComlabel" layoutX="509.0" layoutY="313.0" prefHeight="17.0" prefWidth="69.0" text="num" />
    </children>
 </AnchorPane>
