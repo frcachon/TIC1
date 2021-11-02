@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @Service
 public class ReservaMgr {
@@ -18,6 +19,14 @@ public class ReservaMgr {
         Reserva res = new Reserva(id_cliente, id_actividad, fecha, hora, cantidad);
         // chequeos
         reservaRepository.save(res);
+    }
+
+    public List<Reserva> getFromActivityInDate(Integer id_actividad, LocalDate fecha) {
+        return reservaRepository.findAllByIdactividadAndFecha(id_actividad, fecha);
+    }
+
+    public List<Reserva> getNoValidadas(Integer id_actividad) {
+        return reservaRepository.findAllByValidadaIsFalseAndIdactividad(id_actividad);
     }
 
 }

@@ -69,6 +69,9 @@ public class EditActividadController implements Initializable {
     private TextField cupo_field;
 
     @FXML
+    private CheckBox vacuna_check;
+
+    @FXML
     void goBack(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
@@ -118,11 +121,12 @@ public class EditActividadController implements Initializable {
             LocalTime cierre = LocalTime.parse(horarioCierre_field.getText());
             Integer cupo = Integer.valueOf(cupo_field.getText());
             Boolean utiliza_reservas = reservas_check.isSelected();
+            Boolean requiere_vacuna = vacuna_check.isSelected();
             byte[] imagen_actividad = image_bytes;
 
             try {
-                actividadMgr.setActividad(actividad);
-                actividadMgr.updateActividad(titulo,descripcion,apertura,cierre,cupo,utiliza_reservas, imagen_actividad);
+                //actividadMgr.setActividad(actividad);
+                actividadMgr.updateActividad(actividad.getId(), titulo,descripcion,apertura,cierre,cupo,utiliza_reservas, imagen_actividad, requiere_vacuna);
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
                 AnchorPane pane = fxmlLoader.load(ClienteController.class.getResourceAsStream("HomeOperador.fxml"));
@@ -158,6 +162,7 @@ public class EditActividadController implements Initializable {
         horarioApertura_field.setText(actividad.getApertura().toString());
         horarioCierre_field.setText(actividad.getCierre().toString());
         reservas_check.setSelected(actividad.getUtiliza_reservas());
+        vacuna_check.setSelected(actividad.getRequiere_vacuna());
         if (actividad.getImagenactividad() != null) {
             InputStream is = new ByteArrayInputStream(actividad.getImagenactividad());
             imagenVw.setImage(new Image(is));
