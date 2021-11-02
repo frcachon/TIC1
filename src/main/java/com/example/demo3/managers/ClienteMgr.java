@@ -31,7 +31,7 @@ public class ClienteMgr {
     public void setCliente(Cliente cliente){this.cliente = cliente;}
 
     public void addClient(String mail, String contrasena, Long documento, String tipo_documento,
-                          LocalDate fecha_nacimiento, Boolean vacuna_covid, String pais,byte[] imagencliente) throws NombreDeUsuarioYaExiste, InformacionInvalida, DocumentoYaExisteParaMismoPais {
+                          LocalDate fecha_nacimiento, Boolean vacuna_covid, String pais, byte[] imagencliente) throws NombreDeUsuarioYaExiste, InformacionInvalida, DocumentoYaExisteParaMismoPais {
         //if (document == 0 || name.equals("") || email.equals("")) {
         //    throw new InformacionInvalida();
         //}
