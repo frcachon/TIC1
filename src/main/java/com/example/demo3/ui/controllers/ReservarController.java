@@ -77,9 +77,7 @@ public class ReservarController implements Initializable {
     void buscarHora(ActionEvent event) {
         LocalDate fecha = dateField.getValue();
         Integer cupo = 0;
-        if (actividad.getRequiere_vacuna() && !cliente.getVacuna_covid()) {
-            showAlert("No vacunado", "Para poder realizar reservas en esta actividad, debe estar vacunado.");
-        }
+
         if (!cupoField.getText().equals("")) {
             try {
                 cupo = parseInt(cupoField.getText());
@@ -89,20 +87,28 @@ public class ReservarController implements Initializable {
                 return;
             }
 
-            if (cupo <= 0) {
+            if (actividad.getRequiere_vacuna() && !cliente.getVacuna_covid()) {
+                showAlert("No vacunado", "Para poder realizar reservas en esta actividad, debe estar vacunado.");
+            }
+
+            else if (cupo <= 0) {
                 showAlert("Cantidad inválida", "Por favor ingrese una cantidad numérica y mayor a cero.");
                 return;
             }
 
+            else if (cupoField.getText().equals("") || dateField.getValue() == null) {
+                showAlert("Ingrese todos los datos", "Por favor ingrese una fecha y la cantidad de asistentes.");
+                return;
+            }
+            else if (dateField.getValue().isBefore(LocalDate.now())) {
+                showAlert("Fecha inválida", "Por favor ingrese una fecha futura.");
+            }
+            else if (parseInt(cupoField.getText()) > actividad.getCupo()) {
+                showAlert("Cantidad invalida", "Por favor ingrese una cantidad menor al cupo por turno de la actividad (" + actividad.getCupo() + " personas).");
+            }
+
         }
-        if (cupoField.getText().equals("") || dateField.getValue() == null) {
-            showAlert("Ingrese todos los datos", "Por favor ingrese una fecha y la cantidad de asistentes.");
-            return;
-        }
-        if (dateField.getValue().isBefore(LocalDate.now())) {
-            showAlert("Fecha inválida", "Por favor ingrese una fecha futura.");
-        }
-        //if (actividad.) si requiere vacunas y yo no estoy
+
         List<Reserva> reservasDelDia = reservaMgr.getFromActivityInDate(actividad.getId(), fecha);
         Integer apertura = actividad.getApertura().getHour();
         Integer cierre = actividad.getCierre().getHour();

@@ -17,7 +17,7 @@ public class ReservaMgr {
 
     public void crearReserva(Integer id_cliente, Integer id_actividad, LocalDate fecha, LocalTime hora, Integer cantidad) {
         Reserva res = new Reserva(id_cliente, id_actividad, fecha, hora, cantidad);
-        // chequeos
+        // los chequeos ya se hacen en el controller para poder mostrar las horas disponibles
         reservaRepository.save(res);
     }
 
@@ -27,6 +27,11 @@ public class ReservaMgr {
 
     public List<Reserva> getNoValidadas(Integer id_actividad) {
         return reservaRepository.findAllByValidadaIsFalseAndIdactividad(id_actividad);
+    }
+
+    public void setValidada(Reserva res, Boolean b) {
+        res.setValidada(b);
+        reservaRepository.save(res);
     }
 
 }

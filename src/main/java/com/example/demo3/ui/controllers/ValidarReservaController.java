@@ -77,12 +77,14 @@ public class ValidarReservaController implements Initializable {
     @FXML
     void rechazarReserva(ActionEvent event) {
         Reserva reserva = tablaReservas.getSelectionModel().getSelectedItem();
+        reservaMgr.setValidada(reserva, false);
 
     }
 
     @FXML
     void validarReserva(ActionEvent event) {
         Reserva reserva = tablaReservas.getSelectionModel().getSelectedItem();
+        reservaMgr.setValidada(reserva, true);
 
     }
 

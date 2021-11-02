@@ -132,7 +132,7 @@ public class HomeOperadorController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         username_label.setText(operador.getEmpresa());
-        List<Actividad> q = (List<Actividad>) actividadMgr.getActividadesFromOperador(operador.getId());
+        List<Actividad> q = actividadMgr.getActividadesFromOperador(operador.getId());
         lista = FXCollections.observableArrayList();
         lista.addAll(q);
         tabla_actividades.setItems(lista);
