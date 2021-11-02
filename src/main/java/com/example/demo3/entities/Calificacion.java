@@ -10,10 +10,10 @@ public class Calificacion {
     private Integer id;
 
     @Column(name="idcliente")
-    private Integer id_cliente;
+    private Integer idcliente;
 
     @Column(name="idactividad")
-    private Integer id_actividad;
+    private Integer idactividad;
 
     @Column(name="puntos")
     private Integer puntos;
@@ -22,8 +22,8 @@ public class Calificacion {
     }
 
     public Calificacion(Integer id_cliente, Integer id_actividad, Integer puntos) {
-        this.id_cliente = id_cliente;
-        this.id_actividad = id_actividad;
+        this.idcliente = id_cliente;
+        this.idactividad = id_actividad;
         this.puntos = puntos;
     }
 
@@ -35,20 +35,20 @@ public class Calificacion {
         this.id = id;
     }
 
-    public Integer getId_cliente() {
-        return id_cliente;
+    public Integer getIdcliente() {
+        return idcliente;
     }
 
-    public void setId_cliente(Integer id_cliente) {
-        this.id_cliente = id_cliente;
+    public void setIdcliente(Integer id_cliente) {
+        this.idcliente = id_cliente;
     }
 
-    public Integer getId_actividad() {
-        return id_actividad;
+    public Integer getIdactividad() {
+        return idactividad;
     }
 
-    public void setId_actividad(Integer id_actividad) {
-        this.id_actividad = id_actividad;
+    public void setIdactividad(Integer id_actividad) {
+        this.idactividad = id_actividad;
     }
 
     public Integer getPuntos() {
@@ -63,8 +63,8 @@ public class Calificacion {
     public String toString() {
         return "Calificacion{" +
                 "id=" + id +
-                ", id_cliente=" + id_cliente +
-                ", id_actividad=" + id_actividad +
+                ", id_cliente=" + idcliente +
+                ", id_actividad=" + idactividad +
                 ", puntos=" + puntos +
                 '}';
     }

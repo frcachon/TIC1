@@ -10,10 +10,10 @@ public class Comentario {
     private Integer id;
 
     @Column(name="idcliente")
-    private Integer id_cliente;
+    private Integer idcliente;
 
     @Column(name="idactividad")
-    private Integer id_actividad;
+    private Integer idactividad;
 
     @Column(name="fecha")
     private LocalDate fecha;
@@ -25,8 +25,8 @@ public class Comentario {
     }
 
     public Comentario(Integer id_cliente, Integer id_actividad, String comentario) {
-        this.id_cliente = id_cliente;
-        this.id_actividad = id_actividad;
+        this.idcliente = id_cliente;
+        this.idactividad = id_actividad;
         this.fecha = LocalDate.now();
         this.comentario = comentario;
     }
@@ -39,20 +39,20 @@ public class Comentario {
         this.id = id;
     }
 
-    public Integer getId_cliente() {
-        return id_cliente;
+    public Integer getIdcliente() {
+        return idcliente;
     }
 
-    public void setId_cliente(Integer id_cliente) {
-        this.id_cliente = id_cliente;
+    public void setIdcliente(Integer id_cliente) {
+        this.idcliente = id_cliente;
     }
 
-    public Integer getId_actividad() {
-        return id_actividad;
+    public Integer getIdactividad() {
+        return idactividad;
     }
 
-    public void setId_actividad(Integer id_actividad) {
-        this.id_actividad = id_actividad;
+    public void setIdactividad(Integer id_actividad) {
+        this.idactividad = id_actividad;
     }
 
     public LocalDate getFecha() {
@@ -75,8 +75,8 @@ public class Comentario {
     public String toString() {
         return "Comentario{" +
                 "id=" + id +
-                ", id_cliente=" + id_cliente +
-                ", id_actividad=" + id_actividad +
+                ", id_cliente=" + idcliente +
+                ", id_actividad=" + idactividad +
                 ", fecha=" + fecha +
                 ", comentario='" + comentario + '\'' +
                 '}';
