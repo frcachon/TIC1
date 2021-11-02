@@ -75,10 +75,14 @@ public class EditarPerfilClienteController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        if (cliente.getVacuna_covid()) {
+            vacunado_field.setVisible(false);
+        }
         if (cliente.getImagencliente() != null) {
             InputStream is = new ByteArrayInputStream(cliente.getImagencliente());
             Image foto = new Image(is);
             perfil_view.setImage(foto);
+            vacunado_field.setSelected(cliente.getVacuna_covid());
             this.image_bytes = cliente.getImagencliente();
 
             double w = 0;
@@ -108,51 +112,44 @@ public class EditarPerfilClienteController implements Initializable{
         String confirmar = confirmacion_field.getText();
         Boolean vacuna = vacunado_field.isSelected();
 
-        clienteMgr.setCliente(cliente);
         byte[] imagen_perfil = image_bytes;
-        clienteMgr.updateImagen(imagen_perfil);
+        clienteMgr.updateImagen(cliente.getId(), imagen_perfil);
 
-        if(!contrasena.equals("") && !confirmar.equals("")){
+        if(!contrasena.equals(cliente.getContrasena())) {
+            if (contrasena.equals(confirmar)) {
+                try {
+                    clienteMgr.updateCliente(cliente.getId(), contrasena, vacuna);
+                    FXMLLoader fxmlLoader = new FXMLLoader();
+                    fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
+                    homeClienteController.setCliente(cliente);
+                    AnchorPane pane = fxmlLoader.load(ClienteController.class.getResourceAsStream("HomeCliente.fxml"));
+                    editar_pane.getChildren().setAll(pane);
 
-            if(!contrasena.equals(cliente.getContrasena())) {
-                if (contrasena.equals(confirmar)) {
-                    try {
-                        clienteMgr.setCliente(cliente);
-                        clienteMgr.updateCliente(contrasena, vacuna);
-                        FXMLLoader fxmlLoader = new FXMLLoader();
-                        fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
-                        homeClienteController.setCliente(cliente);
-                        AnchorPane pane = fxmlLoader.load(ClienteController.class.getResourceAsStream("HomeCliente.fxml"));
-                        editar_pane.getChildren().setAll(pane);
-
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-
-                }
-                else {
-                    showAlert("Datos incorrectos", "Las contraseñas no son iguales");
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
                 }
 
             }
-            else{
-                showAlert("Datos incorrectos", "La contraseña es igual a la actual");
+            else {
+                showAlert("Datos incorrectos", "Las contraseñas no son iguales");
             }
+
+        }
+        else{
+            showAlert("Datos incorrectos", "La contraseña es igual a la actual");
         }
 
-        else {
-            try {
-                clienteMgr.setCliente(cliente);
-                clienteMgr.updateCliente(contrasena, vacuna);
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
-                homeClienteController.setCliente(cliente);
-                AnchorPane pane = fxmlLoader.load(ClienteController.class.getResourceAsStream("HomeCliente.fxml"));
-                editar_pane.getChildren().setAll(pane);
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-        }
+/*        try {
+            clienteMgr.updateCliente(cliente.getId(), contrasena, vacuna);
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
+            homeClienteController.setCliente(cliente);
+            AnchorPane pane = fxmlLoader.load(ClienteController.class.getResourceAsStream("HomeCliente.fxml"));
+            editar_pane.getChildren().setAll(pane);
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }*/
+
 
     }
 

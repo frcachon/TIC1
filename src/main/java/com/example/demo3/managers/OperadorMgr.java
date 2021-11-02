@@ -15,25 +15,6 @@ public class OperadorMgr {
     @Autowired
     private OperadorRepository operadorRepository;
 
-    Operador operador;
-    public void setOperador(Operador operador) {
-        this.operador = operador;
-    }
-
-    /*public void addOperador(Long identificador, String name, String email) throws OperadorYaExiste, InformacionInvalida {
-        if (identificador == 0 || name.equals("") || email.equals("")) {
-            throw new InformacionInvalida();
-        }
-
-        List<Operador> lista = operadorRepository.findAllByIdentificador(identificador);
-        if (lista != null && lista.size() > 0) {
-            throw new OperadorYaExiste();
-        }
-
-        //Operador operador = new Operador(identificador, name, email);
-        //operadorRepository.save(operador);
-    }*/
-
     public void addOperador(String nombreEmpresa, String departamento,
                             Long telefono, String emailContacto, String direccion) throws InformacionInvalida, OperadorYaExiste {
 
@@ -63,8 +44,11 @@ public class OperadorMgr {
         operadorRepository.save(operador);
     }
 
-    public void updateOperador (String nombreEmpresa, String departamento, Long telefono,
+    public void updateOperador (Integer id_operador, String nombreEmpresa, String departamento, Long telefono,
                                 String emailContacto, String direccion) {
+
+    Operador operador = operadorRepository.findOperadorById(id_operador);
+
     if (nombreEmpresa != null) {
         if (!nombreEmpresa.equals("")) {
             operador.setEmpresa(nombreEmpresa);

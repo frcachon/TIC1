@@ -38,7 +38,7 @@ public class Reserva {
         this.fecha = fecha;
         this.hora = hora;
         this.cantidad = cantidad;
-        this.validada = false;
+        this.validada = null;
     }
 
     public Integer getId() {
