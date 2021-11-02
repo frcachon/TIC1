@@ -9,6 +9,6 @@ import java.util.List;
 public interface ReservaRepository extends CrudRepository<Reserva, Integer> {
 
     List<Reserva> findAllByIdactividadAndFecha(Integer id_actividad, LocalDate fecha);
-    List<Reserva> findAllByValidadaIsFalseAndIdactividad(Integer id_actividad);
+    List<Reserva> findAllByIdactividad(Integer id_actividad);
 
 }

@@ -67,6 +67,9 @@ public class ValidarReservaController implements Initializable {
     private TableColumn<Reserva, LocalTime> horaColumn;
 
     @FXML
+    private TableColumn<Reserva, String> estadoColumn;
+
+    @FXML
     void goBack(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
@@ -79,6 +82,47 @@ public class ValidarReservaController implements Initializable {
         Reserva reserva = tablaReservas.getSelectionModel().getSelectedItem();
         reservaMgr.setValidada(reserva, false);
 
+        List<Reserva> q = new ArrayList<>();
+        List<Integer> actividadesDelOperador = actividadMgr.getIdActividadesFromOperador(operador.getId());
+
+        for (int i = 0; i < actividadesDelOperador.size(); i++) {
+            List<Reserva> resDeAct = reservaMgr.getFromActividad(actividadesDelOperador.get(i));
+            for (int j = 0; j < resDeAct.size(); j++) {
+                q.add(resDeAct.get(j));
+            }
+        }
+
+        lista = FXCollections.observableArrayList();
+        lista.removeAll();
+        lista.addAll(q);
+        tablaReservas.setItems(lista);
+        userColumn.setCellValueFactory(cellData -> {
+            String username = clienteMgr.getUsernameFromId(cellData.getValue().getIdcliente());
+            return new ReadOnlyStringWrapper(username);
+        });
+        actividadColumn.setCellValueFactory(cellData -> {
+            String titulo = actividadMgr.getTituloFromId(cellData.getValue().getIdactividad());
+            return new ReadOnlyStringWrapper(titulo);
+        });
+        cupoColumn.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
+        fechaColumn.setCellValueFactory(new PropertyValueFactory<>("fecha"));
+        horaColumn.setCellValueFactory(new PropertyValueFactory<>("hora"));
+        estadoColumn.setCellValueFactory(cellData -> {
+            if (cellData.getValue().getValidada() != null) {
+                boolean estado = cellData.getValue().getValidada();
+                String estadoAsString;
+                if (estado) {
+                    estadoAsString = "Confirmada";
+                } else {
+                    estadoAsString = "Rechazada";
+                }
+                return new ReadOnlyStringWrapper(estadoAsString);
+            }
+            else {
+                return new ReadOnlyStringWrapper("Pendiente");
+            }
+        });
+
     }
 
     @FXML
@@ -86,6 +130,46 @@ public class ValidarReservaController implements Initializable {
         Reserva reserva = tablaReservas.getSelectionModel().getSelectedItem();
         reservaMgr.setValidada(reserva, true);
 
+        List<Reserva> q = new ArrayList<>();
+        List<Integer> actividadesDelOperador = actividadMgr.getIdActividadesFromOperador(operador.getId());
+
+        for (int i = 0; i < actividadesDelOperador.size(); i++) {
+            List<Reserva> resDeAct = reservaMgr.getFromActividad(actividadesDelOperador.get(i));
+            for (int j = 0; j < resDeAct.size(); j++) {
+                q.add(resDeAct.get(j));
+            }
+        }
+
+        lista = FXCollections.observableArrayList();
+        lista.removeAll();
+        lista.addAll(q);
+        tablaReservas.setItems(lista);
+        userColumn.setCellValueFactory(cellData -> {
+            String username = clienteMgr.getUsernameFromId(cellData.getValue().getIdcliente());
+            return new ReadOnlyStringWrapper(username);
+        });
+        actividadColumn.setCellValueFactory(cellData -> {
+            String titulo = actividadMgr.getTituloFromId(cellData.getValue().getIdactividad());
+            return new ReadOnlyStringWrapper(titulo);
+        });
+        cupoColumn.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
+        fechaColumn.setCellValueFactory(new PropertyValueFactory<>("fecha"));
+        horaColumn.setCellValueFactory(new PropertyValueFactory<>("hora"));
+        estadoColumn.setCellValueFactory(cellData -> {
+            if (cellData.getValue().getValidada() != null) {
+                boolean estado = cellData.getValue().getValidada();
+                String estadoAsString;
+                if (estado) {
+                    estadoAsString = "Confirmada";
+                } else {
+                    estadoAsString = "Rechazada";
+                }
+                return new ReadOnlyStringWrapper(estadoAsString);
+            }
+            else {
+                return new ReadOnlyStringWrapper("Pendiente");
+            }
+        });
     }
 
     ObservableList<Reserva> lista;
@@ -96,7 +180,7 @@ public class ValidarReservaController implements Initializable {
         List<Integer> actividadesDelOperador = actividadMgr.getIdActividadesFromOperador(operador.getId());
 
         for (int i = 0; i < actividadesDelOperador.size(); i++) {
-            List<Reserva> resDeAct = reservaMgr.getNoValidadas(actividadesDelOperador.get(i));
+            List<Reserva> resDeAct = reservaMgr.getFromActividad(actividadesDelOperador.get(i));
             for (int j = 0; j < resDeAct.size(); j++) {
                 q.add(resDeAct.get(j));
             }
@@ -116,5 +200,20 @@ public class ValidarReservaController implements Initializable {
         cupoColumn.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
         fechaColumn.setCellValueFactory(new PropertyValueFactory<>("fecha"));
         horaColumn.setCellValueFactory(new PropertyValueFactory<>("hora"));
+        estadoColumn.setCellValueFactory(cellData -> {
+            if (cellData.getValue().getValidada() != null) {
+                boolean estado = cellData.getValue().getValidada();
+                String estadoAsString;
+                if (estado) {
+                    estadoAsString = "Confirmada";
+                } else {
+                    estadoAsString = "Rechazada";
+                }
+                return new ReadOnlyStringWrapper(estadoAsString);
+            }
+            else {
+                return new ReadOnlyStringWrapper("Pendiente");
+            }
+        });
     }
 }

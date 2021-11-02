@@ -25,8 +25,8 @@ public class ReservaMgr {
         return reservaRepository.findAllByIdactividadAndFecha(id_actividad, fecha);
     }
 
-    public List<Reserva> getNoValidadas(Integer id_actividad) {
-        return reservaRepository.findAllByValidadaIsFalseAndIdactividad(id_actividad);
+    public List<Reserva> getFromActividad(Integer id_actividad) {
+        return reservaRepository.findAllByIdactividad(id_actividad);
     }
 
     public void setValidada(Reserva res, Boolean b) {
