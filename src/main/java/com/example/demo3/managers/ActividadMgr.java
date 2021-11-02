@@ -1,6 +1,7 @@
 package com.example.demo3.managers;
 
 import com.example.demo3.entities.Actividad;
+import com.example.demo3.entities.Reserva;
 import com.example.demo3.persistence.ActividadRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
