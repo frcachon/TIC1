@@ -33,6 +33,10 @@ public class ActividadMgr {
         actividadRepository.save(actividad);
     }
 
+    public Actividad getActividadFromTituloAndIdoperador(String titulo,Integer id){
+        return actividadRepository.findByTituloAndAndIdoperador(titulo,id);
+    }
+
     public List<Actividad> getActividadesNoValidadas() {
         return  (List<Actividad>) actividadRepository.findAllByValidadaIsFalse();
     }

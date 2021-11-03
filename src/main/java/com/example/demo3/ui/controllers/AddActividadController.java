@@ -2,6 +2,7 @@ package com.example.demo3.ui.controllers;
 
 import com.example.demo3.Demo3Application;
 
+import com.example.demo3.entities.Actividad;
 import com.example.demo3.entities.Operador;
 import com.example.demo3.managers.ActividadMgr;
 import javafx.event.ActionEvent;
@@ -114,6 +115,8 @@ public class AddActividadController {
                                         actividadMgr.registrarActividad(titulo, imagen_actividad, idoperador, descripcion, apertura, cierre,false,   cupo, utiliza_reservas, requiere_vacuna);
                                         FXMLLoader fxmlLoader = new FXMLLoader();
                                         fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
+                                        Actividad actividad = actividadMgr.getActividadFromTituloAndIdoperador(titulo,idoperador); //Nose si este buscador es el necesario
+                                        editarInteresesActividadController.setActividad(actividad);
                                         AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("EditarInteresesActividad.fxml"));
                                         act_pane.getChildren().setAll(pane);
                                         //actividadMgr.registrarActividad(titulo, imagen_actividad, idoperador, descripcion, apertura, cierre,false,   cupo, utiliza_reservas);
