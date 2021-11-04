@@ -90,6 +90,7 @@ public class EditActividadController implements Initializable {
         act_pane.getChildren().setAll(pane);
     }
 
+
     private void showAlert(String title, String contextText) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);   //Como is lanzara una excepcion cuando algo falla
         alert.setTitle(title);
