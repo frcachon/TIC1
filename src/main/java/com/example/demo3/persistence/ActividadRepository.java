@@ -13,5 +13,6 @@ public interface ActividadRepository extends CrudRepository<Actividad,Integer> {
     List<Actividad> findAllByTituloContaining(String titulo);
     List<Actividad> findAllByValidadaIsFalse();
     Actividad findActividadById(Integer id_actividad);
+    Actividad findByTituloAndAndIdoperador(String titulo,Integer idoperador);
 
 }
