@@ -7,14 +7,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="110.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo3.ui.controllers.ActividadThumbController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="110.0" prefWidth="426.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo3.ui.controllers.ActividadThumbController">
    <children>
       <ImageView fx:id="imagen" fitHeight="100.0" fitWidth="129.0" pickOnBounds="true" preserveRatio="true">
          <HBox.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </HBox.margin>
       </ImageView>
-      <VBox prefHeight="110.0" prefWidth="230.0">
+      <VBox prefHeight="110.0" prefWidth="288.0">
          <children>
             <Label fx:id="nombreLabel" prefHeight="30.0" prefWidth="103.0" text="Nombre Actividad">
                <VBox.margin>
@@ -41,7 +41,7 @@
                   </Label>
                </children>
             </HBox>
-            <Label fx:id="descripcionLabel" prefHeight="55.0" prefWidth="255.0" text="Descripcion">
+            <Label fx:id="descripcionLabel" prefHeight="46.0" prefWidth="278.0" text="Descripcion">
                <font>
                   <Font size="10.0" />
                </font>
