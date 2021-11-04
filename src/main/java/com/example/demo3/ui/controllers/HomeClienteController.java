@@ -35,6 +35,9 @@ public class HomeClienteController implements Initializable {
     private ActividadMgr actividadMgr;
 
     @Autowired
+    private ItinerarioClienteController itinerarioClienteController;
+
+    @Autowired
     private OperadorMgr operadorMgr;
 
     @Autowired
@@ -178,8 +181,12 @@ public class HomeClienteController implements Initializable {
     }
 
     @FXML
-    void ver_itinerario(ActionEvent event) {
-
+    void ver_itinerario(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
+        itinerarioClienteController.setCliente(cliente);
+        AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("ItinerarioCliente.fxml"));
+        home_pane.getChildren().setAll(pane);
     }
 
     @FXML
