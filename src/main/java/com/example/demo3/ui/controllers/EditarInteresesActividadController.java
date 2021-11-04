@@ -240,7 +240,33 @@ public class EditarInteresesActividadController implements Initializable {
                 inters.add(q.get(i).toString());
             }
         }
+
+
         tagsChoiceBox.getItems().addAll(inters);
+        List<Tags> todos_tags = tagsMgr.getAll();
+        List<Integer> tags_actividad = new ArrayList<>();
+        if(todos_tags.size() > 0){
+            for(Tags t: todos_tags){
+                Integer act = t.getId().getActividad();
+                if(act == actividad.getId()){
+                    assert false;
+                    tags_actividad.add(t.getId().getIdtags());
+                }
+            }
+        }
+
+        List<Interes> intereses = new ArrayList<>();
+        if(tags_actividad.size()>0){
+            for(Integer i : tags_actividad){
+                intereses.add(interesMgr.getInteresFromId(i));
+            }
+        }
+        ObservableList<Interes> lista;
+        lista = FXCollections.observableArrayList();
+        lista.addAll(intereses);
+        tablaTags.setItems(lista);
+        interesesColumn.setCellValueFactory(new PropertyValueFactory<>("Nombre"));
+
 
 
 

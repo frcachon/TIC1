@@ -3,7 +3,10 @@ package com.example.demo3.ui.controllers;
 import com.example.demo3.Demo3Application;
 import com.example.demo3.entities.Actividad;
 import com.example.demo3.entities.Operador;
+import com.example.demo3.entities.Tags;
+import com.example.demo3.exceptions.InformacionInvalida;
 import com.example.demo3.managers.ActividadMgr;
+import com.example.demo3.managers.TagsMgr;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,6 +31,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 @Component
@@ -37,6 +42,12 @@ public class EditActividadController implements Initializable {
 
     @Autowired
     private ActividadMgr actividadMgr;
+
+    @Autowired
+    private EditarInteresesActividadController editarInteresesActividadController;
+
+    @Autowired
+    private TagsMgr tagsMgr;
 
     Actividad actividad;
 
@@ -129,7 +140,8 @@ public class EditActividadController implements Initializable {
                 actividadMgr.updateActividad(actividad.getId(), titulo,descripcion,apertura,cierre,cupo,utiliza_reservas, imagen_actividad, requiere_vacuna);
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
-                AnchorPane pane = fxmlLoader.load(ClienteController.class.getResourceAsStream("HomeOperador.fxml"));
+                editarInteresesActividadController.setActividad(actividad);
+                AnchorPane pane = fxmlLoader.load(ClienteController.class.getResourceAsStream("EditarInteresesActividad.fxml"));
                 act_pane.getChildren().setAll(pane);
 
             } catch (IOException e) {
@@ -145,7 +157,20 @@ public class EditActividadController implements Initializable {
     }
 
     @FXML
-    void eliminarActividad(ActionEvent event) throws IOException {
+    void eliminarActividad(ActionEvent event) throws IOException, InformacionInvalida {
+        List<Tags> todos_tags = tagsMgr.getAll();
+        //List<Integer> tags_actividad = new ArrayList<>();
+        if(todos_tags.size() > 0){
+            for(Tags t: todos_tags){
+                Integer act = t.getId().getActividad();
+                if(act == actividad.getId()){
+                    assert false;
+                    tagsMgr.deleteTags(act, t.getId().getIdtags());
+                    //tags_actividad.add(t.getId().getIdtags());
+                }
+            }
+        }
+
         actividadMgr.eliminarActividad(actividad);
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
