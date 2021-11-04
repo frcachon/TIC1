@@ -2,6 +2,7 @@ package com.example.demo3.ui.controllers;
 
 import com.example.demo3.Demo3Application;
 
+import com.example.demo3.entities.Actividad;
 import com.example.demo3.entities.Operador;
 import com.example.demo3.managers.ActividadMgr;
 import javafx.event.ActionEvent;
@@ -44,8 +45,6 @@ public class AddActividadController {
         @FXML
         private AnchorPane act_pane;
 
-        @FXML
-        private Button atras_button;
 
         @FXML
         private TextField titulo_field;
@@ -66,10 +65,7 @@ public class AddActividadController {
         private CheckBox reservas_check;
 
         @FXML
-        private Button seleccionar_button;
-
-        @FXML
-        private Button siguiente_button;
+        private CheckBox vacuna_check;
 
         @FXML
         private ImageView imagenVw  = new ImageView();
@@ -105,8 +101,6 @@ public class AddActividadController {
                 } else {
 
                         try {
-
-
                                 Integer idoperador = operador.getId();
                                 String titulo = titulo_field.getText();
                                 String descripcion = descripcion_field.getText();
@@ -114,16 +108,18 @@ public class AddActividadController {
                                 LocalTime cierre = LocalTime.parse(horarioCierre_field.getText());
                                 Integer cupo = Integer.valueOf(cupo_field.getText());
                                 Boolean utiliza_reservas = reservas_check.isSelected();
+                                Boolean requiere_vacuna = vacuna_check.isSelected();
                                 byte[] imagen_actividad = image_bytes;
 
                                 try {
-                                        actividadMgr.registrarActividad(titulo, imagen_actividad, idoperador, descripcion, apertura, cierre,false,   cupo, utiliza_reservas);
+                                        actividadMgr.registrarActividad(titulo, imagen_actividad, idoperador, descripcion, apertura, cierre,false,   cupo, utiliza_reservas, requiere_vacuna);
                                         FXMLLoader fxmlLoader = new FXMLLoader();
                                         fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
+                                        Actividad actividad = actividadMgr.getActividadFromTituloAndIdoperador(titulo,idoperador); //Nose si este buscador es el necesario
+                                        editarInteresesActividadController.setActividad(actividad);
                                         AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("EditarInteresesActividad.fxml"));
                                         act_pane.getChildren().setAll(pane);
                                         //actividadMgr.registrarActividad(titulo, imagen_actividad, idoperador, descripcion, apertura, cierre,false,   cupo, utiliza_reservas);
-
 
                                         //showAlert("Actividad agregada", "Se registro con exitosamente la actividad");
                                         //close(event);
@@ -186,10 +182,6 @@ public class AddActividadController {
                         Image image = new Image("file:" + ((File) file).getAbsolutePath());
                         imagenVw.setImage(image);
                 }
-
-
         }
-
-
 
 }

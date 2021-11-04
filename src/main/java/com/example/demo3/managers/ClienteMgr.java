@@ -27,9 +27,6 @@ public class ClienteMgr {
     @Autowired
     private AdminRepository adminRepository;
 
-    Cliente cliente;
-    public void setCliente(Cliente cliente){this.cliente = cliente;}
-
     public void addClient(String mail, String contrasena, Long documento, String tipo_documento,
                           LocalDate fecha_nacimiento, Boolean vacuna_covid, String pais, byte[] imagencliente) throws NombreDeUsuarioYaExiste, InformacionInvalida, DocumentoYaExisteParaMismoPais {
         //if (document == 0 || name.equals("") || email.equals("")) {
@@ -71,28 +68,24 @@ public class ClienteMgr {
         clienteRepository.save(cliente);
     }
 
-    public void updateCliente(String contrasena, Boolean vacuna){
+    public void updateCliente(Integer id_cliente, String contrasena, Boolean vacuna){
+        Cliente cliente = clienteRepository.findClienteById(id_cliente);
         if(contrasena != null){
             if (!contrasena.equals("") && !contrasena.equals(cliente.getContrasena())){
                 cliente.setContrasena(contrasena);
             }
         }
-
-        if(vacuna){
-            if (vacuna != cliente.getVacuna_covid()){
-                cliente.setVacuna_covid(vacuna);
-            }
-        }
-
+        cliente.setVacuna_covid(vacuna);
         clienteRepository.save(cliente);
     }
 
-    public void updateImagen(byte[] imagen){
+    public void updateImagen(Integer id_cliente, byte[] imagen){
         if(imagen != null){
+            Cliente cliente = clienteRepository.findClienteById(id_cliente);
             cliente.setImagencliente(imagen);
+            clienteRepository.save(cliente);
         }
 
-        clienteRepository.save(cliente);
     }
 
     public Cliente getClienteFromMailAndPassword(String mail, String contrasena) {

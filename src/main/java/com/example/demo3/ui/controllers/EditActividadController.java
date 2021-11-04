@@ -3,7 +3,10 @@ package com.example.demo3.ui.controllers;
 import com.example.demo3.Demo3Application;
 import com.example.demo3.entities.Actividad;
 import com.example.demo3.entities.Operador;
+import com.example.demo3.entities.Tags;
+import com.example.demo3.exceptions.InformacionInvalida;
 import com.example.demo3.managers.ActividadMgr;
+import com.example.demo3.managers.TagsMgr;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,6 +31,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 @Component
@@ -37,6 +42,12 @@ public class EditActividadController implements Initializable {
 
     @Autowired
     private ActividadMgr actividadMgr;
+
+    @Autowired
+    private EditarInteresesActividadController editarInteresesActividadController;
+
+    @Autowired
+    private TagsMgr tagsMgr;
 
     Actividad actividad;
 
@@ -67,6 +78,9 @@ public class EditActividadController implements Initializable {
 
     @FXML
     private TextField cupo_field;
+
+    @FXML
+    private CheckBox vacuna_check;
 
     @FXML
     void goBack(ActionEvent event) throws IOException {
@@ -118,14 +132,16 @@ public class EditActividadController implements Initializable {
             LocalTime cierre = LocalTime.parse(horarioCierre_field.getText());
             Integer cupo = Integer.valueOf(cupo_field.getText());
             Boolean utiliza_reservas = reservas_check.isSelected();
+            Boolean requiere_vacuna = vacuna_check.isSelected();
             byte[] imagen_actividad = image_bytes;
 
             try {
-                actividadMgr.setActividad(actividad);
-                actividadMgr.updateActividad(titulo,descripcion,apertura,cierre,cupo,utiliza_reservas, imagen_actividad);
+                //actividadMgr.setActividad(actividad);
+                actividadMgr.updateActividad(actividad.getId(), titulo,descripcion,apertura,cierre,cupo,utiliza_reservas, imagen_actividad, requiere_vacuna);
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
-                AnchorPane pane = fxmlLoader.load(ClienteController.class.getResourceAsStream("HomeOperador.fxml"));
+                editarInteresesActividadController.setActividad(actividad);
+                AnchorPane pane = fxmlLoader.load(ClienteController.class.getResourceAsStream("EditarInteresesActividad.fxml"));
                 act_pane.getChildren().setAll(pane);
 
             } catch (IOException e) {
@@ -141,7 +157,20 @@ public class EditActividadController implements Initializable {
     }
 
     @FXML
-    void eliminarActividad(ActionEvent event) throws IOException {
+    void eliminarActividad(ActionEvent event) throws IOException, InformacionInvalida {
+        List<Tags> todos_tags = tagsMgr.getAll();
+        //List<Integer> tags_actividad = new ArrayList<>();
+        if(todos_tags.size() > 0){
+            for(Tags t: todos_tags){
+                Integer act = t.getId().getActividad();
+                if(act == actividad.getId()){
+                    assert false;
+                    tagsMgr.deleteTags(act, t.getId().getIdtags());
+                    //tags_actividad.add(t.getId().getIdtags());
+                }
+            }
+        }
+
         actividadMgr.eliminarActividad(actividad);
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
@@ -158,6 +187,7 @@ public class EditActividadController implements Initializable {
         horarioApertura_field.setText(actividad.getApertura().toString());
         horarioCierre_field.setText(actividad.getCierre().toString());
         reservas_check.setSelected(actividad.getUtiliza_reservas());
+        vacuna_check.setSelected(actividad.getRequiere_vacuna());
         if (actividad.getImagenactividad() != null) {
             InputStream is = new ByteArrayInputStream(actividad.getImagenactividad());
             imagenVw.setImage(new Image(is));

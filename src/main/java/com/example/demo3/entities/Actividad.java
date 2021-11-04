@@ -43,13 +43,13 @@ public class Actividad {
     @Column(name="utiliza_reservas")
     private Boolean utiliza_reservas;
 
-    @Column(name="promediopuntuaciones")
-    private Float promediopuntuaciones;
+    @Column(name="requierevacuna")
+    private Boolean requiere_vacuna;
 
     public Actividad(){}
 
     public Actividad(String titulo, byte[] imagenactividad, Integer idoperador, String descripcion, LocalTime apertura,
-                     LocalTime cierre, Boolean validada, Integer cupo, Boolean utiliza_reservas) {
+                     LocalTime cierre, Boolean validada, Integer cupo, Boolean utiliza_reservas, Boolean requiere_vacuna) {
         this.titulo = titulo;
         this.imagenactividad = imagenactividad;
         this.idoperador = idoperador;
@@ -59,7 +59,7 @@ public class Actividad {
         this.validada = validada;
         this.cupo = cupo;
         this.utiliza_reservas = utiliza_reservas;
-        this.promediopuntuaciones = 0F;
+        this.requiere_vacuna = requiere_vacuna;
     }
 
     public Integer getId() {
@@ -142,12 +142,12 @@ public class Actividad {
         this.utiliza_reservas = utiliza_reservas;
     }
 
-    public Float getPromediopuntuaciones() {
-        return promediopuntuaciones;
+    public Boolean getRequiere_vacuna() {
+        return requiere_vacuna;
     }
 
-    public void setPromediopuntuaciones(Float promediopuntuaciones) {
-        this.promediopuntuaciones = promediopuntuaciones;
+    public void setRequiere_vacuna(Boolean requiere_vacuna) {
+        this.requiere_vacuna = requiere_vacuna;
     }
 
     @Override
@@ -163,7 +163,7 @@ public class Actividad {
                 ", validada=" + validada +
                 ", cupo=" + cupo +
                 ", utiliza_reservas=" + utiliza_reservas +
-                ", promediopuntuaciones=" + promediopuntuaciones +
+                ", requiere_vacuna=" + requiere_vacuna +
                 '}';
     }
 

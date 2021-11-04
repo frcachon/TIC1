@@ -72,8 +72,7 @@ public class EditarPerfilOperadorController implements Initializable {
             String direccion = direccion_field.getText();
 
             try {
-                operadorMgr.setOperador(operador);
-                operadorMgr.updateOperador(nombreEmpresa,departamento,telefono,emailContacto,direccion);
+                operadorMgr.updateOperador(operador.getId(), nombreEmpresa,departamento,telefono,emailContacto,direccion);
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
                 homeOperadorController.setOperador(operador);

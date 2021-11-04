@@ -46,6 +46,9 @@ public class HomeOperadorController implements Initializable {
     @Autowired
     private AddActividadController addActividadController;
 
+    @Autowired
+    private ValidarReservaController validarReservaController;
+
     @FXML
     private AnchorPane home_pane;
 
@@ -119,7 +122,7 @@ public class HomeOperadorController implements Initializable {
     void verReservas(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setControllerFactory(Demo3Application.getContext()::getBean);
-        //validarReservaController.setOperador(operador);
+        validarReservaController.setOperador(operador);
         AnchorPane pane = fxmlLoader.load(MainController.class.getResourceAsStream("ValidarReserva.fxml"));
         home_pane.getChildren().setAll(pane);
     }
@@ -129,7 +132,7 @@ public class HomeOperadorController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         username_label.setText(operador.getEmpresa());
-        List<Actividad> q = (List<Actividad>) actividadMgr.getActividadesFromOperador(operador.getId());
+        List<Actividad> q = actividadMgr.getActividadesFromOperador(operador.getId());
         lista = FXCollections.observableArrayList();
         lista.addAll(q);
         tabla_actividades.setItems(lista);

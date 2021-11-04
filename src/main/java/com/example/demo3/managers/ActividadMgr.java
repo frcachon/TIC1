@@ -7,16 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class ActividadMgr {
-
-    Actividad actividad;
-
-    public void setActividad(Actividad actividad) {
-        this.actividad = actividad;
-    }
 
     @Autowired
     ActividadRepository actividadRepository;
@@ -31,12 +26,16 @@ public class ActividadMgr {
     }
 
     public void registrarActividad(String titulo, byte[] imagen_actividad, Integer idoperador, String descripcion, LocalTime apertura,
-                                          LocalTime cierre, Boolean validada, Integer cupo, Boolean utiliza_reservas)  {
+                                          LocalTime cierre, Boolean validada, Integer cupo, Boolean utiliza_reservas, Boolean requiere_vacuna)  {
 
         Actividad actividad = new Actividad(titulo, imagen_actividad, idoperador, descripcion, apertura,
-                cierre, validada, cupo, utiliza_reservas);
+                cierre, validada, cupo, utiliza_reservas, requiere_vacuna);
         actividad.setValidada(false); //al inicio no esta validada
         actividadRepository.save(actividad);
+    }
+
+    public Actividad getActividadFromTituloAndIdoperador(String titulo,Integer id){
+        return actividadRepository.findByTituloAndAndIdoperador(titulo,id);
     }
 
     public List<Actividad> getActividadesNoValidadas() {
@@ -55,8 +54,10 @@ public class ActividadMgr {
         return (List<Actividad>) actividadRepository.findAllByTituloContaining(str);
     }
 
-    public void updateActividad(String titulo, String descripcion, LocalTime apertura, LocalTime cierre,
-                                Integer cupo, Boolean utiliza_reservas, byte[] imagen) {
+    public void updateActividad(Integer id_actividad, String titulo, String descripcion, LocalTime apertura, LocalTime cierre,
+                                Integer cupo, Boolean utiliza_reservas, byte[] imagen, Boolean requiere_vacuna) {
+
+        Actividad actividad = actividadRepository.findActividadById(id_actividad);
 
         if (titulo != null) {
             if (!titulo.equals("")) {
@@ -87,12 +88,27 @@ public class ActividadMgr {
         }
 
         actividad.setUtiliza_reservas(utiliza_reservas);
+        actividad.setRequiere_vacuna(requiere_vacuna);
         actividad.setValidada(false);
         actividadRepository.save(actividad);
     }
 
     public void eliminarActividad(Actividad actividad){
         actividadRepository.delete(actividad);
+    }
+
+    public String getTituloFromId(Integer id_actividad) {
+        return actividadRepository.findActividadById(id_actividad).getTitulo();
+    }
+
+    public List<Integer> getIdActividadesFromOperador (Integer id_operador) {
+        List<Integer> lista = new ArrayList<>();
+        List<Actividad> delOper = actividadRepository.findAllByIdoperador(id_operador);
+
+        for (Actividad act : delOper) {
+            lista.add(act.getId());
+        }
+        return lista;
     }
 
 }

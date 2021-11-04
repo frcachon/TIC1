@@ -3,6 +3,8 @@ package com.example.demo3.ui.controllers;
 import com.example.demo3.Demo3Application;
 import com.example.demo3.entities.Actividad;
 import com.example.demo3.entities.Operador;
+import com.example.demo3.managers.ActividadMgr;
+import com.example.demo3.managers.CalificacionMgr;
 import com.example.demo3.managers.OperadorMgr;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -35,6 +37,9 @@ public class ActividadAdminController implements Initializable {
 
     @Autowired
     OperadorMgr operadorMgr;
+
+    @Autowired
+    CalificacionMgr calificacionMgr;
 
     @FXML
     private AnchorPane act_view_pane;
@@ -76,7 +81,12 @@ public class ActividadAdminController implements Initializable {
         horario.setText(actividad.getApertura() + " - " + actividad.getCierre());
         admite_reservas.setText( actividad.getUtiliza_reservas() ? "Sí" : "No");
         operador_actividad.setText(operador.getEmpresa());
-        puntuacion_label.setText(actividad.getPromediopuntuaciones() + " estrellas");
+        Float puntos_promedio = calificacionMgr.puntuacionPromedio(actividad.getId());
+        if (puntos_promedio == 0) {
+            puntuacion_label.setText("Sin calificaciones.");
+        } else {
+            puntuacion_label.setText(puntos_promedio + " estrellas");
+        }
 
         if (actividad.getImagenactividad() != null) {
             InputStream is = new ByteArrayInputStream(actividad.getImagenactividad());
