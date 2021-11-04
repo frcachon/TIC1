@@ -38,8 +38,6 @@ public class EditarInteresesActividadController implements Initializable {
     @Autowired
     private TagsMgr tagsMgr;
 
-    @Autowired
-    private HomeOperadorController homeOperadorController;
 
     Actividad actividad;
     void setActividad(Actividad actividad) {
@@ -53,9 +51,6 @@ public class EditarInteresesActividadController implements Initializable {
     private ChoiceBox<String> tagsChoiceBox;
 
     @FXML
-    private Button agregarButton;
-
-    @FXML
     private TableView<Interes> tablaTags;
 
     @FXML
@@ -63,12 +58,6 @@ public class EditarInteresesActividadController implements Initializable {
 
     @FXML
     private TableColumn<Interes, String> interesesColumn;
-
-    @FXML
-    private Button finalizarButton;
-
-    @FXML
-    private Button eliminarButton;
 
     private void showAlert(String title, String contextText) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);   //Como is lanzara una excepcion cuando algo falla

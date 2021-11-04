@@ -22,7 +22,7 @@
           <TableColumn fx:id="interesesColumn" prefWidth="198.0" text="Tags actuales" />
         </columns>
       </TableView>
-      <Button fx:id="finalizarButton" layoutX="477.0" layoutY="362.0" mnemonicParsing="false" onAction="#finalizar" text="Aceptar" />
+      <Button fx:id="finalizarButton" layoutX="525.0" layoutY="360.0" mnemonicParsing="false" onAction="#finalizar" text="Aceptar" />
       <Button fx:id="eliminarButton" layoutX="169.0" layoutY="169.0" mnemonicParsing="false" onAction="#eliminarInteres" prefHeight="26.0" prefWidth="106.0" text="Eliminar tag" />
       <Text layoutX="67.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestione los tags de la actividad" />
       <TextField fx:id="newField" layoutX="58.0" layoutY="231.0" prefHeight="26.0" prefWidth="217.0" />

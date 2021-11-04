@@ -34,4 +34,8 @@ public class ReservaMgr {
         reservaRepository.save(res);
     }
 
+    public List<Reserva> getReservasFromCliente(Integer id_cliente) {
+        return reservaRepository.findAllByIdcliente(id_cliente);
+    }
+
 }
