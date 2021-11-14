@@ -260,7 +260,7 @@ public class HomeClienteController implements Initializable {
             for (Gustos gusto : gustos_cliente) {
                 for (Tags tag : tags_actividad) {
 
-                    if(Objects.equals(gusto.getId(), tag.getId())){
+                    if(gusto.getId().getIdgustos() == tag.getId().getIdtags()) {
 
                     puntaje ++;
 
