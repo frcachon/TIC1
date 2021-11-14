@@ -3,8 +3,10 @@ package com.example.demo3.ui.controllers;
 import com.example.demo3.Demo3Application;
 import com.example.demo3.entities.Actividad;
 import com.example.demo3.entities.Cliente;
-import com.example.demo3.managers.ActividadMgr;
-import com.example.demo3.managers.OperadorMgr;
+import com.example.demo3.entities.Gustos;
+import com.example.demo3.entities.Tags;
+import com.example.demo3.managers.*;
+import com.example.demo3.persistence.GustosRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,11 +23,14 @@ import javafx.scene.layout.HBox;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.swing.text.html.HTML;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 @Component
@@ -33,6 +38,16 @@ public class HomeClienteController implements Initializable {
 
     @Autowired
     private ActividadMgr actividadMgr;
+
+    @Autowired
+    private GustosMgr gustosMgr;
+
+    @Autowired
+    private InteresMgr interesMgr;
+
+    @Autowired
+    private TagsMgr tagsMgr;
+
 
     @Autowired
     private ItinerarioClienteController itinerarioClienteController;
@@ -201,7 +216,8 @@ public class HomeClienteController implements Initializable {
     public void initialize(URL location, ResourceBundle rb) {
         username_label.setText(cliente.getMail());
         actividadesGrid.getChildren().clear();
-        actividades = actividadMgr.getAll();
+
+
         if(cliente.getImagencliente() != null) {
             InputStream img = new ByteArrayInputStream(cliente.getImagencliente());
             Image foto = new Image(img);
@@ -226,23 +242,48 @@ public class HomeClienteController implements Initializable {
             perfil_view.setX((perfil_view.getFitWidth() - w) / 2);
             perfil_view.setY((perfil_view.getFitHeight() - h) / 2);
         }
+////////////////// Match Cliente segun tags y actividades
+
+        actividades = actividadMgr.getAll(); //esta linea es la que hay que cambiar para poder mostrar las actividades filtradas por intereses
+        List<Gustos> gustos_cliente = gustosMgr.getGustosUsuario(String.valueOf(this.cliente.getId()));
+
+        ArrayList<Actividad> actividades_mostrar = new ArrayList<>();
+
+        int contador = 0;
+        for (Actividad actividad : actividades) {
+
+            Integer puntaje = 0;
+            contador ++;
+
+            List<Tags> tags_actividad = tagsMgr.getAllFromActividad(actividad.getId());
+
+            for (Gustos gusto : gustos_cliente) {
+                for (Tags tag : tags_actividad) {
+
+                    if(Objects.equals(gusto.getId(), tag.getId())){
+
+                    puntaje ++;
+
+                    }
+
+                }
+
+                if(puntaje > 0 ) {
+                    actividades_mostrar.add(puntaje -1 , actividad);
+                }
+            }
+
+
+        }
 
 
 
-
-
-
-
-
-
-
-
-        int acts_size = actividades.size();
+        int acts_size = actividades_mostrar.size();
         int i = 0;
         while (i < acts_size) {
             try {
-                if (operadorMgr.getOperadorFromId(actividades.get(i).getIdoperador()).getBloqueado()) {
-                    actividades.remove(i);
+                if (operadorMgr.getOperadorFromId(actividades_mostrar.get(i).getIdoperador()).getBloqueado()) {
+                    actividades_mostrar.remove(i);
                     continue;
                 }
                 i++;
@@ -261,8 +302,8 @@ public class HomeClienteController implements Initializable {
         int row = 1;
 
         try {
-            if (actividades.size() > 0) {
-                for (Actividad actividad : actividades) {
+            if (actividades_mostrar.size() > 0) {
+                for (Actividad actividad : actividades_mostrar) {
                     if (actividad.getValidada()) {
                         FXMLLoader fxmlLoader = new FXMLLoader();
                         fxmlLoader.setLocation(getClass().getResource("ActividadThumb.fxml"));

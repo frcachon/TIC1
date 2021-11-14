@@ -42,4 +42,8 @@ public class GustosMgr {
         return (List<Gustos>) gustosRepository.findAll();
     }
 
+    public List<Gustos> getGustosUsuario(String idUsuario) {
+        return (List<Gustos>) gustosRepository.findAllByIdUsuario(idUsuario);
+    }
+
 }

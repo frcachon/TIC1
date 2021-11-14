@@ -42,4 +42,11 @@ public class TagsMgr {
     public List<Tags> getAll(){
         return (List<Tags>) tagsRepository.findAll();
     }
+
+
+    public List<Tags> getAllFromActividad(Integer idActividad){
+        return (List<Tags>) tagsRepository.findAllByIdActividad(idActividad);
+    }
+
 }
+
