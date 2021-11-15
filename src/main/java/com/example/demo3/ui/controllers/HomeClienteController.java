@@ -244,32 +244,30 @@ public class HomeClienteController implements Initializable {
         }
 ////////////////// Match Cliente segun tags y actividades
 
-        actividades = actividadMgr.getAll(); //esta linea es la que hay que cambiar para poder mostrar las actividades filtradas por intereses
-        List<Gustos> gustos_cliente = gustosMgr.getGustosUsuario(String.valueOf(this.cliente.getId()));
+        actividades = actividadMgr.getAll(); //Lista de todas las actividades que existen
+        List<Gustos> gustos_cliente = gustosMgr.getGustosUsuario(String.valueOf(this.cliente.getId())); //es una lista de los gustos del cliente
 
-        ArrayList<Actividad> actividades_mostrar = new ArrayList<>();
+        ArrayList<Actividad> actividades_mostrar = new ArrayList<>(); //lista de las actividades a mostrar en el grid
 
-        int contador = 0;
-        for (Actividad actividad : actividades) {
 
-            Integer puntaje = 0;
-            contador ++;
+        for (Actividad actividad : actividades) { //para cada actividad de las existentes
 
-            List<Tags> tags_actividad = tagsMgr.getAllFromActividad(actividad.getId());
+            int puntaje = 0;
 
-            for (Gustos gusto : gustos_cliente) {
-                for (Tags tag : tags_actividad) {
+            List<Tags> tags_actividad = tagsMgr.getAllFromActividad(actividad.getId()); //obtengo la lista de los tags de esa actividad
 
-                    if(gusto.getId().getIdgustos() == tag.getId().getIdtags()) {
+            for (Gustos gusto : gustos_cliente) { //para cada gusto del cliente
+                for (Tags tag : tags_actividad) { //y para cada tag de la actividad
+                    if(Objects.equals(gusto.getId().getIdgustos(), tag.getId().getIdtags())) { //evalúo si coinciden los Id
 
-                    puntaje ++;
+                    puntaje ++; //si coinciden entonces suma uno a la variable de puntaje
 
                     }
 
                 }
 
-                if(puntaje > 0 ) {
-                    actividades_mostrar.add(puntaje -1 , actividad);
+                if(puntaje != 0 ) { //Si el puntaje no es cero (es decir que tiene al menos un match)
+                    actividades_mostrar.add(puntaje , actividad); //Agrega la actividad en la posicion indicada por el puntaje del array de actividades a mostrar
                 }
             }
 

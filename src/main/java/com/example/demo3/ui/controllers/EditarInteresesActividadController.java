@@ -108,7 +108,7 @@ public class EditarInteresesActividadController implements Initializable {
                 interesesColumn.setCellValueFactory(new PropertyValueFactory<>("Nombre"));
 
             } catch (TagYaExiste tagYaExiste) {
-                showAlert("Ya se registro esta preferencia","Por favor regitre una preferencia valida");
+                showAlert("Ya se registro esta preferencia","Por favor registre una preferencia valida");
             }
 
 
@@ -129,9 +129,9 @@ public class EditarInteresesActividadController implements Initializable {
                 interesMgr.addInteres(nuevo);
 
                 List<Interes> q = (List<Interes>) interesMgr.getAll();
-                List<String> inters = new ArrayList<>();
+                List<String> intereses = new ArrayList<>();
                 Interes interes = interesMgr.getInteresFromNombre(nuevo);
-                inters.add(interes.getNombre());
+                intereses.add(interes.getNombre());
                 tagsChoiceBox.getItems().add(interes.getNombre());
 
 //                for (int i = 0; i < q.size(); i++) {
