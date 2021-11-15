@@ -27,11 +27,9 @@ import javax.swing.text.html.HTML;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Array;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 @Component
 public class HomeClienteController implements Initializable {
@@ -242,13 +240,17 @@ public class HomeClienteController implements Initializable {
             perfil_view.setX((perfil_view.getFitWidth() - w) / 2);
             perfil_view.setY((perfil_view.getFitHeight() - h) / 2);
         }
-////////////////// Match Cliente segun tags y actividades
+
 
         actividades = actividadMgr.getAll(); //Lista de todas las actividades que existen
-        List<Gustos> gustos_cliente = gustosMgr.getGustosUsuario(String.valueOf(this.cliente.getId())); //es una lista de los gustos del cliente
+        String usuario = this.cliente.getMail();
+        List<Gustos> gustos_cliente = gustosMgr.getGustosUsuario(usuario); //es una lista de los gustos del cliente
 
-        ArrayList<Actividad> actividades_mostrar = new ArrayList<>(); //lista de las actividades a mostrar en el grid
+        ArrayList<Actividad> actividades_mostrar = new ArrayList<>(100); //lista de las actividades a mostrar en el grid
 
+        System.out.println(actividades.size() + "acts");
+        System.out.println(gustos_cliente.size() + "gustos");
+        System.out.println(this.cliente.getId()+ "Id");
 
         for (Actividad actividad : actividades) { //para cada actividad de las existentes
 
@@ -256,24 +258,37 @@ public class HomeClienteController implements Initializable {
 
             List<Tags> tags_actividad = tagsMgr.getAllFromActividad(actividad.getId()); //obtengo la lista de los tags de esa actividad
 
+            System.out.println(tags_actividad.size()+ "tags");
+
             for (Gustos gusto : gustos_cliente) { //para cada gusto del cliente
                 for (Tags tag : tags_actividad) { //y para cada tag de la actividad
-                    if(Objects.equals(gusto.getId().getIdgustos(), tag.getId().getIdtags())) { //evalúo si coinciden los Id
+
+                    System.out.println(gusto.getId().getIdgustos() + "idgusto");
+                    System.out.println(tag.getId().getIdtags() + "idtag");
+
+                    if(gusto.getId().getIdgustos() == tag.getId().getIdtags()) { //evalúo si coinciden los Id
 
                     puntaje ++; //si coinciden entonces suma uno a la variable de puntaje
+                    System.out.println(puntaje + "PUNTOS");
 
                     }
 
                 }
 
-                if(puntaje != 0 ) { //Si el puntaje no es cero (es decir que tiene al menos un match)
-                    actividades_mostrar.add(puntaje , actividad); //Agrega la actividad en la posicion indicada por el puntaje del array de actividades a mostrar
+
+            }
+
+            if(puntaje > 0) { //Si el puntaje no es cero (es decir que tiene al menos un match)
+                if (actividades_mostrar.size() < puntaje) {
+                    actividades_mostrar.add(actividad);
+                } else {
+                    actividades_mostrar.add(puntaje - 1, actividad); //Agrega la actividad en la posicion indicada por el puntaje del array de actividades a mostrar
                 }
             }
 
-
         }
 
+        Collections.reverse(actividades_mostrar);
 
 
         int acts_size = actividades_mostrar.size();
