@@ -16,9 +16,9 @@
             <Font size="15.0" />
          </font>
       </Text>
-      <Label fx:id="nombreLabel" layoutX="225.0" layoutY="24.0" text="Nombre actividad">
+      <Label fx:id="nombreLabel" layoutX="236.0" layoutY="24.0" text="Nombre actividad">
          <font>
-            <Font size="15.0" />
+            <Font name="System Bold" size="15.0" />
          </font>
       </Label>
       <DatePicker fx:id="dateField" layoutX="229.0" layoutY="90.0" />

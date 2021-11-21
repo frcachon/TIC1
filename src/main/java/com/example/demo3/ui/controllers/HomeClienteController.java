@@ -3,8 +3,10 @@ package com.example.demo3.ui.controllers;
 import com.example.demo3.Demo3Application;
 import com.example.demo3.entities.Actividad;
 import com.example.demo3.entities.Cliente;
-import com.example.demo3.managers.ActividadMgr;
-import com.example.demo3.managers.OperadorMgr;
+import com.example.demo3.entities.Gustos;
+import com.example.demo3.entities.Tags;
+import com.example.demo3.managers.*;
+import com.example.demo3.persistence.GustosRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,18 +23,29 @@ import javafx.scene.layout.HBox;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.swing.text.html.HTML;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Array;
 import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 @Component
 public class HomeClienteController implements Initializable {
 
     @Autowired
     private ActividadMgr actividadMgr;
+
+    @Autowired
+    private GustosMgr gustosMgr;
+
+    @Autowired
+    private InteresMgr interesMgr;
+
+    @Autowired
+    private TagsMgr tagsMgr;
+
 
     @Autowired
     private ItinerarioClienteController itinerarioClienteController;
@@ -201,7 +214,8 @@ public class HomeClienteController implements Initializable {
     public void initialize(URL location, ResourceBundle rb) {
         username_label.setText(cliente.getMail());
         actividadesGrid.getChildren().clear();
-        actividades = actividadMgr.getAll();
+
+
         if(cliente.getImagencliente() != null) {
             InputStream img = new ByteArrayInputStream(cliente.getImagencliente());
             Image foto = new Image(img);
@@ -228,21 +242,61 @@ public class HomeClienteController implements Initializable {
         }
 
 
+        actividades = actividadMgr.getAll(); //Lista de todas las actividades que existen
+        String usuario = this.cliente.getMail();
+        List<Gustos> gustos_cliente = gustosMgr.getGustosUsuario(usuario); //es una lista de los gustos del cliente
+
+        ArrayList<Actividad> actividades_mostrar = new ArrayList<>(100); //lista de las actividades a mostrar en el grid
+
+        System.out.println(actividades.size() + "acts");
+        System.out.println(gustos_cliente.size() + "gustos");
+        System.out.println(this.cliente.getId()+ "Id");
+
+        for (Actividad actividad : actividades) { //para cada actividad de las existentes
+
+            int puntaje = 0;
+
+            List<Tags> tags_actividad = tagsMgr.getAllFromActividad(actividad.getId()); //obtengo la lista de los tags de esa actividad
+
+            System.out.println(tags_actividad.size()+ "tags");
+
+            for (Gustos gusto : gustos_cliente) { //para cada gusto del cliente
+                for (Tags tag : tags_actividad) { //y para cada tag de la actividad
+
+                    System.out.println(gusto.getId().getIdgustos() + "idgusto");
+                    System.out.println(tag.getId().getIdtags() + "idtag");
+
+                    if(gusto.getId().getIdgustos() == tag.getId().getIdtags()) { //evalúo si coinciden los Id
+
+                    puntaje ++; //si coinciden entonces suma uno a la variable de puntaje
+                    System.out.println(puntaje + "PUNTOS");
+
+                    }
+
+                }
 
 
+            }
+
+            if(puntaje > 0) { //Si el puntaje no es cero (es decir que tiene al menos un match)
+                if (actividades_mostrar.size() < puntaje) {
+                    actividades_mostrar.add(actividad);
+                } else {
+                    actividades_mostrar.add(puntaje - 1, actividad); //Agrega la actividad en la posicion indicada por el puntaje del array de actividades a mostrar
+                }
+            }
+
+        }
+
+        Collections.reverse(actividades_mostrar);
 
 
-
-
-
-
-
-        int acts_size = actividades.size();
+        int acts_size = actividades_mostrar.size();
         int i = 0;
         while (i < acts_size) {
             try {
-                if (operadorMgr.getOperadorFromId(actividades.get(i).getIdoperador()).getBloqueado()) {
-                    actividades.remove(i);
+                if (operadorMgr.getOperadorFromId(actividades_mostrar.get(i).getIdoperador()).getBloqueado()) {
+                    actividades_mostrar.remove(i);
                     continue;
                 }
                 i++;
@@ -261,8 +315,8 @@ public class HomeClienteController implements Initializable {
         int row = 1;
 
         try {
-            if (actividades.size() > 0) {
-                for (Actividad actividad : actividades) {
+            if (actividades_mostrar.size() > 0) {
+                for (Actividad actividad : actividades_mostrar) {
                     if (actividad.getValidada()) {
                         FXMLLoader fxmlLoader = new FXMLLoader();
                         fxmlLoader.setLocation(getClass().getResource("ActividadThumb.fxml"));

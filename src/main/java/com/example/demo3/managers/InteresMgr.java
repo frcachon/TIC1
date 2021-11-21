@@ -37,4 +37,5 @@ public class InteresMgr {
         return (List<Interes>) interesRepository.findAll();
     }
 
+
 }
