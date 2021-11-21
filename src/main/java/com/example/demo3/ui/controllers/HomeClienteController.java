@@ -248,9 +248,9 @@ public class HomeClienteController implements Initializable {
 
         ArrayList<Actividad> actividades_mostrar = new ArrayList<>(100); //lista de las actividades a mostrar en el grid
 
-        System.out.println(actividades.size() + "acts");
-        System.out.println(gustos_cliente.size() + "gustos");
-        System.out.println(this.cliente.getId()+ "Id");
+        //System.out.println(actividades.size() + "acts");
+        //System.out.println(gustos_cliente.size() + "gustos");
+        //System.out.println(this.cliente.getId()+ "Id");
 
         for (Actividad actividad : actividades) { //para cada actividad de las existentes
 
@@ -258,18 +258,18 @@ public class HomeClienteController implements Initializable {
 
             List<Tags> tags_actividad = tagsMgr.getAllFromActividad(actividad.getId()); //obtengo la lista de los tags de esa actividad
 
-            System.out.println(tags_actividad.size()+ "tags");
+            //System.out.println(tags_actividad.size()+ "tags");
 
             for (Gustos gusto : gustos_cliente) { //para cada gusto del cliente
                 for (Tags tag : tags_actividad) { //y para cada tag de la actividad
 
-                    System.out.println(gusto.getId().getIdgustos() + "idgusto");
-                    System.out.println(tag.getId().getIdtags() + "idtag");
+                    //System.out.println(gusto.getId().getIdgustos() + "idgusto");
+                    //System.out.println(tag.getId().getIdtags() + "idtag");
 
                     if(gusto.getId().getIdgustos() == tag.getId().getIdtags()) { //evalúo si coinciden los Id
 
                     puntaje ++; //si coinciden entonces suma uno a la variable de puntaje
-                    System.out.println(puntaje + "PUNTOS");
+                    //System.out.println(puntaje + "PUNTOS");
 
                     }
 
