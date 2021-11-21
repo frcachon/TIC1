@@ -248,28 +248,18 @@ public class HomeClienteController implements Initializable {
 
         ArrayList<Actividad> actividades_mostrar = new ArrayList<>(100);
 
-        System.out.println(actividades.size() + "acts");
-        System.out.println(gustos_cliente.size() + "gustos");
-        System.out.println(this.cliente.getId()+ "Id");
-
         for (Actividad actividad : actividades) { //para cada actividad de las existentes
 
             int puntaje = 0;
 
             List<Tags> tags_actividad = tagsMgr.getAllFromActividad(actividad.getId());
 
-            System.out.println(tags_actividad.size()+ "tags");
-
             for (Gustos gusto : gustos_cliente) {
                 for (Tags tag : tags_actividad) {
-
-                    System.out.println(gusto.getId().getIdgustos() + "idgusto");
-                    System.out.println(tag.getId().getIdtags() + "idtag");
 
                     if(gusto.getId().getIdgustos() == tag.getId().getIdtags()) {
 
                     puntaje ++;
-                    System.out.println(puntaje + "PUNTOS");
 
                     }
 
