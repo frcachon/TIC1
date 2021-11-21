@@ -1,31 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="login_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo3.ui.controllers.LoginController">
+<AnchorPane fx:id="login_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="background_app" stylesheets="@estilo.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo3.ui.controllers.LoginController">
    <children>
-      <PasswordField fx:id="password_field" layoutX="228.0" layoutY="185.0" prefHeight="30.0" prefWidth="215.0" />
-      <TextField fx:id="user_field" layoutX="228.0" layoutY="127.0" prefHeight="30.0" prefWidth="215.0" />
-      <Text layoutX="142.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Usuario:" wrappingWidth="57.21630859375">
+      <PasswordField fx:id="password_field" layoutX="216.0" layoutY="182.0" prefHeight="30.0" prefWidth="215.0" styleClass="text_app" />
+      <TextField fx:id="user_field" layoutX="216.0" layoutY="124.0" prefHeight="30.0" prefWidth="215.0" styleClass="text_app" />
+      <Text layoutX="136.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textb_app" text="Usuario:" wrappingWidth="68.21630859375">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <Text layoutX="117.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña:" wrappingWidth="81.21630859375">
+      <Text layoutX="121.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textb_app" text="Contraseña:" wrappingWidth="98.21630859375">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <Button fx:id="iniciar_sesion" layoutX="223.0" layoutY="269.0" mnemonicParsing="false" onAction="#loginAction" prefHeight="55.0" prefWidth="155.0" text="Iniciar Sesión">
+      <Button fx:id="iniciar_sesion" layoutX="223.0" layoutY="269.0" mnemonicParsing="false" onAction="#loginAction" prefHeight="55.0" prefWidth="155.0" styleClass="button_app" stylesheets="@../../../../../estilo.css" text="Iniciar Sesión">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <Button fx:id="atras_button" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goBack" text="Atrás" />
+      <Button fx:id="atras_button" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goBack" styleClass="button_app" stylesheets="@estilo.css" text="Atrás" />
    </children>
 </AnchorPane>

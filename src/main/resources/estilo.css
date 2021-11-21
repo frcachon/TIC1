@@ -1,0 +1,220 @@
+/*color de fondo*/
+.background_app{
+    -fx-background-color: #F0EFEB;
+}
+
+/* cajas de texto grandes
+.text_app{
+    -fx-background-color: #cfd3c5;
+    -fx-text-fill: #000;
+    -fx-prompt-text-fill: #b7b7a4;
+    -fx-text-box-border: transparent;
+    -fx-background-radius: 0;
+    -fx-padding: 8;
+    -fx-font-size:14px;
+}*/
+
+/* cajas de texto chicas */
+.text2_app{
+    -fx-background-color: #cfd3c5;
+    -fx-text-fill: #000;
+    -fx-prompt-text-fill: #6b705c;
+    -fx-text-box-border: transparent;
+    -fx-background-radius: 0;
+    -fx-padding: 3;
+    -fx-font-size:11px;
+}
+
+
+.text3_app{
+    -fx-background-color: #f0efeb;
+    -fx-text-fill: #000;
+    -fx-prompt-text-fill: #6b705c;
+    -fx-text-box-border: transparent;
+    -fx-background-radius: 0;
+    -fx-padding: 3;
+    -fx-font-size:11px;
+}
+
+.text_app:focused {
+    -fx-text-fill: #000;
+    -fx-background-color: #fff;
+}
+
+/* Botòn A */
+.button_app{
+    -fx-background-color: #A5A58D;
+    -fx-border-radius: 46;
+    -fx-background-radius: 46;
+    -fx-text-fill: #fff;
+    -fx-alignment: CENTER;
+}
+
+/* Botòn B
+.buttonB_app{
+    -fx-background-color: #DDBEA9;
+    -fx-border-radius: 46;
+    -fx-background-radius: 46;
+    -fx-text-fill: #fff;
+    -fx-alignment: CENTER;
+   }*/
+
+/* Etiqueta de texto*/
+.textb_app{
+    -fx-text-fill: #fff;
+    -fx-font-size:16px;
+    -fx-font-weight: normal;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.5) , 0,0,0,0.5);
+}
+
+/* Check boxes */
+.check-box:selected > .box {
+    /* background color for selected checkbox */
+    -fx-background-color: #B7B7A4;
+}
+
+.check-box > .box {
+    /* background color of unselected checkbox */
+    -fx-background-color: #cfd3c5;
+}
+
+.check-box:selected > .box > .mark,
+.check-box:indeterminate  > .box > .mark {
+    /* modify mark color */
+    -fx-background-color: #DDBEA9;
+}
+
+/* Background color of the control itself */
+.choice-box {
+  -fx-background-color: #cfd3c5;
+  -fx-mark-color: #CB997E; /*Arrow color*/
+  -fx-background-radius: 0;
+}
+/*Selected item text color on the control itself*/
+.choice-box > .label {
+    -fx-text-fill: #6b705c;
+}
+/*CALENDARIO*/
+.date-picker .arrow-button {
+	-fx-background-color: #EDDCD2;
+	-fx-background-radius: 0;
+}
+.date-picker .arrow-button:hover {
+	-fx-background-color: #DDBEA9;
+}
+.date-picker .arrow-button .arrow {
+	-fx-background-color: #CB997E;
+}
+.date-picker .cell {
+	-fx-background-color: #F0EFEB;
+}
+.date-picker .cell:hover {
+	-fx-background-color: #EDDCD2;
+}
+.date-picker .cell:focused {
+	-fx-background-color: #CB997E;
+}
+.date-picker .selected {
+	-fx-background-color: #CB997E;
+	-fx-text-fill: #000;
+}
+.date-picker .selected:focused {
+	-fx-background-color: #CB997E;
+	-fx-text-fill: #000;
+}
+.date-picker-popup  {
+	-fx-border-color: transparent;
+}
+.date-picker-popup .month-year-pane {
+	-fx-background-color: #EDDCD2;
+}
+.date-picker-popup .month-year-pane .label {
+	-fx-text-fill: #000;
+}
+.date-picker-popup .week-number-cell {
+	-fx-text-fill: #000;
+}
+.date-picker-popup .spinner .button .left-arrow,
+.date-picker-popup .spinner .button .right-arrow {
+	-fx-background-color: #000;
+}
+
+/* TABLAS */
+
+/*formato para las celdas del tableview*/
+.table-cell {
+    -fx-padding: 0.5em 0.5em 0.1em 0.3em;
+    -fx-border-color: -fx-box-border -fx-box-border transparent transparent;
+    -fx-font: 13px "Segoe UI";
+    -fx-border-insets: 0;
+}
+
+/*color de fondo para cuando el raton este sobre la celda*/
+.table-cell:hover {
+    -fx-background-color: #FFF1E6;
+}
+
+/*color para filas vacias,*/
+/*aplicar el mismo color cuando el raton este sobre una celda de una fila vacia  */
+.table-row-cell:empty, .table-cell:empty:hover {
+    -fx-background-color: #F0EFEB;
+}
+
+/*eliminar borde de celdas en las filas vacias*/
+.table-row-cell:empty .table-cell {
+    -fx-border-width: 0px;
+}
+
+/*color de una fila cuando en raton se encuentra sobre la misma */
+.table-view:row-selection .table-row-cell:filled:hover {
+    -fx-background-color: #EDDCD2;
+}
+
+/*color de una fila cuando en raton se encuentra sobre una fila que esta seleccionada*/
+.table-view:row-selection .table-row-cell:filled:selected:hover {
+    -fx-background-color: #DDBEA9;
+}
+
+/*color de una fila seleccionada por el usuario*/
+.table-view:row-selection .table-row-cell:filled:selected {
+    -fx-background-color: #CB997E;
+}
+
+/*eliminar border del table que aparece cuando el mismo tiene el foco*/
+.table-view, .table-view:focused {
+  -fx-background-color: transparent,-fx-box-border,-fx-control-inner-background;
+  -fx-background-insets: -1.4, 0, 1;
+  -fx-background-radius: 1.4, 0, 0;
+}
+
+/* centrar y cambiar color de los titulos de columnas*/
+.table-view .column-header .label{
+    -fx-text-fill: #6b705c;
+    -fx-alignment: CENTER;
+}
+
+/*color de fondo del titulo de columna cuando en roton esta sobre ella*/
+.table-view .column-header:hover {
+    -fx-background-color: whitesmoke;
+}
+
+/*tamaño, bordes y color de fondo de los titulos*/
+.table-view .column-header, .table-view .filler {
+    -fx-background-color: #e4e2dc;
+    -fx-size: 45;
+    -fx-border-color: #a5a58d;
+    -fx-border-width: 0 2 3 0;
+    -fx-border-insets: 0;
+}
+
+/*hacer transparente el fondo de los titulos*/
+.table-view .column-header-background {
+    -fx-background-color: transparent;
+}
+
+/* estylo para el boton que permite ocultar o mostrar las columnas*/
+.table-view .show-hide-columns-button {
+    -fx-background-color: white;
+    -fx-border-color: -fx-box-border;
+    -fx-border-insets: 0;
+}
