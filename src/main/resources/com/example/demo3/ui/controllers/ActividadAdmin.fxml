@@ -14,7 +14,7 @@
          <font>
             <Font name="System Bold" size="17.0" />
          </font></Label>
-      <Label fx:id="descripcion" alignment="TOP_LEFT" layoutX="157.0" layoutY="293.0" prefHeight="96.0" prefWidth="387.0" styleClass="background_app" stylesheets="@estilo.css" text="descripcion" />
+      <Label fx:id="descripcion" alignment="TOP_LEFT" layoutX="157.0" layoutY="293.0" prefHeight="96.0" prefWidth="387.0" styleClass="background_app" stylesheets="@../../../../../estilo.css" text="descripcion" />
       <Text layoutX="412.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Horario" />
       <Text layoutX="67.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Descripción" />
       <Label fx:id="horario" layoutX="477.0" layoutY="121.0" prefHeight="17.0" prefWidth="113.0" text="horario" />

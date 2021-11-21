@@ -13,7 +13,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </HBox.margin>
       </ImageView>
-      <VBox prefHeight="110.0" prefWidth="362.0" styleClass="background_app" stylesheets="@../../../../../estilo.css">
+      <VBox prefHeight="110.0" prefWidth="362.0" styleClass="background_app" stylesheets="@estilo.css">
          <children>
             <Label fx:id="nombreLabel" prefHeight="30.0" prefWidth="103.0" text="Nombre Actividad">
                <VBox.margin>

@@ -4,10 +4,10 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="login_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="background_app" stylesheets="@estilo.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo3.ui.controllers.LoginController">
+<AnchorPane fx:id="login_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="background_app" stylesheets="@../../../../../estilo.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo3.ui.controllers.LoginController">
    <children>
-      <PasswordField fx:id="password_field" layoutX="216.0" layoutY="182.0" prefHeight="30.0" prefWidth="215.0" styleClass="text_app" />
-      <TextField fx:id="user_field" layoutX="216.0" layoutY="124.0" prefHeight="30.0" prefWidth="215.0" styleClass="text_app" />
+      <PasswordField fx:id="password_field" layoutX="216.0" layoutY="182.0" prefHeight="30.0" prefWidth="215.0" styleClass="text2_app" stylesheets="@estilo.css" />
+      <TextField fx:id="user_field" layoutX="216.0" layoutY="124.0" prefHeight="30.0" prefWidth="215.0" styleClass="text2_app" stylesheets="@estilo.css" />
       <Text layoutX="136.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textb_app" text="Usuario:" wrappingWidth="68.21630859375">
          <font>
             <Font size="15.0" />

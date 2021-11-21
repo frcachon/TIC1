@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="cliente_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="412.0" prefWidth="593.0" styleClass="background_app" stylesheets="@../../../../../estilo.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo3.ui.controllers.ClienteController">
+<AnchorPane fx:id="cliente_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="412.0" prefWidth="593.0" styleClass="background_app" stylesheets="@estilo.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo3.ui.controllers.ClienteController">
    <children>
       <Label layoutX="169.0" layoutY="52.0" text="Mail:">
          <font>
