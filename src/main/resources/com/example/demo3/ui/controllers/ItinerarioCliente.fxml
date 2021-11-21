@@ -6,10 +6,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane fx:id="backpane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo3.ui.controllers.ItinerarioClienteController">
+<AnchorPane fx:id="backpane" prefHeight="400.0" prefWidth="600.0" styleClass="background_app" stylesheets="@../../../../../estilo.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo3.ui.controllers.ItinerarioClienteController">
     <children>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#929da8" height="51.0" layoutY="-2.0" stroke="BLACK" strokeType="INSIDE" width="608.0" />
-        <Button layoutX="14.0" layoutY="10.0" mnemonicParsing="false" onAction="#goBack" text="Atrás" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ddd7cd" height="51.0" layoutY="-2.0" stroke="#ddd7cd" strokeType="INSIDE" width="608.0" />
+        <Button layoutX="14.0" layoutY="10.0" mnemonicParsing="false" onAction="#goBack" styleClass="button_app" text="Atrás" />
       <TableView fx:id="tabla_reservas" layoutX="40.0" layoutY="76.0" prefHeight="297.0" prefWidth="529.0">
         <columns>
           <TableColumn fx:id="actividadcolumn" prefWidth="190.0" text="Actividad" />

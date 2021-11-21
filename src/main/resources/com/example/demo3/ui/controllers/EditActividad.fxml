@@ -11,7 +11,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo3.ui.controllers.EditActividadController">
    <children>
-      <AnchorPane fx:id="act_pane" layoutX="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
+      <AnchorPane fx:id="act_pane" layoutX="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../../../../estilo.css">
          <children>
             <Label layoutX="82.0" layoutY="66.0" text="Descripción:">
                <font>
@@ -28,17 +28,17 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="horarioApertura_field" layoutX="165.0" layoutY="196.0" prefHeight="26.0" prefWidth="207.0" />
-            <TextField fx:id="titulo_field" layoutX="165.0" layoutY="32.0" prefHeight="26.0" prefWidth="394.0" />
-            <Button fx:id="siguiente_button" layoutX="502.0" layoutY="348.0" mnemonicParsing="false" onAction="#updateActividad" prefHeight="38.0" prefWidth="84.0" text="Actualizar" />
+            <TextField fx:id="horarioApertura_field" layoutX="165.0" layoutY="196.0" prefHeight="26.0" prefWidth="207.0" styleClass="text2_app" />
+            <TextField fx:id="titulo_field" layoutX="165.0" layoutY="32.0" prefHeight="26.0" prefWidth="394.0" styleClass="text2_app" />
+            <Button fx:id="siguiente_button" layoutX="502.0" layoutY="348.0" mnemonicParsing="false" onAction="#updateActividad" prefHeight="38.0" prefWidth="84.0" styleClass="button_app" text="Actualizar" />
             <CheckBox fx:id="reservas_check" layoutX="190.0" layoutY="348.0" mnemonicParsing="false" text="Quiero utilizar el sistema de Reservas" />
-            <Button fx:id="atrasButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goBack" text="Atrás" />
+            <Button fx:id="atrasButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goBack" styleClass="button_app" text="Atrás" />
             <Label layoutX="108.0" layoutY="264.0" text="Imagen:">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Button fx:id="seleccionar_button" layoutX="165.0" layoutY="260.0" mnemonicParsing="false" onAction="#seleccionarImagen" prefHeight="26.0" prefWidth="207.0" text="Seleccionar una imagen" />
+            <Button fx:id="seleccionar_button" layoutX="165.0" layoutY="260.0" mnemonicParsing="false" onAction="#seleccionarImagen" prefHeight="26.0" prefWidth="207.0" styleClass="button_app" text="Seleccionar una imagen" />
             <ImageView fx:id="imagenVw" fitHeight="100.0" fitWidth="156.0" layoutX="402.0" layoutY="187.0" pickOnBounds="true" preserveRatio="true" />
             <Label layoutX="57.0" layoutY="200.0" text="Horario apertura:">
                <font>
@@ -50,10 +50,10 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="horarioCierre_field" layoutX="165.0" layoutY="228.0" prefHeight="26.0" prefWidth="207.0" />
-            <TextArea fx:id="descripcion_field" layoutX="165.0" layoutY="63.0" prefHeight="95.0" prefWidth="394.0" />
-            <TextField fx:id="cupo_field" layoutX="165.0" layoutY="165.0" prefHeight="26.0" prefWidth="207.0" />
-            <Button layoutX="14.0" layoutY="363.0" mnemonicParsing="false" onAction="#eliminarActividad" prefHeight="26.0" prefWidth="130.0" text="Eliminar actividad" />
+            <TextField fx:id="horarioCierre_field" layoutX="165.0" layoutY="228.0" prefHeight="26.0" prefWidth="207.0" styleClass="text2_app" />
+            <TextArea fx:id="descripcion_field" layoutX="165.0" layoutY="63.0" prefHeight="95.0" prefWidth="394.0" styleClass="text2_app" />
+            <TextField fx:id="cupo_field" layoutX="165.0" layoutY="165.0" prefHeight="26.0" prefWidth="207.0" styleClass="text2_app" />
+            <Button layoutX="14.0" layoutY="363.0" mnemonicParsing="false" onAction="#eliminarActividad" prefHeight="26.0" prefWidth="130.0" styleClass="button_app" text="Eliminar actividad" />
             <CheckBox fx:id="vacuna_check" layoutX="190.0" layoutY="320.0" mnemonicParsing="false" text="Requiere vacuna contra COVID-19" />
          </children>
       </AnchorPane>

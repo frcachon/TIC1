@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="pane_empresa" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo3.ui.controllers.EditarPerfilOperadorController">
+<AnchorPane fx:id="pane_empresa" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="background_app" stylesheets="@../../../../../estilo.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo3.ui.controllers.EditarPerfilOperadorController">
    <children>
       <Label layoutX="88.0" layoutY="90.0" text="Nombre de la empresa:">
          <font>
@@ -20,9 +20,9 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="operador_name_field" layoutX="237.0" layoutY="87.0" prefHeight="25.0" prefWidth="220.0" />
-      <TextField fx:id="phone_field" layoutX="237.0" layoutY="158.0" prefHeight="25.0" prefWidth="220.0" />
-      <Button fx:id="finalizar_button" layoutX="510.0" layoutY="348.0" mnemonicParsing="false" onAction="#updateOperador" prefHeight="38.0" prefWidth="76.0" text="Editar" />
+      <TextField fx:id="operador_name_field" layoutX="237.0" layoutY="87.0" prefHeight="25.0" prefWidth="220.0" styleClass="text2_app" />
+      <TextField fx:id="phone_field" layoutX="237.0" layoutY="158.0" prefHeight="25.0" prefWidth="220.0" styleClass="text2_app" />
+      <Button fx:id="finalizar_button" layoutX="510.0" layoutY="348.0" mnemonicParsing="false" onAction="#updateOperador" prefHeight="38.0" prefWidth="76.0" styleClass="button_app" text="Editar" />
       <ChoiceBox fx:id="depto_choice" layoutX="237.0" layoutY="122.0" prefHeight="26.0" prefWidth="220.0" />
       <Label layoutX="135.0" layoutY="127.0" text="Departamento:">
          <font>
@@ -34,14 +34,14 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="email_field" layoutX="237.0" layoutY="194.0" prefHeight="25.0" prefWidth="220.0" />
+      <TextField fx:id="email_field" layoutX="237.0" layoutY="194.0" prefHeight="25.0" prefWidth="220.0" styleClass="text2_app" />
       <Label layoutX="163.0" layoutY="232.0" text="Dirección:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="direccion_field" layoutX="237.0" layoutY="229.0" prefHeight="25.0" prefWidth="220.0" />
-      <Text layoutX="165.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingrese sólo los campos que desee actualizar." wrappingWidth="269.87939453125">
+      <TextField fx:id="direccion_field" layoutX="237.0" layoutY="229.0" prefHeight="25.0" prefWidth="220.0" styleClass="text2_app" />
+      <Text layoutX="167.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingrese sólo los campos que desee actualizar." wrappingWidth="298.5460205078125">
          <font>
             <Font size="14.0" />
          </font>

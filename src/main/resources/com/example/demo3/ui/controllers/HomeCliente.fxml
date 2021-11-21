@@ -12,15 +12,15 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane fx:id="home_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo3.ui.controllers.HomeClienteController">
+<AnchorPane fx:id="home_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="background_app" stylesheets="@../../../../../estilo.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo3.ui.controllers.HomeClienteController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#929da8" height="51.0" layoutX="-7.0" stroke="BLACK" strokeType="INSIDE" width="608.0" />
-      <Button fx:id="itinerario_button" layoutX="270.0" layoutY="13.0" mnemonicParsing="false" onAction="#ver_itinerario" prefHeight="25.0" prefWidth="129.0" text="Itinerario" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ddd7cd" height="51.0" layoutX="-7.0" stroke="#ddd7cd" strokeType="INSIDE" width="608.0" />
+      <Button fx:id="itinerario_button" layoutX="270.0" layoutY="13.0" mnemonicParsing="false" onAction="#ver_itinerario" prefHeight="25.0" prefWidth="129.0" styleClass="button_app" text="Itinerario" />
       <Label fx:id="username_label" alignment="CENTER" contentDisplay="CENTER" layoutX="51.0" layoutY="12.0" prefHeight="25.0" prefWidth="103.0" text="Nombre Usuario" />
-      <TextField fx:id="search_field" layoutX="426.0" layoutY="13.0" onKeyTyped="#busquedaDinamica" prefHeight="22.0" prefWidth="160.0" promptText="Buscar" />
+      <TextField fx:id="search_field" layoutX="426.0" layoutY="13.0" onKeyTyped="#busquedaDinamica" prefHeight="22.0" prefWidth="160.0" promptText="Buscar" styleClass="text3_app" />
       <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" layoutX="24.0" layoutY="55.0" prefHeight="329.0" prefWidth="560.0">
          <content>
-            <GridPane fx:id="actividadesGrid" alignment="CENTER" maxWidth="574.0" minWidth="369.0" onMouseClicked="#mouseClick" prefHeight="327.0" prefWidth="458.0">
+            <GridPane fx:id="actividadesGrid" alignment="CENTER" maxWidth="574.0" minWidth="369.0" onMouseClicked="#mouseClick" prefHeight="327.0" prefWidth="458.0" styleClass="table-view">
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
@@ -28,7 +28,7 @@
          </content>
       </ScrollPane>
       <ImageView fx:id="perfil_view" fitHeight="37.0" fitWidth="38.0" layoutX="13.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
-      <MenuButton fx:id="opciones_button" layoutX="161.0" layoutY="12.0" mnemonicParsing="false" text="Opciones">
+      <MenuButton fx:id="opciones_button" layoutX="161.0" layoutY="12.0" mnemonicParsing="false" styleClass="choice-box" text="Opciones" textFill="#828265">
         <items>
           <MenuItem fx:id="editar_perfil_button" mnemonicParsing="false" onAction="#editar_perfil" text="Editar Perfil" />
           <MenuItem fx:id="editar_preferencias_button" mnemonicParsing="false" onAction="#editar_preferencia" text="Editar Preferencias" />
